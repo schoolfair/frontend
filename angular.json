@@ -103,6 +103,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "schoolfair:build:production",
+            "firebaseProject": "schoolfair-9b858",
+            "firebaseHostingSite": "schoolfair-9b858"
+          }
         }
       }
     }

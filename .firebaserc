@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "schoolfair-9b858": {
+      "hosting": {
+        "schoolfair": [
+          "schoolfair-9b858"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "schoolfair-9b858"
+  }
+}
