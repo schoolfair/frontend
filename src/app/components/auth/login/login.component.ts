@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FirebaseService } from 'src/app/services/firebase/firebase.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   loggingIn = false;
 
-  constructor() {
+  constructor(public firebase: FirebaseService) {
     this.formData = new FormGroup({
       'email': new FormControl('', [Validators.required, Validators.email]),
       'password': new FormControl('', [Validators.required])
@@ -21,8 +22,20 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit() {
+
   }
 
-  login() {}
+  private get email () {
+    return this.formData.controls['email'].value;
+  }
+
+  private get password() {
+    return this.formData.controls['password'].value;
+  }
+
+  login() {
+    this.loggingIn = true;
+    this.firebase.SignIn(this.email, this.password);
+  }
 
 }
