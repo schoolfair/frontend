@@ -7,8 +7,11 @@ export interface User {
     roles: Roles;
 }
 
+// Interface, Enum, or Array?
 export interface Roles {
-  subscriber?: boolean;
-  editor?: boolean;
-  admin?: boolean;
+  student?: boolean,
+  employer?: boolean,
+  admin?: boolean
 }
+
+
