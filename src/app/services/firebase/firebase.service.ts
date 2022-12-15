@@ -7,37 +7,43 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseService {
-  userData: any; // Save logged in user data
+
+
+  private _user!: Observable<User | undefined>;
+
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
-    /* Saving user data in localstorage when
+    /* Saving user data localstorage when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user')!);
-      } else {
-        localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user')!);
+        this._user = this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+      }
+      else {
+        this._user = of(undefined)
       }
     });
   }
+
+  get user() {
+    return this._user;
+  }
+
   // Sign in with email/password
   SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.SetUserData(result.user);
+        //this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
             this.router.navigate(['dashboard']);
@@ -56,7 +62,10 @@ export class FirebaseService {
         /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
         this.SendVerificationMail();
+
         this.SetUserData(result.user);
+
+        this.router.navigate(['verify-email']);
       })
       .catch((error) => {
         window.alert(error.message);
@@ -81,7 +90,11 @@ export class FirebaseService {
         window.alert(error);
       });
   }
-  // Returns true when user is looged in and email is verified
+
+
+
+
+  // Returns true when user is logged in and email is verified
 
   isLogged(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
@@ -99,6 +112,7 @@ export class FirebaseService {
       .signInWithPopup(provider)
       .then((result) => {
         this.router.navigate(['dashboard']);
+
         this.SetUserData(result.user);
       })
       .catch((error) => {
@@ -112,13 +126,18 @@ export class FirebaseService {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
+
     const userData: User = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
+      roles: {
+        subscriber: true
+      }
     };
+
     return userRef.set(userData, {
       merge: true,
     });

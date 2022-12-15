@@ -42,8 +42,13 @@
       </div>
       <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
-        <button routerLink="/login" routerLinkActive="bg-gray-900 activated-route" class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" aria-current="page">Login</button>
-
+        <div *ngIf="firebase.user | async as user else unlogged">
+          <button routerLink="/dashboard" routerLinkActive="bg-gray-900 activated-route" class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" aria-current="page">Dashboard</button>
+          <button (click)="firebase.SignOut()"class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" aria-current="page">Sign Out</button>
+        </div>
+        <ng-template #unlogged>
+          <button routerLink="/login" routerLinkActive="bg-gray-900 activated-route" class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" aria-current="page">Login</button>
+        </ng-template>
       </div>
     </div>
   </div>

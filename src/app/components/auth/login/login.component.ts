@@ -35,7 +35,10 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loggingIn = true;
-    this.firebase.SignIn(this.email, this.password);
+    this.firebase.SignIn(this.email, this.password).then(() => {
+      this.loggingIn = false;
+    });
+    //this.loggingIn = false;
   }
 
 }
