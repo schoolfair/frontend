@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, ApplicationRef, OnChanges, SimpleChanges, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
@@ -10,15 +11,26 @@ import { User } from 'src/app/modules/auth/services/firebase/user';
   styleUrls: ['./navbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
 
-  user!: Observable<User|undefined>;
+  user?: User;
 
-  constructor(public firebase: FirebaseService) {
-    this.user = this.firebase.user;
+  data: any;
+
+  constructor(
+    public firebase: FirebaseService,
+    private cdr: ChangeDetectorRef
+    ) {
+
   }
 
   ngOnInit(): void {
+    this.firebase.user.subscribe((data: User|undefined) => {
+      this.user = data;
+    });
+  }
+
+  ngOnDestroy(): void {
 
   }
 

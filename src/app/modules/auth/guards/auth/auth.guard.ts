@@ -21,13 +21,13 @@ export class AuthGuard implements CanActivate {
         take(1),
         tap((user: User|undefined) => {
           if (!user?.emailVerified) {
-            this.router.navigate(['verify-email']);
+            this.router.navigate(['auth', 'verify-email']);
           }
         }),
         map((user: User|undefined) =>  user && user.emailVerified ? true : false),
         tap((passed:boolean) => {
           if (!passed) {
-            this.router.navigate(['login'])
+            this.router.navigate(['auth', 'login'])
           }
         })
       )

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FirebaseService } from '../../services/firebase/firebase.service';
+import { User } from '../../services/firebase/user';
 
 @Component({
   selector: 'app-verify-email',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerifyEmailComponent implements OnInit {
 
-  constructor() { }
+  constructor(private firebase: FirebaseService, private router:Router) { }
 
   ngOnInit() {
+    this.firebase.user.subscribe((user: User|undefined) => {
+      if (user && user.emailVerified) {
+        this.router.navigate(['dashboard']);
+      }
+    })
   }
 
 }

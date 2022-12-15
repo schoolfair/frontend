@@ -1,3 +1,29 @@
-<p>
-  add-user-data works!
-</p>
+<section>
+  <div class="flex flex-col items-center justify-center w-screen px-6 py-8 mx-auto mt-6 lg:py-0">
+      <div class="w-full rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
+          <div class="max-w-full p-6 space-y-4 min-w-fit md:space-y-6 sm:p-8">
+              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                  Complete Your Profile
+              </h1>
+
+                <mat-stepper [linear]="true">
+                  <mat-step [stepControl]="roleFormGroup">
+                    <form [formGroup]="roleFormGroup">
+                      <ng-template matStepLabel>Role</ng-template>
+                      <label id="text-gray-900">I am a...</label>
+                      <div class="mt-4 ml-4">
+                        <mat-radio-group
+                          aria-labelledby="example-radio-group-label"
+                          class="example-radio-group" formControlName="role">
+                          <mat-radio-button class="ml-4 text-gray-900" [value]="'student'">Student</mat-radio-button>
+                          <mat-radio-button class="ml-4 text-gray-900" [value]="'employer'">Employer</mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                    </form>
+                  </mat-step>
+                </mat-stepper>
+
+          </div>
+      </div>
+  </div>
+</section>

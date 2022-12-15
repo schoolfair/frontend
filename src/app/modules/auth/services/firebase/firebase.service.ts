@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { ApplicationRef, Injectable, NgZone } from '@angular/core';
 import { Roles, User } from './user';
 import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -13,24 +13,29 @@ import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 })
 export class FirebaseService {
 
-
-  private _user!: Observable<User | undefined>;
+  private __user: Subject<User| undefined> = new BehaviorSubject<User|undefined>(undefined);
+  private _user: Observable<User | undefined> = this.__user.asObservable();
 
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
+    private ref: ApplicationRef,
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
     /* Saving user data localstorage when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        this._user = this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+        this.afs.doc<User>(`users/${user.uid}`).valueChanges().subscribe((data: User|undefined) => {
+
+          this.__user.next(data);
+        })
       }
       else {
-        this._user = of(undefined)
+        this.__user.next(undefined);
       }
+
     });
   }
 
@@ -111,9 +116,8 @@ export class FirebaseService {
     return this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
-        this.router.navigate(['dashboard']);
-
         this.SetUserData(result.user);
+        this.router.navigate(['dashboard'])
       })
       .catch((error) => {
         window.alert(error);
@@ -143,8 +147,8 @@ export class FirebaseService {
   // Sign out
   SignOut() {
     return this.afAuth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigate(['login']);
+      this.router.navigate(['']);
+      this.__user.next(undefined);
     });
   }
 }

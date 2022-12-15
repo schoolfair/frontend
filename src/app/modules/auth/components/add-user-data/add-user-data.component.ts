@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-user-data',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddUserDataComponent implements OnInit {
 
-  constructor() { }
+  roleFormGroup: FormGroup;
+
+  constructor() {
+    this.roleFormGroup = new FormGroup({
+      role: new FormControl('', [Validators.required])
+    })
+  }
 
   ngOnInit() {
   }

@@ -25,13 +25,13 @@ export class HasRolesGuard implements CanActivate {
         take(1),
         tap((user: User|undefined) => {
           if (this.emptyRoles(user?.roles)) {
-            this.router.navigate(['add-user-data'])
+            this.router.navigate(['auth', 'add-user-data'])
           }
         }),
         map((user: User|undefined) =>  user && !this.emptyRoles(user.roles) ? true : false),
         tap((passed:boolean) => {
           if (!passed) {
-            this.router.navigate(['login'])
+            this.router.navigate(['auth', 'login'])
           }
         })
       );
