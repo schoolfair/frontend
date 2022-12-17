@@ -8,6 +8,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { UserDataModel } from '../../components/add-user-data/user-data';
 @Injectable({
   providedIn: 'root',
 })
@@ -30,6 +31,7 @@ export class FirebaseService {
         this.afs.doc<User>(`users/${user.uid}`).valueChanges().subscribe((data: User|undefined) => {
 
           this.__user.next(data);
+
         })
       }
       else {
@@ -107,9 +109,7 @@ export class FirebaseService {
   }
   // Sign in with Google
   GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      this.router.navigate(['dashboard']);
-    });
+    return this.AuthLogin(new auth.GoogleAuthProvider())
   }
   // Auth logic to run auth providers
   AuthLogin(provider: any) {
@@ -144,6 +144,38 @@ export class FirebaseService {
       merge: true,
     });
   }
+
+  /**
+   * Set the user data
+   */
+  SetUserdataData(uid: string, data: UserDataModel) {
+    const userDataRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `user-data/${uid}`
+    );
+
+    return userDataRef.set(data, {
+      merge: true
+    })
+  }
+
+  SetRole(uid: string, role:Roles) {
+    const userDataRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${uid}`
+    );
+
+    return userDataRef.set({roles: role}, {
+      merge: true
+    });
+  }
+
+  UserData(uid: string) {
+    const userDataRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `user-data/${uid}`
+    );
+
+    return userDataRef.get();
+  }
+
   // Sign out
   SignOut() {
     return this.afAuth.signOut().then(() => {
