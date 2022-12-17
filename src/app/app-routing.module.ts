@@ -19,7 +19,13 @@ const routes: Routes = [
 
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, HasRolesGuard]},
 
+  // basic user routes (e.g. profile, change profile)
+
   { path: 'user', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule), canActivate: [AuthGuard, HasRolesGuard] },
+
+  // opportunity listings
+
+  { path: 'listings', loadChildren: () => import('./modules/listings/listings.module').then(m => m.ListingsModule), canActivate: [AuthGuard, HasRolesGuard] },
 
 
 ];

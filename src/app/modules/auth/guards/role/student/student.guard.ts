@@ -1,41 +1,39 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+
 import { map, Observable, take, tap } from 'rxjs';
-import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
-import { Roles, User } from 'src/app/modules/auth/services/firebase/user';
+import { FirebaseService } from '../../../services/firebase/firebase.service';
+import { User } from '../../../services/firebase/user';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HasRolesGuard implements CanActivate {
+export class StudentGuard implements CanActivate {
 
   constructor(
     private firebase: FirebaseService,
     private router: Router
-    ) { }
-
-  private emptyRoles(roles: Roles|undefined) {
-    return roles && (!roles.student) && (!roles.employer) && (!roles.admin)
-  }
+    ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+      this.firebase.redirectUrl = state.url;
+
       return this.firebase.user.pipe(
         take(1),
-        map((user: User|undefined) => {
+        map((user: User|undefined) =>  {
 
           if (!user) {
-            this.router.navigate(['auth', 'login'])
+            this.router.navigate(['auth', 'login'], { queryParams: { returnUrl: state.url } })
+          }
+
+          if (user?.roles.student != true) {
             return false;
           }
 
-          if (this.emptyRoles(user.roles)) {
-            this.router.navigate(['auth', 'add-user-data']);
-            return false;
-          }
-
-          return true;
+          return true
         })
       );
   }

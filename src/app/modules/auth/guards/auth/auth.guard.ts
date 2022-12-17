@@ -16,20 +16,24 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
+      this.firebase.redirectUrl = state.url;
 
       return this.firebase.user.pipe(
         take(1),
-        tap((user: User|undefined) => {
-          if (!user?.emailVerified) {
-            this.router.navigate(['auth', 'verify-email']);
+        map((user: User|undefined) => {
+
+          if (!user) {
+            this.router.navigate(['auth', 'login'], { queryParams: { returnUrl: state.url } });
+            return false;
           }
+
+          if (!user.emailVerified) {
+            this.router.navigate(['auth', 'verify-email'], { queryParams: { returnUrl: state.url } });
+            return false;
+          }
+
+          return true;
         }),
-        map((user: User|undefined) =>  user && user.emailVerified ? true : false),
-        tap((passed:boolean) => {
-          if (!passed) {
-            this.router.navigate(['auth', 'login'])
-          }
-        })
       )
   }
 

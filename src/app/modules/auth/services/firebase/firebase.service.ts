@@ -17,6 +17,8 @@ export class FirebaseService {
   private __user: Subject<User| undefined> = new BehaviorSubject<User|undefined>(undefined);
   private _user: Observable<User | undefined> = this.__user.asObservable();
 
+  public redirectUrl?: string;
+
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -31,6 +33,10 @@ export class FirebaseService {
         this.afs.doc<User>(`users/${user.uid}`).valueChanges().subscribe((data: User|undefined) => {
 
           this.__user.next(data);
+
+          if (this.redirectUrl) {
+            this.router.navigate([this.redirectUrl]);
+          }
 
         })
       }
