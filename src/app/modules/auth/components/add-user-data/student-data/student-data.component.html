@@ -1,0 +1,43 @@
+
+<form [formGroup]="studentFormGroup">
+  <ng-template matStepLabel>Additional Information</ng-template>
+  <div class="flex">
+    <label class="block w-1/2 mb-2 mr-1 text-sm font-medium text-gray-900 ">First Name</label>
+    <label class="block w-1/2 mb-2 text-sm font-medium text-gray-900 ">Last Name</label>
+  </div>
+  <div class="flex">
+    <input formControlName="firstName" class="bg-gray-50 mr-1 border inline-block border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-1/2 p-2.5" placeholder="John">
+    <input formControlName="lastName" class="bg-gray-50 border w-1/2 inline-block border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600  p-2.5" placeholder="Doe">
+  </div>
+  <div class="mt-4">
+    <label class="block mb-2 text-sm font-medium text-gray-900">Age</label>
+    <input type="number" formControlName="age" class="bg-gray-50 border border-gray-300 text-gray-900 inline-block sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-1/2 p-2.5" placeholder="16">
+  </div>
+  <div class="mt-4">
+    <label class="block mb-3 text-sm font-medium text-gray-900">Birthdate</label>
+    <div class="flex">
+      <label class="block w-1/4 mb-2 mr-1 text-sm font-medium text-gray-900">Day</label>
+      <label class="block w-1/4 mb-2 mr-1 text-sm font-medium text-gray-900">Month</label>
+      <label class="block w-1/4 mb-2 text-sm font-medium text-gray-900">Year</label>
+    </div>
+    <div class="flex">
+      <input type="number" formControlName="day" class="bg-gray-50 mr-1 border border-gray-300 text-gray-900 inline-block sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-1/4 p-2.5" placeholder="DD">
+      <input type="number" formControlName="month" class="bg-gray-50 mr-1 border border-gray-300 text-gray-900 inline-block sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-1/4 p-2.5" placeholder="MM">
+      <input type="number" formControlName="year" class="bg-gray-50 border border-gray-300 text-gray-900 inline-block sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-1/4 p-2.5" placeholder="YYYY">
+    </div>
+  </div>
+  <div class="mt-4">
+    <label class="block mb-2 text-sm font-medium text-gray-900">Grade</label>
+    <input type="number" formControlName="grade" class="bg-gray-50 border border-gray-300 text-gray-900 inline-block sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-1/2 p-2.5" placeholder="11">
+  </div>
+  <div class="mt-4">
+    <label class="block mb-2 text-sm font-medium text-gray-900">School</label>
+    <input formControlName="school" class="bg-gray-50 border border-gray-300 text-gray-900 inline-block sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full p-2.5" placeholder="Example High School">
+  </div>
+  <div class="mt-4">
+    <button (click)="submitStudent()" class="w-full text-gray-900 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg
+        text-sm px-5 py-2.5 text-center dark:bg-primary-600 ">
+        Submit
+    </button>
+  </div>
+</form>

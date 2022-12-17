@@ -44,8 +44,17 @@
 
         <div *ngIf="firebase.user | async as user else unlogged">
 
-          <button *ngIf="user.emailVerified" routerLink="/dashboard" routerLinkActive="bg-gray-900 activated-route" class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" aria-current="page">Dashboard</button>
-          <button (click)="firebase.SignOut()"class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" aria-current="page">Sign Out</button>
+          <button *ngIf="user.emailVerified" routerLink="/dashboard" routerLinkActive="mr-3 px-3 py-2 bg-gray-900 activated-route" class="text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" aria-current="page">Dashboard</button>
+
+
+          <button mat-icon-button [matMenuTriggerFor]="menu" class="text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">
+            <mat-icon>expand_more</mat-icon>
+          </button>
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="'user'">Profile</button>
+            <button mat-menu-item (click)="firebase.SignOut()">Sign Out</button>
+          </mat-menu>
         </div>
         <ng-template #unlogged>
           <button routerLink="/auth/login" routerLinkActive="bg-gray-900 activated-route" class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" aria-current="page">Login</button>

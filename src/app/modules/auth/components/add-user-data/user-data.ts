@@ -12,6 +12,9 @@ export interface StudentDataModel extends UserDataModel {
   school: string;
 }
 
+export interface EmployerDataModel extends UserDataModel {
+  institution: string;
+}
 
 export interface UserType {
   isStudent?: boolean;

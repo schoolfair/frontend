@@ -10,6 +10,8 @@ import { AddUserDataComponent } from './components/add-user-data/add-user-data.c
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { MaterialModule } from '../material/material.module';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { StudentDataComponent } from './components/add-user-data/student-data/student-data.component';
+import { EmployerDataComponent } from './components/add-user-data/employer-data/employer-data.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     LoginComponent,
     RegisterComponent,
     AddUserDataComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    StudentDataComponent,
+    EmployerDataComponent
   ],
   imports: [
     CommonModule,
