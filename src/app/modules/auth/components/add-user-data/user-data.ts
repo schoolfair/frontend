@@ -14,6 +14,7 @@ export interface StudentDataModel extends UserDataModel {
 
 export interface EmployerDataModel extends UserDataModel {
   institution: string;
+  listings: string[];
 }
 
 export interface UserType {

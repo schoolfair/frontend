@@ -143,7 +143,6 @@ export class FirebaseService {
       displayName: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
-      roles: {}
     };
 
     return userRef.set(userData, {

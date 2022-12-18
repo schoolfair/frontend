@@ -20,6 +20,9 @@
                     </mat-radio-group>
                   </div>
                 </form>
+                <div class="flex flex-row justify-end">
+                  <button class="mt-4" mat-button matStepperNext [disabled]="roleControl?.pristine">Next</button>
+                </div>
               </mat-step>
               <mat-step>
                 <div *ngIf="role === 'student'">

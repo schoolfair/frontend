@@ -29,7 +29,7 @@ export class StudentGuard implements CanActivate {
             this.router.navigate(['auth', 'login'], { queryParams: { returnUrl: state.url } })
           }
 
-          if (user?.roles.student != true) {
+          if (user?.roles?.student != true) {
             return false;
           }
 

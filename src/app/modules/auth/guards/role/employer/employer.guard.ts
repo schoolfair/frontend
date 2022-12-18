@@ -29,7 +29,8 @@ export class EmployerGuard implements CanActivate {
             this.router.navigate(['auth', 'login'])
           }
 
-          if (user?.roles.student != true) {
+          if (user?.roles?.employer != true) {
+            this.router.navigate(['dashboard']);
             return false;
           }
 

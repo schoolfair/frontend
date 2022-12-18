@@ -33,7 +33,7 @@ export class EmployerDataComponent implements OnInit {
   }
 
   submitEmployer() {
-    let student: EmployerDataModel = {
+    let employer: EmployerDataModel = {
       firstName: this.employerFormGroup.get('firstName')?.value,
       lastName: this.employerFormGroup.get('lastName')?.value,
       age: this.employerFormGroup.get('age')?.value,
@@ -41,13 +41,14 @@ export class EmployerDataComponent implements OnInit {
                   ${this.employerFormGroup.get('month')?.value}/
                   ${this.employerFormGroup.get('year')?.value}`,
       institution: this.employerFormGroup.get('company')?.value,
-      type: {isStudent: true}
+      type: {isStudent: true},
+      listings: []
     };
 
     this.firebase.user.subscribe((user: User |undefined) => {
       if (!user) { console.error("User is undefined."); }
       else {
-        this.firebase.SetUserdataData(user.uid, student);
+        this.firebase.SetUserdataData(user.uid, employer);
         this.firebase.SetRole(user.uid, {student: true});
 
         this.router.navigate(['dashboard']);

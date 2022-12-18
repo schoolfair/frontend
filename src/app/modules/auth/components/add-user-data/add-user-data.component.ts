@@ -24,6 +24,11 @@ export class AddUserDataComponent implements OnInit {
 
   }
 
+  get roleControl() {
+    return this.roleFormGroup.get('role')
+
+  }
+
   get role() {
     return this.roleFormGroup.get('role')?.value
   }
