@@ -14,8 +14,8 @@ export class HasRolesGuard implements CanActivate {
     private router: Router
     ) { }
 
-  private emptyRoles(roles: Roles|undefined) {
-    return roles && (!roles.student) && (!roles.employer) && (!roles.admin)
+  private hasRoles(roles: Roles|undefined) {
+    return roles && ((roles.student) || (!roles.employer) || (!roles.admin))
   }
 
   canActivate(
@@ -30,7 +30,7 @@ export class HasRolesGuard implements CanActivate {
             return false;
           }
 
-          if (this.emptyRoles(user.roles)) {
+          if (!this.hasRoles(user.roles)) {
             this.router.navigate(['auth', 'add-user-data']);
             return false;
           }

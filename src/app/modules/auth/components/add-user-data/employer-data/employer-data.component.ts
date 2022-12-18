@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../../../services/firebase/firebase.service';
 import { User } from '../../../services/firebase/user';
+import { UserdataService } from '../../../services/userdata/userdata.service';
 import { EmployerDataModel } from '../user-data';
 
 @Component({
@@ -15,7 +16,10 @@ export class EmployerDataComponent implements OnInit {
 
   employerFormGroup: FormGroup
 
-  constructor(private firebase: FirebaseService, private router: Router) {
+  constructor(
+    private firebase: FirebaseService,
+    private userdata: UserdataService,
+    private router: Router) {
 
     this.employerFormGroup = new FormGroup({
       firstName: new FormControl('', Validators.required),
@@ -41,15 +45,15 @@ export class EmployerDataComponent implements OnInit {
                   ${this.employerFormGroup.get('month')?.value}/
                   ${this.employerFormGroup.get('year')?.value}`,
       institution: this.employerFormGroup.get('company')?.value,
-      type: {isStudent: true},
+      type: {isEmployer: true},
       listings: []
     };
 
     this.firebase.user.subscribe((user: User |undefined) => {
       if (!user) { console.error("User is undefined."); }
       else {
-        this.firebase.SetUserdataData(user.uid, employer);
-        this.firebase.SetRole(user.uid, {student: true});
+        this.userdata.SetUserdataData(user.uid, employer);
+        this.firebase.SetRole(user.uid, {employer: true});
 
         this.router.navigate(['dashboard']);
       }

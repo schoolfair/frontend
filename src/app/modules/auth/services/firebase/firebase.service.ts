@@ -23,10 +23,9 @@ export class FirebaseService {
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    private ref: ApplicationRef,
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
-    /* Saving user data localstorage when
+    /* Saving user data when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
       if (user) {
@@ -150,18 +149,7 @@ export class FirebaseService {
     });
   }
 
-  /**
-   * Set the user data
-   */
-  SetUserdataData(uid: string, data: UserDataModel) {
-    const userDataRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `user-data/${uid}`
-    );
 
-    return userDataRef.set(data, {
-      merge: true
-    })
-  }
 
   SetRole(uid: string, role:Roles) {
     const userDataRef: AngularFirestoreDocument<any> = this.afs.doc(
@@ -173,13 +161,7 @@ export class FirebaseService {
     });
   }
 
-  UserData(uid: string) {
-    const userDataRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `user-data/${uid}`
-    );
 
-    return userDataRef.get();
-  }
 
   // Sign out
   SignOut() {

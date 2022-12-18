@@ -1,0 +1,20 @@
+<div class="mt-4 ml-4">
+  <div class="flex">
+    <div class="content-start">
+      <h1>Your Listings</h1>
+    </div>
+    <div class="content-end">
+      <button mat-icon-button routerLink="create">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+  <mat-card *ngFor="let listing of listings | async; index as i">
+    <mat-card-title>{{listing.position}}</mat-card-title>
+    <mat-card-subtitle>{{listing.institution}}</mat-card-subtitle>
+    <mat-card-content></mat-card-content>
+    <mat-card-actions>
+      <button mat-button routerLink="listings/{{listing.uid}}">See more</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

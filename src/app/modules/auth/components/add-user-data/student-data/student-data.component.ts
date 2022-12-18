@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { FirebaseService } from '../../../services/firebase/firebase.service';
 import { User } from '../../../services/firebase/user';
+import { UserdataService } from '../../../services/userdata/userdata.service';
 import { StudentDataModel } from '../user-data';
 
 @Component({
@@ -18,6 +19,7 @@ export class StudentDataComponent implements OnInit {
 
   constructor(
     private firebase: FirebaseService,
+    private userdata: UserdataService,
     private router: Router
     ) {
       this.studentFormGroup = new FormGroup({
@@ -51,7 +53,7 @@ export class StudentDataComponent implements OnInit {
     this.firebase.user.subscribe((user: User |undefined) => {
       if (!user) { console.error("User is undefined."); }
       else {
-        this.firebase.SetUserdataData(user.uid, student);
+        this.userdata.SetUserdataData(user.uid, student);
         this.firebase.SetRole(user.uid, {student: true});
 
         this.router.navigate(['dashboard']);

@@ -12,6 +12,7 @@ import { MaterialModule } from '../material/material.module';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { StudentDataComponent } from './components/add-user-data/student-data/student-data.component';
 import { EmployerDataComponent } from './components/add-user-data/employer-data/employer-data.component';
+import { UserdataService } from './services/userdata/userdata.service';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { EmployerDataComponent } from './components/add-user-data/employer-data/
     MaterialModule,
     AngularFireAuthModule,
   ], providers: [
-    FirebaseService
+    FirebaseService,
+    UserdataService
   ]
 })
 export class AuthModule { }

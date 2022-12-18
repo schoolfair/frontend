@@ -1,0 +1,11 @@
+<div class="mt-4 ml-4">
+  <h1>Find Listings</h1>
+  <mat-card *ngFor="let listing of listings | async; index as i">
+    <mat-card-title>{{listing.position}}</mat-card-title>
+    <mat-card-subtitle>{{listing.institution}}</mat-card-subtitle>
+    <mat-card-content></mat-card-content>
+    <mat-card-actions>
+      <button mat-button routerLink="listing/listings/{{listing.uid}}">See more</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

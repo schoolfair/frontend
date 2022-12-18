@@ -1,1 +1,8 @@
-<p>listings works!</p>
+<div class="container flex ">
+  <div *ngIf="roles.student">
+    <app-student-listing></app-student-listing>
+  </div>
+  <div *ngIf="roles.employer">
+    <app-employer-listing></app-employer-listing>
+  </div>
+</div>
