@@ -16,7 +16,7 @@ export class ListingService {
   ) { }
 
   Get() {
-    return this.collectionRef.valueChanges();
+    return this.collectionRef.valueChanges({idField: 'uid'});
   }
 
   GetListing(uid: string) {
@@ -24,7 +24,7 @@ export class ListingService {
       `listings/${uid}`
     );
 
-    return docRef.snapshotChanges();
+    return docRef.valueChanges({idField: 'uid'});
   }
 
   Create(listing: Listing) {

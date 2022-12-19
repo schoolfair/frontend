@@ -9,11 +9,13 @@ import { StudentListingComponent } from './components/listings/student-listing/s
 import { MaterialModule } from '../material/material.module';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ListingComponent } from './components/listing/listing.component';
 
 
 @NgModule({
   declarations: [
     ListingsComponent,
+    ListingComponent,
     CreateListingComponent,
     EmployerListingComponent,
     StudentListingComponent
