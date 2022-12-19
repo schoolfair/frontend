@@ -9,12 +9,14 @@
       </button>
     </div>
   </div>
-  <mat-card *ngFor="let listing of listings | async; index as i">
-    <mat-card-title>{{listing.position}}</mat-card-title>
-    <mat-card-subtitle>{{listing.institution}}</mat-card-subtitle>
-    <mat-card-content></mat-card-content>
-    <mat-card-actions>
-      <button mat-button routerLink="listings/{{listing.uid}}">See more</button>
-    </mat-card-actions>
-  </mat-card>
+  <div class="w-full">
+    <mat-card *ngFor="let listing of listings | async; index as i" class="mt-2 mr-2 inline-cards">
+      <mat-card-title>{{listing.position}}</mat-card-title>
+      <mat-card-subtitle>{{listing.institution}}</mat-card-subtitle>
+      <mat-card-content></mat-card-content>
+      <mat-card-actions>
+        <button mat-button routerLink="listings/{{listing.uid}}">See more</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>

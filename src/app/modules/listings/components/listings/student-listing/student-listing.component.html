@@ -1,6 +1,6 @@
 <div class="mt-4 ml-4">
   <h1>Find Listings</h1>
-  <mat-card *ngFor="let listing of listings | async; index as i">
+  <mat-card *ngFor="let listing of listings | async; index as i" class="mt-2 mr-2 inline-cards">
     <mat-card-title>{{listing.position}}</mat-card-title>
     <mat-card-subtitle>{{listing.institution}}</mat-card-subtitle>
     <mat-card-content></mat-card-content>

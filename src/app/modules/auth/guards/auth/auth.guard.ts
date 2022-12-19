@@ -32,7 +32,16 @@ export class AuthGuard implements CanActivate {
             return false;
           }
 
+          // console.log(user.roles)
+
+          // if (user.roles && (user.roles.student || user.roles.employer)) {
+          //   return true;
+          // }
+
+          // this.router.navigate(['auth', 'add-user-data'])
+
           return true;
+
         }),
       )
   }
