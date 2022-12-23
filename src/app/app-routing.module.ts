@@ -27,6 +27,10 @@ const routes: Routes = [
 
   { path: 'listings', loadChildren: () => import('./modules/listings/listings.module').then(m => m.ListingsModule), canActivate: [AuthGuard, HasRolesGuard] },
 
+  // application listings
+
+  { path: 'applications', loadChildren: () => import('./modules/applications/applications.module').then(m => m.ApplicationsModule) },
+
 
 ];
 

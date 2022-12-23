@@ -1,3 +1,5 @@
+import { Requirements } from "./requirements";
+
 export interface Listing {
 
   uid?: string;
@@ -22,6 +24,6 @@ export interface Listing {
    */
   creator: string;
 
-
+  requirements: Requirements;
 }
 

@@ -11,4 +11,6 @@ export interface Requirements {
   interestStatement?: boolean;
 
   essays?:boolean;
+  essayPrompts?: string[]
+
 }

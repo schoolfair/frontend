@@ -34,4 +34,8 @@ export class ListingComponent implements OnInit {
     }
   }
 
+  gotoApplyPage() {
+    this.router.navigate(['applications', 'apply', this.id]);
+  }
+
 }

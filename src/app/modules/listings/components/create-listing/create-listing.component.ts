@@ -62,8 +62,8 @@ export class CreateListingComponent implements OnInit {
             position: this.formGroup.get('position')?.value,
             description: this.formGroup.get('description')?.value,
             creator: data.uid,
-            institution: userdata.institution
-
+            institution: userdata.institution,
+            requirements: {}
           }
 
           this.listing.Create(listing);
