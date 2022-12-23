@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddUserDataComponent } from './modules/auth/components/add-user-data/add-user-data.component';
 
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardComponent } from './components/home/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 
 import { HasRolesGuard } from './modules/auth/guards/role/has-roles/has-roles.guard';
