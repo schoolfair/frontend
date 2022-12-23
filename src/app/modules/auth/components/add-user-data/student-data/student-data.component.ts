@@ -38,27 +38,27 @@ export class StudentDataComponent implements OnInit {
   }
 
   submitStudent() {
-    let student: StudentDataModel = {
-      firstName: this.studentFormGroup.get('firstName')?.value,
-      lastName: this.studentFormGroup.get('lastName')?.value,
-      age: this.studentFormGroup.get('age')?.value,
-      birthdate: `${this.studentFormGroup.get('day')?.value}/
-                  ${this.studentFormGroup.get('month')?.value}/
-                  ${this.studentFormGroup.get('year')?.value}`,
-      grade: this.studentFormGroup.get('grade')?.value,
-      school: this.studentFormGroup.get('school')?.value,
-      type: {isStudent: true}
-    };
+    // let student: StudentDataModel = {
+    //   firstName: this.studentFormGroup.get('firstName')?.value,
+    //   lastName: this.studentFormGroup.get('lastName')?.value,
+    //   age: this.studentFormGroup.get('age')?.value,
+    //   birthdate: `${this.studentFormGroup.get('day')?.value}/
+    //               ${this.studentFormGroup.get('month')?.value}/
+    //               ${this.studentFormGroup.get('year')?.value}`,
+    //   grade: this.studentFormGroup.get('grade')?.value,
+    //   school: this.studentFormGroup.get('school')?.value,
+    //   type: {isStudent: true}
+    // };
 
-    this.firebase.user.subscribe((user: User |undefined) => {
-      if (!user) { console.error("User is undefined."); }
-      else {
-        this.userdata.SetUserdataData(user.uid, student);
-        this.firebase.SetRole(user.uid, {student: true});
+    // this.firebase.user.subscribe((user: User |undefined) => {
+    //   if (!user) { console.error("User is undefined."); }
+    //   else {
+    //     this.userdata.SetUserdataData(user.uid, student);
+    //     this.firebase.SetRole(user.uid, {student: true});
 
-        this.router.navigate(['dashboard']);
-      }
-    });
+    //     this.router.navigate(['dashboard']);
+    //   }
+    // });
   }
 
 }

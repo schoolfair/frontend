@@ -37,27 +37,27 @@ export class EmployerDataComponent implements OnInit {
   }
 
   submitEmployer() {
-    let employer: EmployerDataModel = {
-      firstName: this.employerFormGroup.get('firstName')?.value,
-      lastName: this.employerFormGroup.get('lastName')?.value,
-      age: this.employerFormGroup.get('age')?.value,
-      birthdate: `${this.employerFormGroup.get('day')?.value}/
-                  ${this.employerFormGroup.get('month')?.value}/
-                  ${this.employerFormGroup.get('year')?.value}`,
-      institution: this.employerFormGroup.get('company')?.value,
-      type: {isEmployer: true},
-      listings: []
-    };
+    // let employer: EmployerDataModel = {
+    //   firstName: this.employerFormGroup.get('firstName')?.value,
+    //   lastName: this.employerFormGroup.get('lastName')?.value,
+    //   age: this.employerFormGroup.get('age')?.value,
+    //   birthdate: `${this.employerFormGroup.get('day')?.value}/
+    //               ${this.employerFormGroup.get('month')?.value}/
+    //               ${this.employerFormGroup.get('year')?.value}`,
+    //   institution: this.employerFormGroup.get('company')?.value,
+    //   type: {isEmployer: true},
+    //   listings: []
+    // };
 
-    this.firebase.user.subscribe((user: User |undefined) => {
-      if (!user) { console.error("User is undefined."); }
-      else {
-        this.userdata.SetUserdataData(user.uid, employer);
-        this.firebase.SetRole(user.uid, {employer: true});
+    // this.firebase.user.subscribe((user: User |undefined) => {
+    //   if (!user) { console.error("User is undefined."); }
+    //   else {
+    //     this.userdata.SetUserdataData(user.uid, employer);
+    //     this.firebase.SetRole(user.uid, {employer: true});
 
-        this.router.navigate(['dashboard']);
-      }
-    });
+    //     this.router.navigate(['dashboard']);
+    //   }
+    // });
 
   }
 

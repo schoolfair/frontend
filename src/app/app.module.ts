@@ -15,28 +15,27 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { FirebaseService } from './modules/auth/services/firebase/firebase.service';
 import { MaterialModule } from './modules/material/material.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { LandingPageComponent } from "./components/home/landing-page/landing-page.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    HomeComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MaterialModule,
-    AuthModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
-    // provideFirebaseApp(() => initializeApp(environment.firebase)),
-    // provideAuth(() => getAuth()),
-    // provideStorage(() => getStorage())
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NavbarComponent,
+        HomeComponent,
+        LandingPageComponent
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MaterialModule,
+        AuthModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
+        AngularFireAuthModule,
+    ]
 })
 export class AppModule { }

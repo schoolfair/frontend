@@ -14,6 +14,8 @@ import { ListingService } from '../../services/listing/listing.service';
 export class CreateListingComponent implements OnInit {
 
   formGroup: FormGroup
+  essayPrompts: string[] = [];
+  numOfEssayPrompts = 1;
 
   constructor(
     private firebase: FirebaseService,
@@ -23,11 +25,27 @@ export class CreateListingComponent implements OnInit {
     this.formGroup = new FormGroup({
       position: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
-
+      needsEssay: new FormControl(false, [Validators.required]),
+      needsResume: new FormControl(false, [Validators.required]),
+      needsInterestStatement: new FormControl(false, [Validators.required])
     })
   }
 
+
+
   ngOnInit(): void {
+  }
+
+  get needsEssays() {
+    return this.formGroup.get('needsEssay')?.value;
+  }
+
+  addEssayPrompt() {
+    this.numOfEssayPrompts ++;
+  }
+
+  removeEssayPrompt(index: number) {
+
   }
 
   addListing() {
@@ -45,6 +63,7 @@ export class CreateListingComponent implements OnInit {
             description: this.formGroup.get('description')?.value,
             creator: data.uid,
             institution: userdata.institution
+
           }
 
           this.listing.Create(listing);

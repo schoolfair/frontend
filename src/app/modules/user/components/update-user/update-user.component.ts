@@ -1,27 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { StudentDataModel, EmployerDataModel, UserDataModel } from 'src/app/modules/auth/components/add-user-data/user-data';
+import { Observable } from 'rxjs';
+import { EmployerDataModel, StudentDataModel, UserDataModel } from 'src/app/modules/auth/components/add-user-data/user-data';
 import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
 import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata.service';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  selector: 'app-update-user',
+  templateUrl: './update-user.component.html',
+  styleUrls: ['./update-user.component.scss']
 })
-export class UserComponent implements OnInit {
+export class UpdateUserComponent implements OnInit {
 
   user!: User;
   userData!: UserDataModel;
 
   constructor(
     private userService: FirebaseService,
-    private userDataService: UserdataService,
-    private router: Router
-  ) { }
+    private userDataService: UserdataService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.userService.user.subscribe((user: User|undefined) => {
       if (user) {
         this.user = user;
@@ -36,11 +34,8 @@ export class UserComponent implements OnInit {
           }
         });
       }
-    });
-  }
+    })
 
-  navigateToUpdateProfile() {
-    this.router.navigate(['user', 'update']);
   }
 
 }

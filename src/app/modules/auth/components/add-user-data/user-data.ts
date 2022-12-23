@@ -1,10 +1,23 @@
 
 export interface UserDataModel {
+
   firstName: string;
   lastName: string;
+  preferredName: string;
+
   age: number;
   birthdate: string;
   type: UserType;
+
+  addressLine1: string;
+  addressLine2?: string;
+
+  city: string;
+  state: string;
+  zipcode: string;
+  country: string;
+
+
 }
 
 export interface StudentDataModel extends UserDataModel {

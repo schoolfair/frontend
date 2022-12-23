@@ -5,6 +5,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './components/user/user.component';
 import { AuthModule } from '../auth/auth.module';
 import { MaterialModule } from '../material/material.module';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import { MaterialModule } from '../material/material.module';
     CommonModule,
     UserRoutingModule,
     AuthModule,
-    MaterialModule
+    MaterialModule,
   ]
 })
 export class UserModule { }
