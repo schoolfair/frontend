@@ -1,71 +1,73 @@
-
-<div class="mt-20 sm:mt-4 m-8 text-center w-full ">
-  <div class="w-full">
-      <h1 class="text-3xl font-medium leading-6 text-gray-900">{{listing.position}}</h1>
-      <p class="mt-1 text-sm text-gray-600">{{listing.institution}}</p>
+<ng-container *ngIf="listing">
+  <div class="w-full m-8 mt-20 text-center sm:mt-4 ">
+    <div class="w-full">
+        <h1 class="text-3xl font-medium leading-6 text-gray-900">{{listing.position}}</h1>
+        <p class="mt-1 text-sm text-gray-600">{{listing.institution}}</p>
+    </div>
   </div>
-</div>
 
-<div class="m-8">
-  <div class="md:grid md:grid-cols-3 md:gap-6">
-    <div class="md:col-span-1">
-      <div class="px-4 sm:px-0">
-        <h3 class="text-lg font-medium leading-6 text-gray-900">Application</h3>
-        <p class="mt-1 text-sm text-gray-600">This position asks for:</p>
-        <ul>
-          <li *ngIf="listing.requirements.interestStatement">Statement of Interest</li>
-          <li *ngIf="listing.requirements.essays">Essay(s)</li>
-          <li *ngIf="listing.requirements.resume">Resume</li>
-        </ul>
+  <div class="m-8">
+    <div class="md:grid md:grid-cols-3 md:gap-6">
+      <div class="md:col-span-1">
+        <div class="px-4 sm:px-0">
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Application</h3>
+          <p class="mt-1 text-sm text-gray-600">This position asks for:</p>
+          <ul>
+            <li *ngIf="listing.requirements.interestStatement">Statement of Interest</li>
+            <li *ngIf="listing.requirements.essays">Essay(s)</li>
+            <li *ngIf="listing.requirements.resume">Resume</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-5 md:col-span-2 md:mt-0">
+        <form [formGroup]="applicationFormGroup">
+          <div class="shadow sm:overflow-hidden sm:rounded-md">
+            <div class="px-4 py-5 space-y-6 bg-white sm:p-6">
+
+              <div *ngIf="listing.requirements.interestStatement">
+                <label for="about" class="block text-sm font-medium text-gray-700">Statement of Interest</label>
+                <div class="mt-1">
+                  <textarea formControlName="interestStatement" id="about" name="about" rows="3" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
+                </div>
+                <p class="mt-2 text-sm text-gray-500">Brief description of why you want this position (2500 characters max)</p>
+              </div>
+
+              <div *ngIf="listing.requirements.essays">
+                <label for="about" class="block text-sm font-medium text-gray-700">Essays</label>
+                <div *ngFor="let prompt of listing.requirements.essayPrompts; index as i">
+                  <div class="mt-1">
+                    <textarea [formControl]="essayControl(i)" id="about" name="about" rows="3" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
+                  </div>
+                  <p class="mt-2 text-sm text-gray-500">{{prompt}} (2500 characters max)</p>
+                </div>
+              </div>
+
+              <div *ngIf="listing.requirements.resume">
+                <label class="block text-sm font-medium text-gray-700">Resume</label>
+                <div class="flex justify-center px-6 pt-5 pb-6 mt-1 border-2 border-gray-300 border-dashed rounded-md">
+                  <div class="space-y-1 text-center">
+                    <svg *ngIf="!file" class="w-12 h-12 mx-auto text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                      <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <svg @animation class="w-12 h-12 mx-auto" *ngIf="file" width="3rem" height="3rem" viewBox="0 0 24 24" fill="#22c55e" xmlns="http://www.w3.org/2000/svg" stroke="#22c55e" stroke-width="0"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><path fill-rule="evenodd" clip-rule="evenodd" d="M19.633 6.226a1 1 0 0 1 .141 1.407l-9 11a1 1 0 0 1-1.481.074l-5-5a1 1 0 1 1 1.414-1.414l4.219 4.219 8.3-10.145a1 1 0 0 1 1.407-.14Z" fill="#22c55e"></path></svg>
+                    <div class="flex text-sm text-gray-600">
+                      <label for="file-upload" class="relative font-medium text-indigo-600 bg-white rounded-md cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
+                        <span>Upload a file</span>
+                        <input id="file-upload" name="file-upload" type="file" (change)="selectFile($event)" class="sr-only">
+                      </label>
+                      <p class="pl-1">or drag and drop</p>
+                    </div>
+                    <p class="text-xs text-gray-500">PDF, up to 10MB</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="px-4 py-3 text-right bg-gray-50 sm:px-6">
+              <button (click)="submit()" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Apply</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-    <div class="mt-5 md:col-span-2 md:mt-0">
-      <form [formGroup]="applicationFormGroup">
-        <div class="shadow sm:overflow-hidden sm:rounded-md">
-          <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
-
-            <div *ngIf="listing.requirements.interestStatement">
-              <label for="about" class="block text-sm font-medium text-gray-700">Statement of Interest</label>
-              <div class="mt-1">
-                <textarea formControlName="interestStatement" id="about" name="about" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
-              </div>
-              <p class="mt-2 text-sm text-gray-500">Brief description of why you want this position (2500 characters max)</p>
-            </div>
-
-            <div *ngIf="listing.requirements.essays">
-              <label for="about" class="block text-sm font-medium text-gray-700">Essays</label>
-              <div *ngFor="let prompt of listing.requirements.essayPrompts; index as i">
-                <div class="mt-1">
-                  <textarea [formControl]="essayControl(i)" id="about" name="about" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
-                </div>
-                <p class="mt-2 text-sm text-gray-500">{{prompt}} (2500 characters max)</p>
-              </div>
-            </div>
-
-            <div *ngIf="listing.requirements.resume">
-              <label class="block text-sm font-medium text-gray-700">Resume</label>
-              <div class="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
-                <div class="space-y-1 text-center">
-                  <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                  <div class="flex text-sm text-gray-600">
-                    <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
-                      <span>Upload a file</span>
-                      <input id="file-upload" name="file-upload" type="file" class="sr-only">
-                    </label>
-                    <p class="pl-1">or drag and drop</p>
-                  </div>
-                  <p class="text-xs text-gray-500">PDF, up to 10MB</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-            <button (click)="submit()" class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Apply</button>
-          </div>
-        </div>
-      </form>
-    </div>
   </div>
-</div>
+</ng-container>

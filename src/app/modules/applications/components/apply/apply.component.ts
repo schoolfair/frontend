@@ -8,17 +8,32 @@ import { ListingService } from 'src/app/modules/listings/services/listing/listin
 
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Guid } from 'guid-typescript';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Application } from '../../models/application';
+import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { User } from 'src/app/modules/auth/services/firebase/user';
+import { ApplicationService } from '../../services/application/application.service';
 
 @Component({
   templateUrl: './apply.component.html',
-  styleUrls: ['./apply.component.scss']
+  styleUrls: ['./apply.component.scss'],
+  animations: [
+    trigger('animation', [
+      transition(':enter', [
+        style({ left: '0%' }),  // initial
+        animate('0.5s',
+          style({ left: '100%' }))  // final
+      ]),
+      transition(':leave', [])
+    ])
+  ]
 })
 export class ApplyComponent implements OnInit {
 
   id!: string;
   listing!: Listing;
 
-  private file: File | null = null;
+  file: File | null = null;
 
   fileId!: Guid;
 
@@ -30,7 +45,9 @@ export class ApplyComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private listingService: ListingService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private user: FirebaseService,
+    private applicationService: ApplicationService
   ) {
     this.applicationFormGroup = new FormGroup({
       interestStatement: new FormControl('', Validators.maxLength(2500)),
@@ -53,7 +70,7 @@ export class ApplyComponent implements OnInit {
     if (_id) {
       this.id = _id;
 
-      this.listingService.GetListing(_id).subscribe((listing: Listing|undefined) => {
+      this.listingService.GetById(_id).subscribe((listing: Listing|undefined) => {
         if (listing) {
           this.listing = listing;
           if (listing.requirements.essays) {
@@ -74,9 +91,10 @@ export class ApplyComponent implements OnInit {
 
   }
 
-  selectFile( event: FileList ) {
-    const file = event && event.item(0);
-    this.file = file;
+  selectFile( event: Event ) {
+    const element = (event.target as HTMLInputElement);
+    if (element && element.files)
+      this.file = element.files[0];
   }
 
   pushFileToStorage(fileUpload: File): Observable<number | undefined> {
@@ -84,7 +102,7 @@ export class ApplyComponent implements OnInit {
     this.fileId = Guid.create();
 
     const filePath = `${this.basePath}/${this.fileId.toString()}`;
-    const storageRef = this.storage.ref(filePath);
+    //const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload)
 
     return uploadTask.percentageChanges();
@@ -110,6 +128,30 @@ export class ApplyComponent implements OnInit {
       }
     }
 
-  }
+    this.user.user.subscribe((data: User|undefined) => {
+      if (data && this.listing.uid) {
+        let application: Application = {
+          userId: data.uid,
+          listingId: this.listing.uid
+        }
 
+        if (this.listing.requirements.resume) {
+          application.resumeId = this.fileId.toString();
+        }
+
+        if (this.listing.requirements.essays) {
+          application.essays = this.essays.value;
+        }
+
+        if (this.listing.requirements.interestStatement) {
+          application.interestStatement = this.applicationFormGroup.get('interestStatement')?.value;
+        }
+
+        this.applicationService.Create(application);
+
+        this.router.navigate(['']);
+
+      }
+    })
+  }
 }

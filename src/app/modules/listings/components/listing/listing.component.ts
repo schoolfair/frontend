@@ -24,7 +24,7 @@ export class ListingComponent implements OnInit {
     if (_id) {
       this.id = _id;
 
-      this.listings.GetListing(_id).subscribe((data: Listing|undefined) => {
+      this.listings.GetById(_id).subscribe((data: Listing|undefined) => {
         if (data) {
           this.listing = data;
         }

@@ -7,6 +7,8 @@ import { ViewApplicationsComponent } from './components/view-applications/view-a
 import { MaterialModule } from '../material/material.module';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ApplicationService } from './services/application/application.service';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 
 @NgModule({
@@ -19,8 +21,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ApplicationsRoutingModule,
     MaterialModule,
+    AngularFireAuthModule,
     AngularFireStorageModule,
     ReactiveFormsModule
+  ],
+  providers: [
+    ApplicationService
   ]
 })
 export class ApplicationsModule { }
