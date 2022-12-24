@@ -33,3 +33,8 @@ Run `firebase init` to initialize firebase in a folder.
 ### Deploying
 
 To deploy the app, build the frontend using `ng build`, then navigate to the dist folder with `cd dist/schoolfair`.  After that, run `firebase deploy`. 
+
+
+# App
+
+View the App [here](https://schoolfair-9b858.web.app).
