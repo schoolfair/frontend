@@ -6,6 +6,7 @@ import { UserComponent } from './components/user/user.component';
 import { AuthModule } from '../auth/auth.module';
 import { MaterialModule } from '../material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { BrowserModule } from '@angular/platform-browser';
     UserRoutingModule,
     AuthModule,
     MaterialModule,
+    ReactiveFormsModule,
   ]
 })
 export class UserModule { }

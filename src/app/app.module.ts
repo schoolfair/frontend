@@ -15,6 +15,7 @@ import { MaterialModule } from './modules/material/material.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { LandingPageComponent } from "./components/home/landing-page/landing-page.component";
 import { DashboardComponent } from "./components/home/dashboard/dashboard.component";
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import { DashboardComponent } from "./components/home/dashboard/dashboard.compon
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
         AngularFireAuthModule,
+        AngularFireStorageModule
     ]
 })
 export class AppModule { }

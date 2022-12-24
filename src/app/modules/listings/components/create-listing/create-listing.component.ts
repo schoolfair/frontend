@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { EmployerDataModel } from 'src/app/modules/auth/components/add-user-data/user-data';
 import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
@@ -14,20 +15,21 @@ import { ListingService } from '../../services/listing/listing.service';
 export class CreateListingComponent implements OnInit {
 
   formGroup: FormGroup
-  essayPrompts: string[] = [];
   numOfEssayPrompts = 1;
 
   constructor(
     private firebase: FirebaseService,
     private userData: UserdataService,
-    private listing: ListingService
+    private listing: ListingService,
+    private router: Router
   ) {
     this.formGroup = new FormGroup({
       position: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       needsEssay: new FormControl(false, [Validators.required]),
       needsResume: new FormControl(false, [Validators.required]),
-      needsInterestStatement: new FormControl(false, [Validators.required])
+      needsInterestStatement: new FormControl(false, [Validators.required]),
+      prompts: new FormArray([]),
     })
   }
 
@@ -40,12 +42,25 @@ export class CreateListingComponent implements OnInit {
     return this.formGroup.get('needsEssay')?.value;
   }
 
+  get essayPrompts() {
+    return this.formGroup.get('prompts') as FormArray;
+  }
+
+  private essayPrompt() {
+    return new FormControl('', [Validators.required]);
+  }
+
   addEssayPrompt() {
-    this.numOfEssayPrompts ++;
+    this.essayPrompts.push(this.essayPrompt())
   }
 
   removeEssayPrompt(index: number) {
+    this.essayPrompts.removeAt(index);
 
+  }
+
+  getControl(index: number) {
+    return this.essayPrompts.get(index.toString()) as FormControl;
   }
 
   addListing() {
@@ -56,17 +71,22 @@ export class CreateListingComponent implements OnInit {
         this.userData.UserData(data.uid).subscribe((userRawdata: any|undefined) => {
           let userdata = userRawdata as EmployerDataModel;
 
-          console.log(userRawdata);
-
           let listing: Listing = {
             position: this.formGroup.get('position')?.value,
             description: this.formGroup.get('description')?.value,
             creator: data.uid,
             institution: userdata.institution,
-            requirements: {}
+            requirements: {
+              interestStatement: this.formGroup.get('needsInterestStatement')?.value,
+              resume:  this.formGroup.get('needsResume')?.value,
+              essays:  this.formGroup.get('needsEssay')?.value,
+              essayPrompts: this.formGroup.get('prompts')?.value
+            }
           }
 
           this.listing.Create(listing);
+
+          this.router.navigate(['listings'])
 
         })
       }
