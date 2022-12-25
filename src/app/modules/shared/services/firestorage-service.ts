@@ -34,7 +34,7 @@ export abstract class FirestoreService<T>  {
     return this.collectionRef.doc(uid).delete();
   }
 
-  Update(uid: string, newItem: T) {
+  Update(uid: string, newItem: any) {
     return this.collectionRef.doc(uid).set(newItem, {
       merge: true
     });

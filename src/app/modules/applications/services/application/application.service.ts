@@ -15,10 +15,15 @@ export class ApplicationService extends FirestoreService<Application> {
   }
 
   GetByUserId(userId: string) {
-
     return from(this.collectionRef.ref.where('userId', '==', userId).get());
+  }
 
+  accept(appId: string) {
+    return this.Update(appId, {accepted: true});
+  }
 
+  reject(appId: string) {
+    return this.Update(appId, {accepted: false});
   }
 
 }

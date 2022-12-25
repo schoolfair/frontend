@@ -1,4 +1,4 @@
-<div class="inline-block w-full" >
+<div class="inline-block w-full" *ngIf="applications.length != 0 else noApps">
   <h2 class="text-2xl font-bold tracking-tight text-gray-900"></h2>
   <ng-container *ngFor="let application of applications; index as i">
     <ng-container *ngIf="users[i] as _user as UserDataModel">
@@ -21,3 +21,8 @@
     </ng-container>
   </ng-container>
 </div>
+<ng-template #noApps>
+  <div class="mt-2 text-center">
+    <p>You currently have no applications.  Get the word out and check again later.</p>
+  </div>
+</ng-template>

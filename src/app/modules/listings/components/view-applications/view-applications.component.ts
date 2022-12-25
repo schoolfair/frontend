@@ -34,15 +34,14 @@ export class ViewApplicationsComponent implements OnInit {
 
       data = data.filter((d: Application) => d.listingId == _id);
 
+      console.log(data);
+
       this.applications = data;
 
       data.forEach((app: Application, i) => {
-        this.userData.GetById(app.userId).pipe(
-          tap((data: any) => {
-            this.users[i] = data as StudentDataModel;
-            console.log(this.users);
-          }
-        ));
+        this.userData.GetById(app.userId).pipe(take(1)).subscribe((data: any) => {
+          this.users[i] = data as StudentDataModel;
+        });
       })
 
     });

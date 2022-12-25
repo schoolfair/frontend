@@ -8,4 +8,6 @@ export interface Application {
   resumeId ?: string;
   essays ?: string[];
   interestStatement ?: string;
+
+  status?: boolean;
 }

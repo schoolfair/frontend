@@ -1,1 +1,40 @@
-<p>application works!</p>
+<ng-container *ngIf="application">
+  <div class="m-8">
+    <div class="">
+      <div class="mt-5 md:mt-0">
+        <div class="shadow sm:overflow-hidden sm:rounded-md">
+          <div class="px-4 py-5 space-y-6 bg-white sm:p-6">
+
+            <div *ngIf="application.interestStatement">
+              <label for="about" class="block text-sm font-medium text-gray-700">Statement of Interest</label>
+              <div class="mt-1">
+                <textarea [value]="application.interestStatement" disabled id="about" name="about" rows="3" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
+              </div>
+            </div>
+
+            <div *ngIf="application.essays">
+              <label for="about" class="block text-sm font-medium text-gray-700">Essays</label>
+              <div *ngFor="let essay of application.essays; index as i">
+                <div class="mt-1">
+                  <textarea [value]="essay" disabled id="about" name="about" rows="3" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
+                </div>
+                <p *ngIf="listing && listing.requirements.essayPrompts" class="mt-2 text-sm text-gray-500">{{listing.requirements.essayPrompts[i]}} (2500 characters max)</p>
+              </div>
+            </div>
+
+            <div *ngIf="application.resumeId">
+              <label class="block text-sm font-medium text-gray-700">Resume</label>
+              <div class="mt-1">
+                View Resume <a class="text-blue-400" [href]="resumeLink">Here.</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-4 py-3 text-right bg-gray-50 sm:px-6">
+          <button (click)="accept()" class="inline-flex justify-center px-4 py-2 mr-2 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-md shadow-sm hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Accept</button>
+          <button (click)="reject()" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md shadow-sm hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Reject</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
