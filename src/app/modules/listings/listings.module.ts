@@ -10,6 +10,8 @@ import { MaterialModule } from '../material/material.module';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ListingComponent } from './components/listing/listing.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { ViewApplicationsComponent } from './components/view-applications/view-applications.component';
 
 
 @NgModule({
@@ -18,14 +20,15 @@ import { ListingComponent } from './components/listing/listing.component';
     ListingComponent,
     CreateListingComponent,
     EmployerListingComponent,
-    StudentListingComponent
+    StudentListingComponent,
+    ViewApplicationsComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     AngularFireAuthModule,
     ListingsRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class ListingsModule { }

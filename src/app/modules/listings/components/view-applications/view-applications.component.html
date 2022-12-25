@@ -1,3 +1,23 @@
-<p>
-  view-applications works!
-</p>
+<div class="inline-block w-full" >
+  <h2 class="text-2xl font-bold tracking-tight text-gray-900"></h2>
+  <ng-container *ngFor="let application of applications; index as i">
+    <ng-container *ngIf="users[i] as _user as UserDataModel">
+      <mat-card class="!inline-block mb-1 mr-1 w-1/4">
+        <mat-card-header>
+          <h1>{{_user.firstName + " " + _user.lastName}}</h1>
+        </mat-card-header>
+        <mat-card-subtitle></mat-card-subtitle>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>Grade: {{_user.grade}}</mat-list-item>
+            <mat-list-item>School: {{_user.school}}</mat-list-item>
+          </mat-list>
+        </mat-card-content>
+        <mat-card-footer class="text-right">
+          <button mat-button (click)="gotoApplication(application.uid)">View Application</button>
+          <button mat-button (click)="gotoUser(_user.uid)">View Profile</button>
+        </mat-card-footer>
+      </mat-card>
+    </ng-container>
+  </ng-container>
+</div>

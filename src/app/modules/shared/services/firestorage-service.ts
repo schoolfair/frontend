@@ -20,7 +20,7 @@ export abstract class FirestoreService<T>  {
 
   GetById(uid: string) {
     const docRef = this.afs.doc<T>(
-      `listings/${uid}`
+      `${this.dbPath}/${uid}`
     );
 
     return docRef.valueChanges({idField: 'uid'});

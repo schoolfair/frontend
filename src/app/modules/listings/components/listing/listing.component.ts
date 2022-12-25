@@ -38,4 +38,8 @@ export class ListingComponent implements OnInit {
     this.router.navigate(['applications', 'apply', this.id]);
   }
 
+  gotoApplicationsPage() {
+    this.router.navigate(['listings', 'view-applications', this.id]);
+  }
+
 }

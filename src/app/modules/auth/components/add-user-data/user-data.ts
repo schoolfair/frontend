@@ -1,6 +1,8 @@
 
 export interface UserDataModel {
 
+  uid?: string;
+
   firstName: string;
   lastName: string;
   preferredName: string;

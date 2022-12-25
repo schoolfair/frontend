@@ -9,6 +9,6 @@ import { Listing } from '../../models/listing';
 export class ListingService extends FirestoreService<Listing> {
 
   constructor(private _afs: AngularFirestore) {
-    super("listing", _afs);
+    super("listings", _afs);
   }
 }

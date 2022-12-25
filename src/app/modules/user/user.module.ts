@@ -7,11 +7,13 @@ import { AuthModule } from '../auth/auth.module';
 import { MaterialModule } from '../material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
   declarations: [
-    UserComponent
+    UserComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

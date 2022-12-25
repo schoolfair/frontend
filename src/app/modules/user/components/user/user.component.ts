@@ -26,7 +26,7 @@ export class UserComponent implements OnInit {
       if (user) {
         this.user = user;
 
-        this.userDataService.UserData(user.uid).subscribe((data: any) => {
+        this.userDataService.GetById(user.uid).subscribe((data: any) => {
           if (data) {
             if (user.roles?.student)
               this.userData = data as StudentDataModel;

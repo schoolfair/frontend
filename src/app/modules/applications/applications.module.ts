@@ -9,13 +9,15 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApplicationService } from './services/application/application.service';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { ApplicationComponent } from './components/application/application.component';
 
 
 @NgModule({
   declarations: [
 
     ApplyComponent,
-    ViewApplicationsComponent
+    ViewApplicationsComponent,
+    ApplicationComponent
   ],
   imports: [
     CommonModule,

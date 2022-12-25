@@ -25,7 +25,7 @@ export class ListingsComponent implements OnInit {
           this.roles = data.roles;
         }
 
-        this.userdataService.UserData(data?.uid).subscribe((data: any | undefined) => {
+        this.userdataService.GetById(data?.uid).subscribe((data: any | undefined) => {
           if (data) {
             this.userdata = data;
           }

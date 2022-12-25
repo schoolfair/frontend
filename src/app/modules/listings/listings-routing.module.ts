@@ -4,6 +4,7 @@ import { EmployerGuard } from '../auth/guards/role/employer/employer.guard';
 import { CreateListingComponent } from './components/create-listing/create-listing.component';
 import { ListingComponent } from './components/listing/listing.component';
 import { ListingsComponent } from './components/listings/listings.component';
+import { ViewApplicationsComponent } from './components/view-applications/view-applications.component';
 
 const routes: Routes = [
 
@@ -15,7 +16,9 @@ const routes: Routes = [
 
   { path: 'create', component: CreateListingComponent, canActivate: [EmployerGuard]},
 
-  { path: 'listing/:id', component: ListingComponent}
+  { path: 'listing/:id', component: ListingComponent},
+
+  { path: 'view-applications/:id', component: ViewApplicationsComponent, canActivate: [EmployerGuard]}
 
 
 ];

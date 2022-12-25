@@ -68,7 +68,7 @@ export class CreateListingComponent implements OnInit {
     this.firebase.user.subscribe((data: User|undefined) => {
 
       if (data) {
-        this.userData.UserData(data.uid).subscribe((userRawdata: any|undefined) => {
+        this.userData.GetById(data.uid).subscribe((userRawdata: any|undefined) => {
           let userdata = userRawdata as EmployerDataModel;
 
           let listing: Listing = {
@@ -82,6 +82,10 @@ export class CreateListingComponent implements OnInit {
               essays:  this.formGroup.get('needsEssay')?.value,
               essayPrompts: this.formGroup.get('prompts')?.value
             }
+          }
+
+          if (!listing.requirements.essays) {
+            listing.requirements.essayPrompts = undefined;
           }
 
           this.listing.Create(listing);
