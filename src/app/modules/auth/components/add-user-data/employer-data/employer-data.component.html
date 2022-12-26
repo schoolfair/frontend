@@ -25,6 +25,31 @@
       <input type="number" formControlName="month" class="bg-gray-50 mr-1 border border-gray-300 text-gray-900 inline-block sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-1/4 p-2.5" placeholder="MM">
       <input type="number" formControlName="year" class="bg-gray-50 border border-gray-300 text-gray-900 inline-block sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-1/4 p-2.5" placeholder="YYYY">
     </div>
+
+    <div class="col-span-6">
+      <label for="street-address" class="block text-sm font-medium text-gray-700">Address Line 1</label>
+      <input type="text" disabled name="street-address" id="street-address" autocomplete="street-address" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+    </div>
+
+    <div class="col-span-6">
+      <label for="street-address" class="block text-sm font-medium text-gray-700">Address Line 2</label>
+      <input type="text" disabled name="street-address" id="street-address" autocomplete="street-address" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+    </div>
+
+    <div class="col-span-6 sm:col-span-6 lg:col-span-2">
+      <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+      <input type="text" disabled name="city" id="city" autocomplete="address-level2" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+    </div>
+
+    <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+      <label for="region" class="block text-sm font-medium text-gray-700">State / Province</label>
+      <input type="text" disabled name="region" id="region" autocomplete="address-level1" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+    </div>
+
+    <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+      <label for="postal-code" class="block text-sm font-medium text-gray-700">ZIP / Postal code</label>
+      <input type="text" disabled name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+    </div>
   </div>
 
   <div class="mt-4">

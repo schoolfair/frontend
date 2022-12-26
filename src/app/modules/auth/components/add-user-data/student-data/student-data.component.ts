@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { FirebaseService } from '../../../services/firebase/firebase.service';
@@ -17,6 +17,7 @@ export class StudentDataComponent implements OnInit {
 
   studentFormGroup: FormGroup;
 
+
   constructor(
     private firebase: FirebaseService,
     private userdata: UserdataService,
@@ -30,11 +31,26 @@ export class StudentDataComponent implements OnInit {
         day: new FormControl('', [Validators.required]),
         year: new FormControl('', [Validators.required]),
         grade: new FormControl('', [Validators.required]), // regex
-        school: new FormControl('', [Validators.required])
+        school: new FormControl('', [Validators.required]),
+        interests: new FormArray([])
       })
     }
 
   ngOnInit(): void {
+  }
+
+  onEnter(event: Event) {
+    const el = event.target as HTMLInputElement
+    this.interests.push(new FormControl(el.value));
+    el.value = "";
+  }
+
+  remove(i: number) {
+    this.interests.removeAt(i);
+  }
+
+  get interests() {
+    return (this.studentFormGroup.get('interests') as FormArray);
   }
 
   submitStudent() {
