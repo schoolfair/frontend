@@ -2,6 +2,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { countryList, states } from 'src/app/modules/shared/models/geography';
 import { FirebaseService } from '../../services/firebase/firebase.service';
 import { User } from '../../services/firebase/user';
 import { StudentDataModel } from './user-data';
@@ -14,13 +15,45 @@ import { StudentDataModel } from './user-data';
 export class AddUserDataComponent implements OnInit {
 
   roleFormGroup: FormGroup;
+  userDataFormGroup: FormGroup;
+
+  countryList = countryList;
+  statesList = states;
 
   constructor(
     private firebase: FirebaseService,
-    private router: Router) {
+    private router: Router
+  ) {
+
     this.roleFormGroup = new FormGroup({
       role: new FormControl('', [Validators.required])
-    })
+    });
+
+    this.userDataFormGroup = new FormGroup({
+        firstName: new FormControl('', Validators.required),
+        lastName: new FormControl('', [Validators.required]),
+        preferredName: new FormControl('', [Validators.required]),
+
+
+        age: new FormControl('', [Validators.required]), // Numbers regex
+
+        // date lines
+
+        month: new FormControl('', [Validators.required]),
+        day: new FormControl('', [Validators.required]),
+        year: new FormControl('', [Validators.required]),
+
+        // address lines
+
+        addressLine1: new FormControl('', [Validators.required]),
+        addressLine2: new FormControl('', []),
+
+        city: new FormControl('', [Validators.required]),
+        state: new FormControl('',),
+        zipcode: new FormControl('', [Validators.required]),
+
+        country: new FormControl('', [Validators.required])
+    });
 
   }
 
@@ -30,7 +63,7 @@ export class AddUserDataComponent implements OnInit {
   }
 
   get role() {
-    return this.roleFormGroup.get('role')?.value
+    return this.roleControl?.value
   }
 
   ngOnInit() {

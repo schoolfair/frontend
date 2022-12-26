@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -17,6 +17,7 @@ export class StudentDataComponent implements OnInit {
 
   studentFormGroup: FormGroup;
 
+  @Input() userDataFormGroup!: FormGroup;
 
   constructor(
     private firebase: FirebaseService,
@@ -24,12 +25,11 @@ export class StudentDataComponent implements OnInit {
     private router: Router
     ) {
       this.studentFormGroup = new FormGroup({
-        firstName: new FormControl('', Validators.required),
-        lastName: new FormControl('', [Validators.required]),
-        age: new FormControl('', [Validators.required]), // Numbers regex
-        month: new FormControl('', [Validators.required]),
-        day: new FormControl('', [Validators.required]),
-        year: new FormControl('', [Validators.required]),
+
+        description: new FormControl('', [Validators.required]),
+
+        // student specific
+
         grade: new FormControl('', [Validators.required]), // regex
         school: new FormControl('', [Validators.required]),
         interests: new FormArray([])
@@ -54,27 +54,40 @@ export class StudentDataComponent implements OnInit {
   }
 
   submitStudent() {
-    // let student: StudentDataModel = {
-    //   firstName: this.studentFormGroup.get('firstName')?.value,
-    //   lastName: this.studentFormGroup.get('lastName')?.value,
-    //   age: this.studentFormGroup.get('age')?.value,
-    //   birthdate: `${this.studentFormGroup.get('day')?.value}/
-    //               ${this.studentFormGroup.get('month')?.value}/
-    //               ${this.studentFormGroup.get('year')?.value}`,
-    //   grade: this.studentFormGroup.get('grade')?.value,
-    //   school: this.studentFormGroup.get('school')?.value,
-    //   type: {isStudent: true}
-    // };
+    let student: StudentDataModel = {
+      firstName: this.userDataFormGroup.get('firstName')?.value,
+      lastName: this.userDataFormGroup.get('lastName')?.value,
+      preferredName: this.userDataFormGroup.get('preferredName')?.value,
 
-    // this.firebase.user.subscribe((user: User |undefined) => {
-    //   if (!user) { console.error("User is undefined."); }
-    //   else {
-    //     this.userdata.SetUserdataData(user.uid, student);
-    //     this.firebase.SetRole(user.uid, {student: true});
+      age: this.userDataFormGroup.get('age')?.value,
+      birthdate: `${this.userDataFormGroup.get('day')?.value}/
+                  ${this.userDataFormGroup.get('month')?.value}/
+                  ${this.userDataFormGroup.get('year')?.value}`,
 
-    //     this.router.navigate(['dashboard']);
-    //   }
-    // });
+      addressLine1: this.userDataFormGroup.get('addressLine1')?.value,
+      addressLine2: this.userDataFormGroup.get('addressLine2')?.value,
+
+      city: this.userDataFormGroup.get('city')?.value,
+      state: this.userDataFormGroup.get('state')?.value,
+      zipcode: this.userDataFormGroup.get('zipcode')?.value,
+
+      country: this.userDataFormGroup.get('country')?.value,
+
+      grade: this.studentFormGroup.get('grade')?.value,
+      school: this.studentFormGroup.get('school')?.value,
+      description: this.studentFormGroup.get('description')?.value,
+    };
+
+    this.firebase.user.subscribe((user: User |undefined) => {
+      if (!user) { console.error("User is undefined."); }
+      else {
+        this.userdata.Update(user.uid, student);
+
+        this.firebase.SetRole(user.uid, {student: true});
+
+        this.router.navigate(['dashboard']);
+      }
+    });
   }
 
 }

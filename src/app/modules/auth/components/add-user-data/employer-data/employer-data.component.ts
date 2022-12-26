@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../../../services/firebase/firebase.service';
@@ -14,7 +14,8 @@ import { EmployerDataModel } from '../user-data';
 })
 export class EmployerDataComponent implements OnInit {
 
-  employerFormGroup: FormGroup
+  employerFormGroup: FormGroup;
+  @Input() userDataFormGroup!: FormGroup;
 
   constructor(
     private firebase: FirebaseService,
@@ -22,13 +23,7 @@ export class EmployerDataComponent implements OnInit {
     private router: Router) {
 
     this.employerFormGroup = new FormGroup({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', [Validators.required]),
-      age: new FormControl('', [Validators.required]), // Numbers regex
-      month: new FormControl('', [Validators.required]),
-      day: new FormControl('', [Validators.required]),
-      year: new FormControl('', [Validators.required]),
-      company: new FormControl('', [Validators.required])
+      institution: new FormControl('', [Validators.required])
     })
 
   }
@@ -37,27 +32,37 @@ export class EmployerDataComponent implements OnInit {
   }
 
   submitEmployer() {
-    // let employer: EmployerDataModel = {
-    //   firstName: this.employerFormGroup.get('firstName')?.value,
-    //   lastName: this.employerFormGroup.get('lastName')?.value,
-    //   age: this.employerFormGroup.get('age')?.value,
-    //   birthdate: `${this.employerFormGroup.get('day')?.value}/
-    //               ${this.employerFormGroup.get('month')?.value}/
-    //               ${this.employerFormGroup.get('year')?.value}`,
-    //   institution: this.employerFormGroup.get('company')?.value,
-    //   type: {isEmployer: true},
-    //   listings: []
-    // };
+    let employer: EmployerDataModel = {
+      firstName: this.userDataFormGroup.get('firstName')?.value,
+      lastName: this.userDataFormGroup.get('lastName')?.value,
+      preferredName: this.userDataFormGroup.get('preferredName')?.value,
 
-    // this.firebase.user.subscribe((user: User |undefined) => {
-    //   if (!user) { console.error("User is undefined."); }
-    //   else {
-    //     this.userdata.SetUserdataData(user.uid, employer);
-    //     this.firebase.SetRole(user.uid, {employer: true});
+      age: this.userDataFormGroup.get('age')?.value,
+      birthdate: `${this.userDataFormGroup.get('day')?.value}/
+                  ${this.userDataFormGroup.get('month')?.value}/
+                  ${this.userDataFormGroup.get('year')?.value}`,
 
-    //     this.router.navigate(['dashboard']);
-    //   }
-    // });
+      addressLine1: this.userDataFormGroup.get('addressLine1')?.value,
+      addressLine2: this.userDataFormGroup.get('addressLine2')?.value,
+
+      city: this.userDataFormGroup.get('city')?.value,
+      state: this.userDataFormGroup.get('state')?.value,
+      zipcode: this.userDataFormGroup.get('zipcode')?.value,
+
+      country: this.userDataFormGroup.get('country')?.value,
+
+      institution: this.employerFormGroup.get('company')?.value,
+    };
+
+    this.firebase.user.subscribe((user: User |undefined) => {
+      if (!user) { console.error("User is undefined."); }
+      else {
+        this.userdata.Update(user.uid, employer);
+        this.firebase.SetRole(user.uid, {employer: true});
+
+        this.router.navigate(['dashboard']);
+      }
+    });
 
   }
 

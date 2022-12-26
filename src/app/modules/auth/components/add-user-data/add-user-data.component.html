@@ -1,8 +1,7 @@
 <section>
   <div class="flex flex-col items-center justify-center w-screen px-6 py-8 mx-auto mt-6 lg:py-0">
-      <div class="w-full rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
-          <div class="max-w-full p-6 space-y-4 min-w-fit md:space-y-6 sm:p-8">
-          <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+    <div class="w-full rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
+          <h1 class="mt-2 ml-2 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Complete Your Profile
           </h1>
 
@@ -25,15 +24,101 @@
                 </div>
               </mat-step>
               <mat-step>
+                <form [formGroup]="userDataFormGroup">
+
+                  <!-- Name -->
+
+                  <mat-form-field class="inline-block mr-2">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName" />
+                  </mat-form-field>
+
+                  <mat-form-field class="inline-block">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="lastName" />
+                  </mat-form-field>
+
+                  <mat-form-field class="mr-2">
+                    <mat-label>Preferred Name</mat-label>
+                    <input matInput formControlName="preferredName" />
+                  </mat-form-field>
+
+                  <!-- Birthdate -->
+
+                  <mat-form-field>
+                    <mat-label>Age</mat-label>
+                    <input  matInput formControlName="age" />
+                  </mat-form-field>
+
+                  <mat-form-field class="w-1/4 mr-2">
+                    <mat-label>Month</mat-label>
+                    <input matInput  formControlName="month" />
+                  </mat-form-field>
+
+                  <mat-form-field class="w-1/4 mr-2">
+                    <mat-label>Day</mat-label>
+                    <input matInput  formControlName="day" />
+                  </mat-form-field>
+
+                  <mat-form-field class="w-1/4 mr-2">
+                    <mat-label>Year</mat-label>
+                    <input matInput  formControlName="year" />
+                  </mat-form-field>
+
+                  <!-- Address -->
+
+                  <mat-form-field class="w-full">
+                    <mat-label>Address Line 1</mat-label>
+                    <input matInput formControlName="addressLine1" />
+                  </mat-form-field>
+
+                  <mat-form-field class="w-full">
+                    <mat-label>Address Line 2</mat-label>
+                    <input matInput formControlName="addressLine2" />
+                  </mat-form-field>
+
+                  <mat-form-field class="w-1/3 mr-2">
+                    <mat-label>City</mat-label>
+                    <input matInput formControlName="city" />
+                  </mat-form-field>
+
+                  <mat-form-field class="w-1/4 mr-2">
+                    <mat-label>State</mat-label>
+                    <mat-select formControlName="state">
+                      <mat-option *ngFor="let state of statesList" [value]="state">
+                        {{state}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field class="w-1/4 mr-2">
+                    <mat-label>Zipcode</mat-label>
+                    <input #zipcode matInput formControlName="zipcode" />
+                    <mat-hint align="end">{{zipcode.value.length}} / 5</mat-hint>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Countries</mat-label>
+                    <mat-select formControlName="country">
+                      <mat-option *ngFor="let country of countryList" [value]="country">
+                        {{country}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div class="text-right">
+                    <button class="mt-4" mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step>
                 <div *ngIf="role === 'student'">
-                  <app-student-data></app-student-data>
+                  <app-student-data [userDataFormGroup]="userDataFormGroup"></app-student-data>
                 </div>
                 <div *ngIf="role === 'employer'">
-                  <app-employer-data></app-employer-data>
+                  <app-employer-data [userDataFormGroup]="userDataFormGroup"></app-employer-data>
                 </div>
               </mat-step>
             </mat-stepper>
-          </div>
       </div>
   </div>
 </section>
