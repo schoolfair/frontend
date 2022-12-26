@@ -1,0 +1,23 @@
+
+<ng-container class="overflow-auto whitespace-nowrap" *ngFor="let app of applications; index as i">
+  <mat-card class="!inline-block border w-1/6 ml-2" [ngClass]="{'!border-green-400': app.status, '!border-red-400': app.status === false}">
+    <mat-card-header>{{listings[i].position}}</mat-card-header>
+    <mat-card-subtitle class="text-center">{{listings[i].institution}}</mat-card-subtitle>
+    <mat-card-content class="overflow-hidden whitespace-nowrap text-ellipsis">
+      <mat-divider></mat-divider>
+      <div class="mt-4">Your application:</div>
+      <div class="mt-2 ml-2 text-gray-900" *ngIf="app.interestStatement">
+        {{app.interestStatement}}
+      </div>
+      <div class="mb-4 ml-2 text-gray-900" *ngIf="app.essays">
+        {{app.essays[0]}}
+      </div>
+      <mat-divider></mat-divider>
+    </mat-card-content>
+    <mat-card-footer>
+      <div class="mb-2 text-center" *ngIf="app.status">Congratulations! You were accepted for this position.</div>
+      <div class="mb-2 text-center" *ngIf="app.status === false">You were rejected for this position.</div>
+      <div class="mb-2 text-center" *ngIf="app.status === undefined">Your application status is still pending.</div>
+    </mat-card-footer>
+  </mat-card>
+</ng-container>

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { first, Observable } from 'rxjs';
+import { UserDataModel } from 'src/app/modules/auth/components/add-user-data/user-data';
+import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { Roles, User } from 'src/app/modules/auth/services/firebase/user';
+import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata.service';
 import { Listing } from '../../models/listing';
 import { ListingService } from '../../services/listing/listing.service';
 
@@ -14,10 +18,14 @@ export class ListingComponent implements OnInit {
   id!: string;
   listing!: Listing;
 
+  roles!: Roles
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private listings: ListingService) { }
+    private listings: ListingService,
+    private user: FirebaseService,
+    private userData: UserdataService) { }
 
   ngOnInit() {
     const _id = this.route.snapshot.paramMap.get('id');
@@ -32,6 +40,13 @@ export class ListingComponent implements OnInit {
     } else {
       this.router.navigate(['listings'])
     }
+
+    this.user.user.pipe(first()).subscribe((data?: User) => {
+      if (data && data.roles) {
+        this.roles = data?.roles;
+      }
+    });
+
   }
 
   gotoApplyPage() {

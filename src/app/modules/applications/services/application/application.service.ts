@@ -19,11 +19,11 @@ export class ApplicationService extends FirestoreService<Application> {
   }
 
   accept(appId: string) {
-    return this.Update(appId, {accepted: true});
+    return this.Update(appId, {status: true});
   }
 
   reject(appId: string) {
-    return this.Update(appId, {accepted: false});
+    return this.Update(appId, {status: false});
   }
 
 }
