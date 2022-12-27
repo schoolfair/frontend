@@ -51,7 +51,7 @@ export class EmployerDataComponent implements OnInit {
 
       country: this.userDataFormGroup.get('country')?.value,
 
-      institution: this.employerFormGroup.get('company')?.value,
+      institution: this.employerFormGroup.get('institution')?.value,
     };
 
     this.firebase.user.subscribe((user: User |undefined) => {

@@ -17,6 +17,7 @@ import { LandingPageComponent } from "./components/home/landing-page/landing-pag
 import { DashboardComponent } from "./components/home/dashboard/dashboard.component";
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { PreviewApplicationsComponent } from './components/home/dashboard/preview-applications/preview-applications.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import { PreviewApplicationsComponent } from './components/home/dashboard/previe
         DashboardComponent,
         HomeComponent,
         LandingPageComponent,
-        PreviewApplicationsComponent
+        PreviewApplicationsComponent,
+        FooterComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
