@@ -1,5 +1,5 @@
 
-<ng-container class="flex overflow-x-auto" *ngFor="let app of applications | slice:0:5; index as i">
+<ng-container class="flex overflow-x-auto" *ngFor="let app of applications; index as i">
   <mat-card class="!inline-block border w-1/6 ml-2" [ngClass]="{'!border-green-400': app.status, '!border-red-400': app.status === false}">
     <ng-container *ngIf="listings[i]">
       <mat-card-header>{{listings[i].position}}</mat-card-header>
@@ -23,6 +23,3 @@
     </mat-card-footer>
   </mat-card>
 </ng-container>
-<div class="text-right">
-  <button (click)="gotoApplications()" mat-button>See All Applications</button>
-</div>

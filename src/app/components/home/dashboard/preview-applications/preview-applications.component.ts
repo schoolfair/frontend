@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { first } from 'rxjs';
 import { Application } from 'src/app/modules/applications/models/application';
 import { ApplicationService } from 'src/app/modules/applications/services/application/application.service';
@@ -16,7 +17,8 @@ export class PreviewApplicationsComponent implements OnInit {
 
   constructor(
     private applicationService: ApplicationService,
-    private listingService: ListingService
+    private listingService: ListingService,
+    private router: Router
   ) { }
 
   applications!: Application[];
@@ -40,6 +42,10 @@ export class PreviewApplicationsComponent implements OnInit {
 
   viewStatus(id?: string) {
 
+  }
+
+  gotoApplications() {
+    this.router.navigate(['applications', 'applications'])
   }
 
 }

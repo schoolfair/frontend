@@ -122,7 +122,7 @@ export class FirebaseService {
       .signInWithPopup(provider)
       .then((result) => {
         this.SetUserData(result.user);
-        this.router.navigate(['dashboard'])
+        this.router.navigate([''])
       })
       .catch((error) => {
         window.alert(error);

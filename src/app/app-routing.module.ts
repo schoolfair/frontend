@@ -29,7 +29,7 @@ const routes: Routes = [
 
   // application listings
 
-  { path: 'applications', loadChildren: () => import('./modules/applications/applications.module').then(m => m.ApplicationsModule) },
+  { path: 'applications', loadChildren: () => import('./modules/applications/applications.module').then(m => m.ApplicationsModule), canActivate: [AuthGuard, HasRolesGuard] },
 
 
 ];

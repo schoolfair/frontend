@@ -18,6 +18,8 @@ import { DashboardComponent } from "./components/home/dashboard/dashboard.compon
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { PreviewApplicationsComponent } from './components/home/dashboard/preview-applications/preview-applications.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
+import { TermsComponent } from './components/terms/terms.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +29,9 @@ import { FooterComponent } from './components/footer/footer.component';
         HomeComponent,
         LandingPageComponent,
         PreviewApplicationsComponent,
-        FooterComponent
+        FooterComponent,
+        PrivacyComponent,
+        TermsComponent
     ],
     providers: [],
     bootstrap: [AppComponent],

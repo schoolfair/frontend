@@ -4,12 +4,14 @@ import { AuthGuard } from '../auth/guards/auth/auth.guard';
 import { EmployerGuard } from '../auth/guards/role/employer/employer.guard';
 import { StudentGuard } from '../auth/guards/role/student/student.guard';
 import { ApplicationComponent } from './components/application/application.component';
+import { ApplicationsComponent } from './components/applications/applications.component';
 import { ApplyComponent } from './components/apply/apply.component';
 import { ViewApplicationsComponent } from './components/view-applications/view-applications.component';
 
 const routes: Routes = [
-  { path: 'apply/:uid', component: ApplyComponent, canActivate: [AuthGuard, StudentGuard] },
-  { path: 'view-applications/:uid', component: ViewApplicationsComponent, canActivate: [AuthGuard, EmployerGuard]},
+  { path: 'applications', component: ApplicationsComponent, canActivate: [StudentGuard]},
+  { path: 'apply/:uid', component: ApplyComponent, canActivate: [StudentGuard] },
+  { path: 'view-applications/:uid', component: ViewApplicationsComponent, canActivate: [EmployerGuard]},
   { path: 'app/:id', component: ApplicationComponent }
 ];
 

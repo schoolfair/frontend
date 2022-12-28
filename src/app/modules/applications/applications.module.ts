@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ApplicationService } from './services/application/application.service';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { ApplicationComponent } from './components/application/application.component';
+import { ApplicationsComponent } from './components/applications/applications.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ApplicationComponent } from './components/application/application.compo
 
     ApplyComponent,
     ViewApplicationsComponent,
-    ApplicationComponent
+    ApplicationComponent,
+    ApplicationsComponent
   ],
   imports: [
     CommonModule,
