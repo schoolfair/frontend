@@ -14,6 +14,7 @@ import { StudentDataComponent } from './components/add-user-data/student-data/st
 import { EmployerDataComponent } from './components/add-user-data/employer-data/employer-data.component';
 import { UserdataService } from './services/userdata/userdata.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CreatedUserComponent } from './components/created-user/created-user.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     AddUserDataComponent,
     VerifyEmailComponent,
     StudentDataComponent,
-    EmployerDataComponent
+    EmployerDataComponent,
+    CreatedUserComponent
   ],
   imports: [
     CommonModule,

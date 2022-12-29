@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddUserDataComponent } from './components/add-user-data/add-user-data.component';
+import { CreatedUserComponent } from './components/created-user/created-user.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [UnloggedGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [UnloggedGuard] },
   { path: 'verify-email-address', component: VerifyEmailComponent },
+  { path: 'creating-user', component: CreatedUserComponent },
   { path: 'add-user-data', component: AddUserDataComponent, canActivate: [AuthGuard, NoRolesGuard]},
 ];
 

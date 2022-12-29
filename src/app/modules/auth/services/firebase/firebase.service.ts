@@ -127,7 +127,7 @@ export class FirebaseService {
       .signInWithPopup(provider)
       .then((result) => {
         //this.SetUserData(result.user);
-        this.router.navigate([''])
+        this.router.navigate(['auth', 'creating-user'])
       })
       .catch((error) => {
         window.alert(error);

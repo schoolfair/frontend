@@ -48,4 +48,8 @@ export class PreviewApplicationsComponent implements OnInit {
     this.router.navigate(['applications', 'applications'])
   }
 
+  gotoListings() {
+    this.router.navigate(['listings']);
+  }
+
 }
