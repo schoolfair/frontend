@@ -1,4 +1,5 @@
 export const environment = {
+  apiUrl: 'https://us-central1-schoolfair-9b858.cloudfunctions.net/api',
   firebase: {
     projectId: 'schoolfair-9b858',
     appId: '1:566329469840:web:1e216cd96166d85ff62115',

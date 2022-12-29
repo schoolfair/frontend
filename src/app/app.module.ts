@@ -20,6 +20,8 @@ import { PreviewApplicationsComponent } from './components/home/dashboard/previe
 import { FooterComponent } from './components/footer/footer.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { TermsComponent } from './components/terms/terms.component';
+import { TagsInputComponent } from './modules/shared/components/tags-input/tags-input.component';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -31,7 +33,7 @@ import { TermsComponent } from './components/terms/terms.component';
         PreviewApplicationsComponent,
         FooterComponent,
         PrivacyComponent,
-        TermsComponent
+        TermsComponent,
     ],
     providers: [],
     bootstrap: [AppComponent],
@@ -45,7 +47,11 @@ import { TermsComponent } from './components/terms/terms.component';
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
         AngularFireAuthModule,
-        AngularFireStorageModule
+        AngularFireStorageModule,
+        SharedModule
+    ],
+    exports: [
+      TagsInputComponent
     ]
 })
 export class AppModule { }

@@ -13,6 +13,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { StudentDataComponent } from './components/add-user-data/student-data/student-data.component';
 import { EmployerDataComponent } from './components/add-user-data/employer-data/employer-data.component';
 import { UserdataService } from './services/userdata/userdata.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { UserdataService } from './services/userdata/userdata.service';
     AuthRoutingModule,
     MaterialModule,
     AngularFireAuthModule,
+    HttpClientModule,
   ], providers: [
     FirebaseService,
     UserdataService

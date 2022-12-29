@@ -1,6 +1,4 @@
-
-
-<div class="mt-10 sm:mt-4 m-8">
+<div class="m-8 mt-10 sm:mt-4">
   <div class="md:grid md:grid-cols-3 md:gap-6">
     <div class="md:col-span-1">
       <div class="px-4 sm:px-0">
@@ -11,47 +9,52 @@
     <div class="mt-5 md:col-span-2 md:mt-0">
       <form [formGroup]="formGroup">
         <div class="overflow-hidden shadow sm:rounded-md">
-          <div class="bg-white px-4 py-5 sm:p-6">
+          <div class="px-4 py-5 bg-white sm:p-6">
             <div class="grid grid-cols-6 gap-6">
-              <div class="col-span-6 ">
-                <label for="first-name" class="block text-sm font-medium text-gray-700">Position</label>
-                <input type="text" formControlName="position" name="first-name" id="first-name" autocomplete="given-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-              </div>
+              <mat-form-field class="col-span-6 ">
+                <mat-label for="first-name">Position</mat-label>
+                <input matInput type="text" formControlName="position" name="first-name" id="first-name" autocomplete="given-name" class="w-full">
+              </mat-form-field>
 
-              <div class="col-span-6">
-                <label for="last-name" class="block text-sm font-medium text-gray-700">Description</label>
-                <textarea name="last-name" formControlName="description" id="last-name" autocomplete="family-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
-              </div>
+              <mat-form-field class="col-span-6" appearance="outline">
+                <mat-label for="last-name">Description</mat-label>
+                <textarea matInput name="last-name" formControlName="description" id="last-name" autocomplete="family-name" class="w-full h-20" ></textarea>
+              </mat-form-field>
 
               <div class="col-span-6 ">
-                <label for="last-name" class="block text-sm font-medium mb-2 text-gray-700">Requirements</label>
-                <input type="checkbox" formControlName="needsInterestStatement" name="last-name" id="last-name" class="inline-block w-4 mr-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">Statement of Interest
-                <input type="checkbox" formControlName="needsEssay" name="last-name" id="last-name" class="inline-block w-4 ml-4 mr-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">Essays
-                <input type="checkbox" formControlName="needsResume" name="last-name" id="last-name" class="inline-block w-4 ml-4 mr-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">Resume
+                <label for="last-name" class="block mb-2 text-sm font-medium text-gray-700">Requirements</label>
+                <mat-checkbox formControlName="needsInterestStatement" class="mr-2">Statement of Interest</mat-checkbox>
+                <mat-checkbox formControlName="needsEssay" class="mr-2">Essays</mat-checkbox>
+                <mat-checkbox formControlName="needsResume">Resume</mat-checkbox>
               </div>
 
               <div class="col-span-6" *ngIf="needsEssays">
                 <div>
                   <label for="street-address" class="inline-block text-sm font-medium text-gray-700">Essays</label>
-                  <button class="inline-block" (click)="addEssayPrompt()">
-                    <svg class="w-3 h-3 ml-4" fill="#333333" version="1.1" id="SVGRepoEditor" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 45.402 45.402" xml:space="preserve" stroke="#000000" stroke-width="0"><g id="SVGRepo_bgCarrier" stroke-width="0"></g> <path d="M41.267,18.557H26.832V4.134C26.832,1.851,24.99,0,22.707,0c-2.283,0-4.124,1.851-4.124,4.135v14.432H4.141 c-2.283,0-4.139,1.851-4.138,4.135c-0.001,1.141,0.46,2.187,1.207,2.934c0.748,0.749,1.78,1.222,2.92,1.222h14.453V41.27 c0,1.142,0.453,2.176,1.201,2.922c0.748,0.748,1.777,1.211,2.919,1.211c2.282,0,4.129-1.851,4.129-4.133V26.857h14.435 c2.283,0,4.134-1.867,4.133-4.15C45.399,20.425,43.548,18.557,41.267,18.557z"></path> </svg>
+                  <button mat-icon-button class="inline-block w-3" (click)="addEssayPrompt()">
+                    <mat-icon>add</mat-icon>
                   </button>
-                </div>
-                <div formArrayName="prompts" *ngFor="let prompt of essayPrompts.controls; let i=index">
-                  <textarea type="text" [formControl]="getControl(i)" name="street-address" id="street-address" autocomplete="street-address" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" ></textarea>
-                  <div>
-                    <label class="inline-block text-xs mt-1 text-gray-900" for="essay{{i}}">Prompt #{{i + 1}}</label>
-                    <button (click)="removeEssayPrompt(i)" class="inline-block">
-                      <svg class="w-3 h-3 ml-4 mt-2" fill="#000000" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="0"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><path d="M 10.7617 30.0977 L 45.2383 30.0977 C 46.3633 30.0977 47.3476 29.1367 47.3476 27.9883 C 47.3476 26.8398 46.3633 25.9023 45.2383 25.9023 L 10.7617 25.9023 C 9.6367 25.9023 8.6524 26.8398 8.6524 27.9883 C 8.6524 29.1367 9.6367 30.0977 10.7617 30.0977 Z"></path></svg>
-                    </button>
-                  </div>
                 </div>
               </div>
 
+              <mat-form-field class="col-span-6" formArrayName="prompts" *ngFor="let prompt of essayPrompts.controls; let i=index">
+                <mat-label>Prompt #{{i + 1}}</mat-label>
+                <input matInput type="text" [formControl]="getControl(i)" />
+                <button mat-icon-button (click)="removeEssayPrompt(i)" matSuffix>
+                  <mat-icon>remove</mat-icon>
+                </button>
+              </mat-form-field>
+
+              <div class="col-span-6">
+
+
+                <app-tags-input (tags)="tags"></app-tags-input>
+
+              </div>
             </div>
           </div>
-          <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-            <button (click)="addListing()" class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save</button>
+          <div class="px-4 py-3 text-right bg-gray-50 sm:px-6">
+            <button (click)="addListing()" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save</button>
           </div>
         </div>
       </form>

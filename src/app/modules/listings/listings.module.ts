@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ListingComponent } from './components/listing/listing.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ViewApplicationsComponent } from './components/view-applications/view-applications.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ViewApplicationsComponent } from './components/view-applications/view-a
     AngularFireAuthModule,
     ListingsRoutingModule,
     ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class ListingsModule { }

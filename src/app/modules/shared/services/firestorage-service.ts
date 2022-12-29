@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
+import { environment } from "src/environments/environment";
 
 
 export abstract class FirestoreService<T>  {
@@ -10,6 +11,9 @@ export abstract class FirestoreService<T>  {
     private dbPath: string,
     private afs: AngularFirestore
   ) {
+    if (!environment.production) {
+      this.afs.firestore.useEmulator(`http://localhost`, 8080);
+    }
 
     this.collectionRef = this.afs.collection<T>(this.dbPath);
   }

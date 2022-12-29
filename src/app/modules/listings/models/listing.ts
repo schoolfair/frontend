@@ -24,6 +24,8 @@ export interface Listing {
    */
   creator: string;
 
+  tags: string[];
+
   requirements: Requirements;
 }
 

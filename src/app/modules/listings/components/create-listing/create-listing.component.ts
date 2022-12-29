@@ -5,6 +5,7 @@ import { EmployerDataModel } from 'src/app/modules/auth/components/add-user-data
 import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
 import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata.service';
+import { Tags } from 'src/app/modules/shared/models/tags';
 import { Listing } from '../../models/listing';
 import { ListingService } from '../../services/listing/listing.service';
 
@@ -16,6 +17,10 @@ export class CreateListingComponent implements OnInit {
 
   formGroup: FormGroup
   numOfEssayPrompts = 1;
+
+  tags = [];
+
+  allTags = Tags;
 
   constructor(
     private firebase: FirebaseService,
@@ -32,8 +37,6 @@ export class CreateListingComponent implements OnInit {
       prompts: new FormArray([]),
     })
   }
-
-
 
   ngOnInit(): void {
   }
@@ -74,6 +77,7 @@ export class CreateListingComponent implements OnInit {
           let listing: Listing = {
             position: this.formGroup.get('position')?.value,
             description: this.formGroup.get('description')?.value,
+            tags: this.tags,
             creator: data.uid,
             institution: userdata.institution,
             requirements: {

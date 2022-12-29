@@ -3,6 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+
+  stripeKey: 'pk_test_51MK2cjGnsOgkPr2ErqxMeue0Vxjn5werYj0oj0EA8Uq21Z7eVsICUAxYcoKNrzURYeNPlY4aMfinJVRPCZLblg4S00PRsI5qGH',
+
+  apiUrl: 'http://127.0.0.1:5001/schoolfair-9b858/us-central1/httpTest',
+
   firebase: {
     apiKey: "AIzaSyABpcpuZnZsPzdZdda6gVfpFVYIM-nf72o",
 

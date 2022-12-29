@@ -9,6 +9,8 @@ import {
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { UserDataModel } from '../../components/add-user-data/user-data';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
@@ -23,8 +25,15 @@ export class FirebaseService {
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    private http: HttpClient,
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
   ) {
+    if (!environment.production) {
+      this.afAuth.useEmulator(`http://localhost:9099`);
+      this.afs.firestore.useEmulator(`http://localhost`, 8080)
+    }
+
+
     /* Saving user data when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
@@ -74,9 +83,7 @@ export class FirebaseService {
         /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
         this.SendVerificationMail();
-
         this.SetUserData(result.user);
-
         this.router.navigate(['verify-email']);
       })
       .catch((error) => {
@@ -132,9 +139,6 @@ export class FirebaseService {
   sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   SetUserData(user: any) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
-    );
 
     const userData: User = {
       uid: user.uid,
@@ -144,9 +148,7 @@ export class FirebaseService {
       emailVerified: user.emailVerified,
     };
 
-    return userRef.set(userData, {
-      merge: true,
-    });
+    this.http.post(`${environment.apiUrl}/users`, userData).subscribe();
   }
 
 
