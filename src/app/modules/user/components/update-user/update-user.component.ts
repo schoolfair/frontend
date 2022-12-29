@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EmployerDataModel, StudentDataModel, UserDataModel } from 'src/app/modules/auth/components/add-user-data/user-data';
+import { EmployerDataModel, StudentDataModel, UserDataModel } from 'src/app/modules/auth/models/user-data';
 import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
 import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata.service';

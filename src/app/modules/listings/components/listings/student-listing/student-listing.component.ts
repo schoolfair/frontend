@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import { StudentDataModel, UserDataModel } from 'src/app/modules/auth/components/add-user-data/user-data';
+import { StudentDataModel, UserDataModel } from 'src/app/modules/auth/models/user-data';
 import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { Listing } from '../../../models/listing';
 import { ListingService } from '../../../services/listing/listing.service';

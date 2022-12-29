@@ -14,7 +14,7 @@ export class NoRolesGuard implements CanActivate {
     private router: Router) { }
 
   private hasRoles(roles: Roles|undefined) {
-    return roles && ((roles.student) || (!roles.employer) || (!roles.admin))
+    return roles && ((roles.student) || (roles.employer))
   }
 
   canActivate(

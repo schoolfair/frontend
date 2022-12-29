@@ -1,3 +1,4 @@
+import { Roles } from "../services/firebase/user";
 
 export interface UserDataModel {
 
@@ -17,12 +18,15 @@ export interface UserDataModel {
   state: string;
   zipcode: string;
   country: string;
+
+  type: Roles;
 }
 
 export interface StudentDataModel extends UserDataModel {
   description: string;
   grade: number;
   school: string;
+  tags?: string[];
 }
 
 export interface EmployerDataModel extends UserDataModel {

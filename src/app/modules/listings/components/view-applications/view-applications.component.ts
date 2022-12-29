@@ -4,7 +4,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { first, Observable, take, tap } from 'rxjs';
 import { Application } from 'src/app/modules/applications/models/application';
 import { ApplicationService } from 'src/app/modules/applications/services/application/application.service';
-import { StudentDataModel, UserDataModel } from 'src/app/modules/auth/components/add-user-data/user-data';
+import { StudentDataModel, UserDataModel } from 'src/app/modules/auth/models/user-data';
 import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
 import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata.service';

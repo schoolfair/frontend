@@ -8,7 +8,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import { UserDataModel } from '../../components/add-user-data/user-data';
+import { UserDataModel } from '../../models/user-data';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 @Injectable({
@@ -28,15 +28,13 @@ export class FirebaseService {
     private http: HttpClient,
     public ngZone: NgZone, // NgZone service to remove outside scope warning
   ) {
-    if (!environment.production) {
-      this.afAuth.useEmulator(`http://localhost:9099`);
-      this.afs.firestore.useEmulator(`http://localhost`, 8080)
-    }
+
 
 
     /* Saving user data when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
+
       if (user) {
         this.afs.doc<User>(`users/${user.uid}`).valueChanges().subscribe((data: User|undefined) => {
 
@@ -83,7 +81,7 @@ export class FirebaseService {
         /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
         this.SendVerificationMail();
-        this.SetUserData(result.user);
+        //this.SetUserData(result.user);
         this.router.navigate(['verify-email']);
       })
       .catch((error) => {
@@ -128,7 +126,7 @@ export class FirebaseService {
     return this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
-        this.SetUserData(result.user);
+        //this.SetUserData(result.user);
         this.router.navigate([''])
       })
       .catch((error) => {
@@ -140,6 +138,10 @@ export class FirebaseService {
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   SetUserData(user: any) {
 
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user.uid}`
+    );
+
     const userData: User = {
       uid: user.uid,
       email: user.email,
@@ -148,7 +150,10 @@ export class FirebaseService {
       emailVerified: user.emailVerified,
     };
 
-    this.http.post(`${environment.apiUrl}/users`, userData).subscribe();
+    return userRef.set(userData, {
+      merge: true,
+    });
+
   }
 
 

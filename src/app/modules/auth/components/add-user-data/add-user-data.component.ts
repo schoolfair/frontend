@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { countryList, states } from 'src/app/modules/shared/models/geography';
 import { FirebaseService } from '../../services/firebase/firebase.service';
 import { User } from '../../services/firebase/user';
-import { StudentDataModel } from './user-data';
+import { StudentDataModel } from '../../models/user-data';
 
 @Component({
   selector: 'app-add-user-data',

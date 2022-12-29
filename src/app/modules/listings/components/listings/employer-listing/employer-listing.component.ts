@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EmployerDataModel } from 'src/app/modules/auth/components/add-user-data/user-data';
+import { EmployerDataModel } from 'src/app/modules/auth/models/user-data';
 import { Listing } from '../../../models/listing';
 import { ListingService } from '../../../services/listing/listing.service';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first, Observable } from 'rxjs';
-import { UserDataModel } from 'src/app/modules/auth/components/add-user-data/user-data';
+import { UserDataModel } from 'src/app/modules/auth/models/user-data';
 import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { Roles, User } from 'src/app/modules/auth/services/firebase/user';
 import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata.service';

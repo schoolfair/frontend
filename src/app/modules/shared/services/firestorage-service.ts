@@ -8,12 +8,12 @@ export abstract class FirestoreService<T>  {
   collectionRef: AngularFirestoreCollection<T>
 
   constructor(
-    private dbPath: string,
-    private afs: AngularFirestore
+    protected dbPath: string,
+    protected afs: AngularFirestore
   ) {
-    if (!environment.production) {
-      this.afs.firestore.useEmulator(`http://localhost`, 8080);
-    }
+    // if (!environment.production) {
+    //   this.afs.firestore.useEmulator(`localhost`, 8080);
+    // }
 
     this.collectionRef = this.afs.collection<T>(this.dbPath);
   }
