@@ -15,9 +15,9 @@ export class AppComponent {
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore
   ) {
-    if (!environment.production && environment.isEmulating) {
-      this.afAuth.useEmulator(environment.authEmulatorURL);
-      this.afs.firestore.useEmulator(`localhost`, 8080)
-    }
+    // if (!environment.production && environment.isEmulating) {
+    //   this.afAuth.useEmulator(environment.authEmulatorURL);
+    //   this.afs.firestore.useEmulator(`localhost`, 8080)
+    // }
   }
 }

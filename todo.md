@@ -2,4 +2,5 @@
 
 - Form Validations
 - Tags for listings
-- Landing Page
+- Make applications in a table
+- Better listings selection
