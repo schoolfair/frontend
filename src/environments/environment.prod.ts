@@ -9,5 +9,6 @@ export const environment = {
     authDomain: 'schoolfair-9b858.firebaseapp.com',
     messagingSenderId: '566329469840',
   },
-  production: true
+  production: true,
+  isEmulating: false
 };

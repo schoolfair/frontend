@@ -12,17 +12,11 @@ export const environment = {
 
   firebase: {
     apiKey: "AIzaSyABpcpuZnZsPzdZdda6gVfpFVYIM-nf72o",
-
-  authDomain: "schoolfair-9b858.firebaseapp.com",
-
-  projectId: "schoolfair-9b858",
-
-  storageBucket: "schoolfair-9b858.appspot.com",
-
-  messagingSenderId: "566329469840",
-
-  appId: "1:566329469840:web:1e216cd96166d85ff62115"
-
+    authDomain: "schoolfair-9b858.firebaseapp.com",
+    projectId: "schoolfair-9b858",
+    storageBucket: "schoolfair-9b858.appspot.com",
+    messagingSenderId: "566329469840",
+    appId: "1:566329469840:web:1e216cd96166d85ff62115"
   },
 
   firestoreEmulatorURL: 'http://127.0.0.1:8080',

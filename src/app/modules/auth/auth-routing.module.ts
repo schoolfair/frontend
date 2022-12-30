@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [UnloggedGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [UnloggedGuard] },
   { path: 'verify-email-address', component: VerifyEmailComponent },
-  { path: 'creating-user', component: CreatedUserComponent },
+  //{ path: 'creating-user', component: CreatedUserComponent, canActivate: [UnloggedGuard] },
   { path: 'add-user-data', component: AddUserDataComponent, canActivate: [AuthGuard, NoRolesGuard]},
 ];
 

@@ -13,7 +13,7 @@ import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata
 export class UserComponent implements OnInit {
 
   user!: User;
-  userData!: UserDataModel;
+  userData!: any;
 
   constructor(
     private userService: FirebaseService,
