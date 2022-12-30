@@ -1,7 +1,7 @@
 import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/compat/firestore';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { Observable, ReplaySubject } from 'rxjs';
 import { StudentDataModel, UserDataModel } from 'src/app/modules/auth/models/user-data';
 import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
