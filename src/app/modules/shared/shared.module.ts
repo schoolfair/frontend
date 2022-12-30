@@ -3,18 +3,22 @@ import { CommonModule } from '@angular/common';
 import { TagsInputComponent } from './components/tags-input/tags-input.component';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TextInputComponent } from './components/text-input/text-input.component';
+import { NgxEditorModule } from 'ngx-editor';
 
 
 
 @NgModule({
-  declarations: [TagsInputComponent],
+  declarations: [TagsInputComponent, TextInputComponent],
   imports: [
     CommonModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxEditorModule,
   ],
   exports: [
-    TagsInputComponent
+    TagsInputComponent,
+    TextInputComponent
   ]
 })
 export class SharedModule { }

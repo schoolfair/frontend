@@ -13,6 +13,7 @@ import { ListingComponent } from './components/listing/listing.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ViewApplicationsComponent } from './components/view-applications/view-applications.component';
 import { SharedModule } from '../shared/shared.module';
+import { NgxEditorModule } from 'ngx-editor';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { SharedModule } from '../shared/shared.module';
     CreateListingComponent,
     EmployerListingComponent,
     StudentListingComponent,
-    ViewApplicationsComponent
+    ViewApplicationsComponent,
+
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,26 @@ import { SharedModule } from '../shared/shared.module';
     AngularFireAuthModule,
     ListingsRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    NgxEditorModule.forRoot({
+      locals: {
+        bold: 'Bold',
+        italic: 'Italic',
+        code: 'Code',
+        underline: 'Underline',
+        strike: 'Strike',
+        blockquote: 'Blockquote',
+        bullet_list: 'Bullet List',
+        ordered_list: 'Ordered List',
+        heading: 'Heading',
+        h1: 'Header 1',
+        h2: 'Header 2',
+        h3: 'Header 3',
+        h4: 'Header 4',
+        h5: 'Header 5',
+        h6: 'Header 6',
+      }
+    }),
   ]
 })
 export class ListingsModule { }

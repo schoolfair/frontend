@@ -25,7 +25,8 @@
     "daisyui": "^2.46.0",
     "firebase": "^9.15.0",
     "guid-typescript": "^1.0.9",
-    "rxjs": "~7.4.0",
+    "ngx-editor": "^15.1.0",
+    "rxjs": "^7.5.0",
     "tslib": "^2.3.0",
     "tw-elements": "^1.0.0-alpha13",
     "zone.js": "~0.11.4"

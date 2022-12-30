@@ -11,6 +11,7 @@ import { ApplicationService } from './services/application/application.service';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { ApplicationComponent } from './components/application/application.component';
 import { ApplicationsComponent } from './components/applications/applications.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ApplicationsComponent } from './components/applications/applications.co
     MaterialModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers: [
     ApplicationService

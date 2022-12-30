@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AbstractControl, UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Editor, Toolbar } from 'ngx-editor';
+import { first } from 'rxjs';
+
 import { EmployerDataModel } from 'src/app/modules/auth/models/user-data';
 import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
@@ -19,6 +22,8 @@ export class CreateListingComponent implements OnInit {
   numOfEssayPrompts = 1;
 
   tags = [];
+
+
 
   allTags = Tags;
 
@@ -53,6 +58,8 @@ export class CreateListingComponent implements OnInit {
     return new UntypedFormControl('', [Validators.required]);
   }
 
+
+
   addEssayPrompt() {
     this.essayPrompts.push(this.essayPrompt())
   }
@@ -66,9 +73,13 @@ export class CreateListingComponent implements OnInit {
     return this.essayPrompts.get(index.toString()) as UntypedFormControl;
   }
 
+  get description() {
+    return this.formGroup.get('description') as UntypedFormControl;
+  }
+
   addListing() {
 
-    this.firebase.user.subscribe((data: User|undefined) => {
+    this.firebase.user.pipe(first()).subscribe((data: User|undefined) => {
 
       if (data) {
         this.userData.GetById(data.uid).subscribe((userRawdata: any|undefined) => {
@@ -89,7 +100,7 @@ export class CreateListingComponent implements OnInit {
           }
 
           if (!listing.requirements.essays) {
-            listing.requirements.essayPrompts = undefined;
+            listing.requirements.essayPrompts = [];
           }
 
           this.listing.Create(listing);

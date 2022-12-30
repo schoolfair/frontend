@@ -16,10 +16,7 @@
                 <input matInput type="text" formControlName="position" name="first-name" id="first-name" autocomplete="given-name" class="w-full">
               </mat-form-field>
 
-              <mat-form-field class="col-span-6" appearance="outline">
-                <mat-label for="last-name">Description</mat-label>
-                <textarea matInput name="last-name" formControlName="description" id="last-name" autocomplete="family-name" class="w-full h-20" ></textarea>
-              </mat-form-field>
+              <app-text-input class="col-span-6" [formControl]="description"></app-text-input>
 
               <div class="col-span-6 ">
                 <label for="last-name" class="block mb-2 text-sm font-medium text-gray-700">Requirements</label>
