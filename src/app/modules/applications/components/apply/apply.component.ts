@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, Observable } from 'rxjs';
 import { Listing } from 'src/app/modules/listings/models/listing';
@@ -39,7 +39,7 @@ export class ApplyComponent implements OnInit {
 
   private basePath = '/resumes';
 
-  applicationFormGroup: FormGroup
+  applicationFormGroup: UntypedFormGroup
 
   constructor(
     private route: ActivatedRoute,
@@ -49,18 +49,18 @@ export class ApplyComponent implements OnInit {
     private user: FirebaseService,
     private applicationService: ApplicationService
   ) {
-    this.applicationFormGroup = new FormGroup({
-      interestStatement: new FormControl('', Validators.maxLength(2500)),
-      essays: new FormArray([]),
+    this.applicationFormGroup = new UntypedFormGroup({
+      interestStatement: new UntypedFormControl('', Validators.maxLength(2500)),
+      essays: new UntypedFormArray([]),
     });
   }
 
   get essays() {
-    return this.applicationFormGroup.get('essays') as FormArray;
+    return this.applicationFormGroup.get('essays') as UntypedFormArray;
   }
 
   essayControl(i: number) {
-    return this.essays.get(i.toString()) as FormControl;
+    return this.essays.get(i.toString()) as UntypedFormControl;
   }
 
   ngOnInit(): void {
@@ -76,7 +76,7 @@ export class ApplyComponent implements OnInit {
           if (listing.requirements.essays) {
             if (listing.requirements.essayPrompts) {
               for (let i = 0; i < listing.requirements.essayPrompts?.length; i++) {
-                this.essays.push(new FormControl('', [Validators.required]));
+                this.essays.push(new UntypedFormControl('', [Validators.required]));
               }
             }
           }

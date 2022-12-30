@@ -1,6 +1,6 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { countryList, states } from 'src/app/modules/shared/models/geography';
 import { FirebaseService } from '../../services/firebase/firebase.service';
@@ -14,8 +14,8 @@ import { StudentDataModel } from '../../models/user-data';
 })
 export class AddUserDataComponent implements OnInit {
 
-  roleFormGroup: FormGroup;
-  userDataFormGroup: FormGroup;
+  roleFormGroup: UntypedFormGroup;
+  userDataFormGroup: UntypedFormGroup;
 
   countryList = countryList;
   statesList = states;
@@ -25,34 +25,34 @@ export class AddUserDataComponent implements OnInit {
     private router: Router
   ) {
 
-    this.roleFormGroup = new FormGroup({
-      role: new FormControl('', [Validators.required])
+    this.roleFormGroup = new UntypedFormGroup({
+      role: new UntypedFormControl('', [Validators.required])
     });
 
-    this.userDataFormGroup = new FormGroup({
-        firstName: new FormControl('', Validators.required),
-        lastName: new FormControl('', [Validators.required]),
-        preferredName: new FormControl('', [Validators.required]),
+    this.userDataFormGroup = new UntypedFormGroup({
+        firstName: new UntypedFormControl('', Validators.required),
+        lastName: new UntypedFormControl('', [Validators.required]),
+        preferredName: new UntypedFormControl('', [Validators.required]),
 
 
-        age: new FormControl('', [Validators.required]), // Numbers regex
+        age: new UntypedFormControl('', [Validators.required]), // Numbers regex
 
         // date lines
 
-        month: new FormControl('', [Validators.required]),
-        day: new FormControl('', [Validators.required]),
-        year: new FormControl('', [Validators.required]),
+        month: new UntypedFormControl('', [Validators.required]),
+        day: new UntypedFormControl('', [Validators.required]),
+        year: new UntypedFormControl('', [Validators.required]),
 
         // address lines
 
-        addressLine1: new FormControl('', [Validators.required]),
-        addressLine2: new FormControl('', []),
+        addressLine1: new UntypedFormControl('', [Validators.required]),
+        addressLine2: new UntypedFormControl('', []),
 
-        city: new FormControl('', [Validators.required]),
-        state: new FormControl('',),
-        zipcode: new FormControl('', [Validators.required]),
+        city: new UntypedFormControl('', [Validators.required]),
+        state: new UntypedFormControl('',),
+        zipcode: new UntypedFormControl('', [Validators.required]),
 
-        country: new FormControl('', [Validators.required])
+        country: new UntypedFormControl('', [Validators.required])
     });
 
   }

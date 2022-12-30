@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Input, Output, ElementRef, ViewChild } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
 import { Tags } from '../../models/tags';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
@@ -16,7 +16,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 export class TagsInputComponent implements OnInit {
 
   separatorKeysCodes: number[] =  [ENTER, COMMA];
-  tagControl: FormControl = new FormControl('', [Validators.required]);
+  tagControl: UntypedFormControl = new UntypedFormControl('', [Validators.required]);
   filteredTags: Observable<string[]>;
   allTags: string[] = Tags
   tags: string[] = [];

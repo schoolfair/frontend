@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
 
 @Component({
@@ -9,13 +9,13 @@ import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase
 })
 export class RegisterComponent implements OnInit {
 
-  formData: FormGroup
+  formData: UntypedFormGroup
   loading = false;
 
   constructor(private firebase: FirebaseService) {
-    this.formData = new FormGroup({
-      'email': new FormControl('', [Validators.required, Validators.email]),
-      'password': new FormControl('', [Validators.required, Validators.minLength(8)]),
+    this.formData = new UntypedFormGroup({
+      'email': new UntypedFormControl('', [Validators.required, Validators.email]),
+      'password': new UntypedFormControl('', [Validators.required, Validators.minLength(8)]),
     })
   }
 

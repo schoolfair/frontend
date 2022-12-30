@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { FirebaseService } from '../../../services/firebase/firebase.service';
@@ -15,24 +15,24 @@ import { StudentDataModel } from '../../../models/user-data';
 })
 export class StudentDataComponent implements OnInit {
 
-  studentFormGroup: FormGroup;
+  studentFormGroup: UntypedFormGroup;
 
-  @Input() userDataFormGroup!: FormGroup;
+  @Input() userDataFormGroup!: UntypedFormGroup;
 
   constructor(
     private firebase: FirebaseService,
     private userdata: UserdataService,
     private router: Router
     ) {
-      this.studentFormGroup = new FormGroup({
+      this.studentFormGroup = new UntypedFormGroup({
 
-        description: new FormControl('', [Validators.required]),
+        description: new UntypedFormControl('', [Validators.required]),
 
         // student specific
 
-        grade: new FormControl('', [Validators.required]), // regex
-        school: new FormControl('', [Validators.required]),
-        interests: new FormArray([])
+        grade: new UntypedFormControl('', [Validators.required]), // regex
+        school: new UntypedFormControl('', [Validators.required]),
+        interests: new UntypedFormArray([])
       })
     }
 
@@ -41,7 +41,7 @@ export class StudentDataComponent implements OnInit {
 
   onEnter(event: Event) {
     const el = event.target as HTMLInputElement
-    this.interests.push(new FormControl(el.value));
+    this.interests.push(new UntypedFormControl(el.value));
     el.value = "";
   }
 
@@ -50,7 +50,7 @@ export class StudentDataComponent implements OnInit {
   }
 
   get interests() {
-    return (this.studentFormGroup.get('interests') as FormArray);
+    return (this.studentFormGroup.get('interests') as UntypedFormArray);
   }
 
   submitStudent() {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmployerDataModel } from 'src/app/modules/auth/models/user-data';
 import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
@@ -15,7 +15,7 @@ import { ListingService } from '../../services/listing/listing.service';
 })
 export class CreateListingComponent implements OnInit {
 
-  formGroup: FormGroup
+  formGroup: UntypedFormGroup
   numOfEssayPrompts = 1;
 
   tags = [];
@@ -28,13 +28,13 @@ export class CreateListingComponent implements OnInit {
     private listing: ListingService,
     private router: Router
   ) {
-    this.formGroup = new FormGroup({
-      position: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      needsEssay: new FormControl(false, [Validators.required]),
-      needsResume: new FormControl(false, [Validators.required]),
-      needsInterestStatement: new FormControl(false, [Validators.required]),
-      prompts: new FormArray([]),
+    this.formGroup = new UntypedFormGroup({
+      position: new UntypedFormControl('', [Validators.required]),
+      description: new UntypedFormControl('', [Validators.required]),
+      needsEssay: new UntypedFormControl(false, [Validators.required]),
+      needsResume: new UntypedFormControl(false, [Validators.required]),
+      needsInterestStatement: new UntypedFormControl(false, [Validators.required]),
+      prompts: new UntypedFormArray([]),
     })
   }
 
@@ -46,11 +46,11 @@ export class CreateListingComponent implements OnInit {
   }
 
   get essayPrompts() {
-    return this.formGroup.get('prompts') as FormArray;
+    return this.formGroup.get('prompts') as UntypedFormArray;
   }
 
   private essayPrompt() {
-    return new FormControl('', [Validators.required]);
+    return new UntypedFormControl('', [Validators.required]);
   }
 
   addEssayPrompt() {
@@ -63,7 +63,7 @@ export class CreateListingComponent implements OnInit {
   }
 
   getControl(index: number) {
-    return this.essayPrompts.get(index.toString()) as FormControl;
+    return this.essayPrompts.get(index.toString()) as UntypedFormControl;
   }
 
   addListing() {

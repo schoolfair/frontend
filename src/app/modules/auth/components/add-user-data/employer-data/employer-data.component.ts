@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../../../services/firebase/firebase.service';
 import { User } from '../../../services/firebase/user';
@@ -14,16 +14,16 @@ import { EmployerDataModel } from '../../../models/user-data';
 })
 export class EmployerDataComponent implements OnInit {
 
-  employerFormGroup: FormGroup;
-  @Input() userDataFormGroup!: FormGroup;
+  employerFormGroup: UntypedFormGroup;
+  @Input() userDataFormGroup!: UntypedFormGroup;
 
   constructor(
     private firebase: FirebaseService,
     private userdata: UserdataService,
     private router: Router) {
 
-    this.employerFormGroup = new FormGroup({
-      institution: new FormControl('', [Validators.required])
+    this.employerFormGroup = new UntypedFormGroup({
+      institution: new UntypedFormControl('', [Validators.required])
     })
 
   }
