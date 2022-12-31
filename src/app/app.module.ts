@@ -25,6 +25,9 @@ import { TagsInputComponent } from './modules/shared/components/tags-input/tags-
 import { SharedModule } from './modules/shared/shared.module';
 import { UpgradeComponent } from './components/upgrade/upgrade.component';
 import { AdsenseModule } from 'ng2-adsense';
+import { ProductsComponent } from './components/products/products.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 @NgModule({
     declarations: [
@@ -38,6 +41,9 @@ import { AdsenseModule } from 'ng2-adsense';
         PrivacyComponent,
         TermsComponent,
         UpgradeComponent,
+        ProductsComponent,
+        AboutComponent,
+        ContactComponent,
     ],
     providers: [],
     bootstrap: [AppComponent],

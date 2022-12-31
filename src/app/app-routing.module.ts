@@ -8,6 +8,11 @@ import { HomeComponent } from './components/home/home.component';
 import { HasRolesGuard } from './modules/auth/guards/role/has-roles/has-roles.guard';
 import { AuthGuard } from './modules/auth/guards/auth/auth.guard';
 import { UpgradeComponent } from './components/upgrade/upgrade.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
+import { TermsComponent } from './components/terms/terms.component';
+import { ProductsComponent } from './components/products/products.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
@@ -34,6 +39,16 @@ const routes: Routes = [
 
   { path: 'applications', loadChildren: () => import('./modules/applications/applications.module').then(m => m.ApplicationsModule), canActivate: [AuthGuard, HasRolesGuard] },
 
+  // information pages
+
+  { path: 'privacy', component: PrivacyComponent },
+  { path: 'terms', component: TermsComponent },
+  { path: 'products', component: ProductsComponent },
+  { path: 'about-us', component: AboutComponent },
+  { path: 'contact-us', component: ContactComponent },
+
+  // otherwise redirect to home
+  { path: '**', redirectTo: ''}
 
 ];
 
