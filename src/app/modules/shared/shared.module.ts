@@ -7,6 +7,8 @@ import { TextInputComponent } from './components/text-input/text-input.component
 import { NgxEditorModule } from 'ngx-editor';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AdsenseModule } from 'ng2-adsense';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -21,12 +23,15 @@ import { MatDialogModule } from '@angular/material/dialog';
     MaterialModule,
     ReactiveFormsModule,
     NgxEditorModule,
-    MatDialogModule
+    MatDialogModule,
+    AdsenseModule.forRoot({
+      adClient: environment.adClientId,
+    }),
   ],
   exports: [
     TagsInputComponent,
     TextInputComponent,
     CheckoutComponent
-  ]
+  ],
 })
 export class SharedModule { }

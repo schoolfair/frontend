@@ -1,4 +1,4 @@
-<section class="py-8 mb-8">
+<section class="py-8 mb-8" *ngIf="listings">
   <div class="container px-2 pt-4 pb-12 mx-auto mr-4 text-gray-800">
     <div class="flex flex-col justify-center my-12 sm:flex-row sm:my-4">
       <div class="flex flex-col w-5/6 mx-auto mt-4 bg-white rounded-none lg:w-1/4 lg:mx-0 lg:rounded-l-lg">
@@ -10,6 +10,9 @@
             <li *ngFor="let listing of listings; index as i" class="py-4 border-b" [ngClass]="{'bg-gray-100': selected == i}">
               <button class="text-lg text-blue-400 underline" (click)="selected = i">{{listing.position}}</button>
               <p>{{listing.institution}}</p>
+              <div class="border-t" *ngIf="i % 5 == 0 && i > 0">
+                <ng-adsense></ng-adsense>
+              </div>
             </li>
 
           </ul>

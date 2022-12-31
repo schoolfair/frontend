@@ -1,4 +1,7 @@
 export const environment = {
+
+  // Firebase
+
   apiUrl: 'https://us-central1-schoolfair-9b858.cloudfunctions.net/api',
   firebase: {
     projectId: 'schoolfair-9b858',
@@ -10,5 +13,17 @@ export const environment = {
     messagingSenderId: '566329469840',
   },
   production: true,
-  isEmulating: false
+  isEmulating: false,
+
+  // Stripe
+
+  stripeKey: 'pk_test_51MK2cjGnsOgkPr2ErqxMeue0Vxjn5werYj0oj0EA8Uq21Z7eVsICUAxYcoKNrzURYeNPlY4aMfinJVRPCZLblg4S00PRsI5qGH',
+  stripePricing: {
+    basic: 'price_1MKuiNGnsOgkPr2EbXf1cZYM',
+    pro: 'price_1MKuk0GnsOgkPr2Ejy1KrFAK'
+  },
+
+  // AdSense
+
+  adClientId: 'ca-pub-2984949598588246',
 };

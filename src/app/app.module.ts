@@ -24,6 +24,7 @@ import { TermsComponent } from './components/terms/terms.component';
 import { TagsInputComponent } from './modules/shared/components/tags-input/tags-input.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { UpgradeComponent } from './components/upgrade/upgrade.component';
+import { AdsenseModule } from 'ng2-adsense';
 
 @NgModule({
     declarations: [
@@ -52,6 +53,7 @@ import { UpgradeComponent } from './components/upgrade/upgrade.component';
         AngularFirestoreModule,
         AngularFireAuthModule,
         AngularFireStorageModule,
+
         SharedModule
     ],
     exports: [

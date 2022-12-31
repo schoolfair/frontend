@@ -14,6 +14,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ViewApplicationsComponent } from './components/view-applications/view-applications.component';
 import { SharedModule } from '../shared/shared.module';
 import { NgxEditorModule } from 'ngx-editor';
+import { AdsenseModule } from 'ng2-adsense';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { NgxEditorModule } from 'ngx-editor';
     ListingsRoutingModule,
     ReactiveFormsModule,
     SharedModule,
+    AdsenseModule,
     NgxEditorModule.forRoot({
       locals: {
         bold: 'Bold',

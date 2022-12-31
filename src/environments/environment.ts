@@ -13,6 +13,7 @@ export const environment = {
   //apiUrl: 'http://127.0.0.1:5001/schoolfair-9b858/us-central1/api',
   apiUrl: 'https://us-central1-schoolfair-9b858.cloudfunctions.net/api',
 
+  adClientId: 'ca-pub-2984949598588246',
 
   firebase: {
     apiKey: "AIzaSyABpcpuZnZsPzdZdda6gVfpFVYIM-nf72o",

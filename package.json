@@ -25,6 +25,7 @@
     "daisyui": "^2.46.0",
     "firebase": "^9.15.0",
     "guid-typescript": "^1.0.9",
+    "ng2-adsense": "^11.0.0",
     "ngx-editor": "^15.1.0",
     "rxjs": "^7.5.0",
     "tslib": "^2.3.0",
