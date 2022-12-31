@@ -1,6 +1,6 @@
 <section *ngIf="listing">
-  <div class="flex flex-col items-center justify-center w-screen px-6 py-8 mx-auto mt-6 lg:py-0">
-      <div class="w-full rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
+  <div class="flex flex-col items-center justify-center w-screen px-6 py-8 mx-auto mt-6 mb-14 lg:py-0">
+      <div class="w-full rounded-lg shadow dark:border md:mt-0 xl:p-0">
           <div class="max-w-full p-6 space-y-4 min-w-fit md:space-y-6 sm:p-8" >
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               {{listing.position}}
@@ -9,8 +9,8 @@
             <div [innerHTML]="listing.description"></div>
           </div>
           <div class="px-4 py-3 text-right bg-gray-50 sm:px-6">
-            <button *ngIf="roles.employer" (click)="gotoApplicationsPage()" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">View Applications</button>
-            <button *ngIf="roles.student" (click)="gotoApplyPage()" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Apply</button>
+            <button *ngIf="roles.employer" (click)="gotoApplicationsPage()"  mat-button>View Applications</button>
+            <button *ngIf="roles.student" (click)="gotoApplyPage()" mat-button>Apply</button>
           </div>
         </div>
   </div>

@@ -28,7 +28,7 @@
             </div>
           </div>
         </div>
-        <div class="px-4 py-3 text-right bg-gray-50 sm:px-6">
+        <div class="px-4 py-3 text-right bg-gray-50 sm:px-6" *ngIf="roles.employer">
           <button (click)="accept()" class="inline-flex justify-center px-4 py-2 mr-2 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-md shadow-sm hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Accept</button>
           <button (click)="reject()" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md shadow-sm hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Reject</button>
         </div>

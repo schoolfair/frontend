@@ -5,6 +5,8 @@ import { ApplicationService } from '../../services/application/application.servi
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ListingService } from 'src/app/modules/listings/services/listing/listing.service';
 import { Listing } from 'src/app/modules/listings/models/listing';
+import { Roles, User } from 'src/app/modules/auth/services/firebase/user';
+import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
 
 @Component({
   templateUrl: './application.component.html',
@@ -17,12 +19,15 @@ export class ApplicationComponent implements OnInit {
 
   listing!: Listing;
 
+  roles!: Roles;
+
   constructor(
     private route: ActivatedRoute,
     private applicationService: ApplicationService,
     private storage: AngularFireStorage,
     private listingService: ListingService,
-    private router: Router
+    private router: Router,
+    private firebase: FirebaseService
   ) { }
 
   ngOnInit(): void {
@@ -45,7 +50,13 @@ export class ApplicationComponent implements OnInit {
             })
           }
         }
-      })
+      });
+
+      this.firebase.user.subscribe((user?: User) => {
+        if (user && user.roles) {
+          this.roles = user.roles;
+        }
+      });
     }
 
   }

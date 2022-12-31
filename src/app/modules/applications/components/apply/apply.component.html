@@ -51,7 +51,7 @@
                     </svg>
                     <svg @animation class="w-12 h-12 mx-auto" *ngIf="file" width="3rem" height="3rem" viewBox="0 0 24 24" fill="#22c55e" xmlns="http://www.w3.org/2000/svg" stroke="#22c55e" stroke-width="0"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><path fill-rule="evenodd" clip-rule="evenodd" d="M19.633 6.226a1 1 0 0 1 .141 1.407l-9 11a1 1 0 0 1-1.481.074l-5-5a1 1 0 1 1 1.414-1.414l4.219 4.219 8.3-10.145a1 1 0 0 1 1.407-.14Z" fill="#22c55e"></path></svg>
                     <div class="flex text-sm text-gray-600">
-                      <label for="file-upload" class="relative font-medium text-indigo-600 bg-white rounded-md cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
+                      <label for="file-upload" class="relative font-medium text-blue-400 bg-white rounded-md cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
                         <span>Upload a file</span>
                         <input id="file-upload" name="file-upload" type="file" (change)="selectFile($event)" class="sr-only">
                       </label>
@@ -63,7 +63,7 @@
               </div>
             </div>
             <div class="px-4 py-3 text-right bg-gray-50 sm:px-6">
-              <button (click)="submit()" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Apply</button>
+              <button (click)="submit()" mat-button class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-400 border border-transparent rounded-md shadow-sm">Apply</button>
             </div>
           </div>
         </form>
