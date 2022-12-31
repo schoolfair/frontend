@@ -1,0 +1,7 @@
+<button (click)="checkout($event)" mat-button>
+  <ng-content></ng-content>
+</button>
+
+<div *ngIf="loading">
+  <mat-spinner [diameter]="30" [strokeWidth]="4"></mat-spinner>
+</div>

@@ -44,6 +44,7 @@
 
         <div *ngIf="firebase.user | async as user else unlogged">
 
+          <button *ngIf="user.emailVerified" routerLink="/upgrade" routerLinkActive=" bg-gray-900 activated-route" class="px-3 py-2 mr-3 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" aria-current="page">Upgrade</button>
           <button *ngIf="user.emailVerified" routerLink="/listings" routerLinkActive=" bg-gray-900 activated-route" class="px-3 py-2 mr-3 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white" aria-current="page">Listings</button>
 
           <button mat-icon-button [matMenuTriggerFor]="menu" class="text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">

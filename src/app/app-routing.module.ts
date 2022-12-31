@@ -7,9 +7,12 @@ import { HomeComponent } from './components/home/home.component';
 
 import { HasRolesGuard } from './modules/auth/guards/role/has-roles/has-roles.guard';
 import { AuthGuard } from './modules/auth/guards/auth/auth.guard';
+import { UpgradeComponent } from './components/upgrade/upgrade.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
+
+  {path: 'upgrade', component: UpgradeComponent, canActivate: [AuthGuard, HasRolesGuard]},
 
   // Authentication routes
 

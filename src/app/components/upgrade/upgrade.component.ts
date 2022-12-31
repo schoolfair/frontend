@@ -1,0 +1,16 @@
+import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+
+@Component({
+  templateUrl: './upgrade.component.html',
+  styleUrls: ['./upgrade.component.scss']
+})
+export class UpgradeComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+
+  }
+
+}

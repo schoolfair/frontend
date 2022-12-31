@@ -22,6 +22,7 @@ import { PrivacyComponent } from './components/privacy/privacy.component';
 import { TermsComponent } from './components/terms/terms.component';
 import { TagsInputComponent } from './modules/shared/components/tags-input/tags-input.component';
 import { SharedModule } from './modules/shared/shared.module';
+import { UpgradeComponent } from './components/upgrade/upgrade.component';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { SharedModule } from './modules/shared/shared.module';
         FooterComponent,
         PrivacyComponent,
         TermsComponent,
+        UpgradeComponent,
     ],
     providers: [],
     bootstrap: [AppComponent],
