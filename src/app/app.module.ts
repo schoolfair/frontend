@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
 import { MaterialModule } from './modules/material/material.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { LandingPageComponent } from "./components/home/landing-page/landing-page.component";
@@ -47,6 +48,7 @@ import { UpgradeComponent } from './components/upgrade/upgrade.component';
         BrowserAnimationsModule,
         ReactiveFormsModule,
         AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAnalyticsModule,
         AngularFirestoreModule,
         AngularFireAuthModule,
         AngularFireStorageModule,
