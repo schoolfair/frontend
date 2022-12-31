@@ -5,6 +5,10 @@
 export const environment = {
 
   stripeKey: 'pk_test_51MK2cjGnsOgkPr2ErqxMeue0Vxjn5werYj0oj0EA8Uq21Z7eVsICUAxYcoKNrzURYeNPlY4aMfinJVRPCZLblg4S00PRsI5qGH',
+  stripePricing: {
+    basic: 'price_1MKuiNGnsOgkPr2EbXf1cZYM',
+    pro: 'price_1MKuk0GnsOgkPr2Ejy1KrFAK'
+  },
 
   //apiUrl: 'http://127.0.0.1:5001/schoolfair-9b858/us-central1/api',
   apiUrl: 'https://us-central1-schoolfair-9b858.cloudfunctions.net/api',
@@ -24,7 +28,10 @@ export const environment = {
 
   isEmulating: false,
 
-  production: false
+  production: false,
+
+
+
 };
 
 /*

@@ -1,4 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, HostListener, Input, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import {AngularFireFunctions} from '@angular/fire/compat/functions';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,6 +9,11 @@ import { environment } from 'src/environments/environment';
 
 declare var StripeCheckout: any;
 declare var Stripe: any; // Stripe.js
+
+interface CheckoutSession {
+  error: any;
+  url: string;
+}
 
 @Component({
   selector: 'app-checkout',
@@ -19,53 +25,59 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private auth: FirebaseService,
-    private functions: AngularFireFunctions,
+    private db: AngularFirestore
   ) {}
 
-  @Input() amount!: number;
-  @Input() description!: string;
-
-  handler!: any;
-
-  confirmation: any;
-  loading = false;
-
   ngOnInit() {
-    this.handler = StripeCheckout.configure({
-      key: environment.stripeKey,
-      locale: 'auto',
-      source: (source: any) => {
-        this.loading = true;
-        this.auth.user.subscribe(user => {
-          if (!user) return;
-
-          const fun = this.functions.httpsCallable('stripeCreateCharge');
-          this.confirmation = fun({ source: source.id, uid: user.uid, amount: this.amount }).toPromise();
-          this.loading = false;
-        })
-
-      }
-    });
   }
+
+  isLoading = false;
+
+  /**
+   * The price ID of the product to be purchased.
+   */
+  @Input() priceId!: string;
 
   // Open the checkout handler
   checkout(e: Event) {
-    this.auth.user.subscribe(user => {
-      if (!user) return;
+    this.isLoading = true;
+    this.auth.user.subscribe(async (data) => {
+      if (!data) {
+        this.isLoading = false;
+        return;
+      }
 
-      this.handler.open({
-        name: 'Schoolfair',
-        description: this.description,
-        amount: this.amount,
-        email: user.email,
+      const docRef = await this.db
+        .collection('customers')
+        .doc(data.uid)
+        .collection('checkout_sessions')
+        .add({
+          price: this.priceId,
+          success_url: window.location.origin,
+          cancel_url: window.location.origin,
+        });
+      // Wait for the CheckoutSession to get attached by the extension
+      docRef.onSnapshot((snap) => {
+        if (!snap.data()) {
+          this.isLoading = false;
+          return;
+        }
+
+        const { error, url } = snap.data() as CheckoutSession;
+        if (error) {
+          // Show an error to your customer and
+          // inspect your Cloud Function logs in the Firebase console.
+          alert(`An error occured: ${error.message}`);
+          this.isLoading = false;
+        }
+        if (url) {
+          this.isLoading = false;
+          // We have a Stripe Checkout URL, let's redirect.
+          window.location.assign(url);
+        }
       });
-      e.preventDefault();
-    })
+    });
+
   }
 
-  // Close on navigate
-  @HostListener('window:popstate')
-  onPopstate() {
-    this.handler.close();
-  }
 }

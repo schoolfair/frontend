@@ -2,6 +2,6 @@
   <ng-content></ng-content>
 </button>
 
-<div *ngIf="loading">
-  <mat-spinner [diameter]="30" [strokeWidth]="4"></mat-spinner>
+<div *ngIf="isLoading" class="ml-3 ">
+  <mat-spinner [diameter]="50"></mat-spinner>
 </div>
