@@ -11,6 +11,8 @@ export interface UserDataModel {
 
   zipcode: string;
 
+
+
   type: Roles;
 }
 
@@ -19,6 +21,8 @@ export interface StudentDataModel extends UserDataModel {
   grade: number;
   school: string;
   interests?: string[];
+  skills?: string[];
+  website?: string;
 }
 
 export interface EmployerDataModel extends UserDataModel {

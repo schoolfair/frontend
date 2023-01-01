@@ -8,12 +8,15 @@ import { MaterialModule } from '../material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SharedModule } from '../shared/shared.module';
+import { UpdateUserComponent } from './components/update-user/update-user.component';
 
 
 @NgModule({
   declarations: [
     UserComponent,
-    ProfileComponent
+    ProfileComponent,
+    UpdateUserComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +24,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     AuthModule,
     MaterialModule,
     ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class UserModule { }

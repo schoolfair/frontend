@@ -14,24 +14,33 @@ import {  MatChipInputEvent } from '@angular/material/chips';
 })
 export class TagsInputComponent implements OnInit {
 
+  @Input() label!: string;
+  @Input() placeholder!: string;
+
   separatorKeysCodes: number[] =  [ENTER, COMMA];
   tagControl: UntypedFormControl = new UntypedFormControl('', [Validators.required]);
   filteredTags: Observable<string[]>;
-  allTags: string[] = Tags
+
+  @Input() data!: string[];
+
   tags: string[] = [];
 
-  @Input() Tags = new FormControl<string[]>([], [Validators.required]);
+  @Input() control!: UntypedFormControl;
 
   @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
 
   constructor() {
     this.filteredTags = this.tagControl.valueChanges.pipe(
       startWith(null),
-      map((tag: string | null) => (tag ? this._filter(tag) : this.allTags.slice())),
+      map((tag: string | null) => (tag ? this._filter(tag) : this.data.slice())),
     )
   }
 
   ngOnInit(): void {
+    if(this.control.value) {
+      this.tags = this.control.value;
+
+    }
   }
 
   add(event: MatChipInputEvent): void {
@@ -47,7 +56,7 @@ export class TagsInputComponent implements OnInit {
     // Clear the input value
     event.chipInput!.clear();
 
-    this.Tags.setValue(this.tags);
+    this.control.setValue(this.tags);
 
     this.tagControl.setValue(null);
   }
@@ -59,7 +68,7 @@ export class TagsInputComponent implements OnInit {
       this.tags.splice(index, 1);
     }
 
-    this.Tags.setValue(this.tags);
+    this.control.setValue(this.tags);
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
@@ -68,7 +77,7 @@ export class TagsInputComponent implements OnInit {
 
     this.tagInput.nativeElement.value = '';
 
-    this.Tags.setValue(this.tags);
+    this.control.setValue(this.tags);
 
     this.tagControl.setValue(null);
   }
@@ -76,7 +85,7 @@ export class TagsInputComponent implements OnInit {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.allTags.filter(tag => tag.toLowerCase().includes(filterValue));
+    return this.data.filter(tag => tag.toLowerCase().includes(filterValue));
   }
 
 }

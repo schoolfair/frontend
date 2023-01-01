@@ -1,7 +1,7 @@
 
 
-<mat-form-field class="w-full">
-  <mat-label>Tags</mat-label>
+<mat-form-field class="w-full" floatLabel="always">
+  <mat-label>{{label}}</mat-label>
   <mat-chip-grid #chipGrid aria-label="Tag selection">
     <mat-chip *ngFor="let tag of tags" (removed)="remove(tag)">
       {{tag}}
@@ -10,7 +10,7 @@
       </button>
     </mat-chip>
   </mat-chip-grid>
-  <input placeholder="New Tag..." #tagInput [formControl]="tagControl"
+  <input placeholder="{{placeholder}}" #tagInput [formControl]="tagControl"
     [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
     (matChipInputTokenEnd)="add($event)"/>

@@ -7,6 +7,8 @@ import { User } from '../../../services/firebase/user';
 import { UserdataService } from '../../../services/userdata/userdata.service';
 import { StudentDataModel } from '../../../models/user-data';
 import { Observable } from 'rxjs';
+import { Tags } from 'src/app/modules/shared/models/tags';
+import { skills } from 'src/app/modules/shared/models/skills';
 
 @Component({
   selector: 'app-student-data',
@@ -15,6 +17,9 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StudentDataComponent implements OnInit {
+
+  tags = Tags
+  skills = skills
 
   studentFormGroup: UntypedFormGroup;
 
@@ -36,7 +41,8 @@ export class StudentDataComponent implements OnInit {
 
         grade: new UntypedFormControl('', [Validators.required, Validators.min(1), Validators.max(12)]), // regex
         school: new UntypedFormControl('', [Validators.required]),
-        tags: new FormControl<string[]>([], [Validators.required])
+        tags: new FormControl<string[]>([], []),
+        skills: new FormControl<string[]>([], [])
       })
     }
 
@@ -45,6 +51,10 @@ export class StudentDataComponent implements OnInit {
 
   get tagsControl() {
     return this.studentFormGroup.get('tags') as FormControl<string[]>;
+  }
+
+  get skillsControl() {
+    return this.studentFormGroup.get('skills') as FormControl<string[]>;
   }
 
   errorMessage(controlName: string) {

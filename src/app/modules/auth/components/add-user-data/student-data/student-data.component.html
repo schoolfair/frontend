@@ -34,8 +34,10 @@
   </mat-form-field>
 
   <!-- Interests -->
-  <app-tags-input [Tags]="tagsControl"></app-tags-input>
+  <app-tags-input label="Interests" placeholder="New Interest..." [data]="tags" [control]="tagsControl"></app-tags-input>
 
+  <!-- Skills -->
+  <app-tags-input label="Skills" placeholder="New Skill..." [data]="skills" [control]="skillsControl"></app-tags-input>
 
   <div class="mt-4">
     <button (click)="submitStudent()" class="w-full text-gray-900 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg

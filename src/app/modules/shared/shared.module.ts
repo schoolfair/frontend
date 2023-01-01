@@ -10,8 +10,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AdsenseModule } from 'ng2-adsense';
 import { environment } from 'src/environments/environment';
 
-
-
 @NgModule({
   declarations: [
     TagsInputComponent,
@@ -31,7 +29,7 @@ import { environment } from 'src/environments/environment';
   exports: [
     TagsInputComponent,
     TextInputComponent,
-    CheckoutComponent
+    CheckoutComponent,
   ],
   providers: [
     {
