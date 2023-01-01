@@ -17,6 +17,8 @@ export class EmployerDataComponent implements OnInit {
   employerFormGroup: UntypedFormGroup;
   @Input() userDataFormGroup!: UntypedFormGroup;
 
+  hasErrors = false;
+
   constructor(
     private firebase: FirebaseService,
     private userdata: UserdataService,
@@ -31,8 +33,41 @@ export class EmployerDataComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  errorMessage(controlName: string) {
+
+    let control = this.employerFormGroup.get(controlName);
+
+    if (!control) {
+      return 'No control with this name';
+    }
+
+    if (control.hasError('required')) {
+      return 'This field is required';
+    }
+
+    if (control.hasError('email')) {
+      return 'Not a valid email';
+    }
+
+    if (control.hasError('max')) {
+      return 'This number is too big';
+    }
+
+    if (control.hasError('min')) {
+      return 'This number is too small';
+    }
+
+    return '';
+  }
+
   submitEmployer() {
 
+    if (this.employerFormGroup.invalid || this.userDataFormGroup.invalid) {
+      this.hasErrors = true;
+      return ;
+    }
+
+    this.hasErrors = false;
 
     this.firebase.user.subscribe((user: User |undefined) => {
       if (!user) { console.error("User is undefined."); }
@@ -47,19 +82,9 @@ export class EmployerDataComponent implements OnInit {
           lastName: this.userDataFormGroup.get('lastName')?.value,
           preferredName: this.userDataFormGroup.get('preferredName')?.value,
 
-          age: this.userDataFormGroup.get('age')?.value,
-          birthdate: `${this.userDataFormGroup.get('day')?.value}/
-                      ${this.userDataFormGroup.get('month')?.value}/
-                      ${this.userDataFormGroup.get('year')?.value}`,
 
-          addressLine1: this.userDataFormGroup.get('addressLine1')?.value,
-          addressLine2: this.userDataFormGroup.get('addressLine2')?.value,
-
-          city: this.userDataFormGroup.get('city')?.value,
-          state: this.userDataFormGroup.get('state')?.value,
           zipcode: this.userDataFormGroup.get('zipcode')?.value,
 
-          country: this.userDataFormGroup.get('country')?.value,
 
           institution: this.employerFormGroup.get('institution')?.value,
         };

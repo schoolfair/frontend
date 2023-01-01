@@ -8,16 +8,7 @@ export interface UserDataModel {
   lastName: string;
   preferredName: string;
 
-  age: number;
-  birthdate: string;
-
-  addressLine1: string;
-  addressLine2?: string;
-
-  city: string;
-  state: string;
   zipcode: string;
-  country: string;
 
   type: Roles;
 }

@@ -6,25 +6,31 @@
 
   <!-- Description -->
 
-  <mat-form-field class="mr-2">
+  <mat-form-field class="w-full mr-2">
     <mat-label>Description</mat-label>
     <input matInput formControlName="description" />
+    <mat-hint>A short description of yourself for people to see.</mat-hint>
+    <mat-error>{{errorMessage('description')}}</mat-error>
   </mat-form-field>
 
 
 
   <!-- Grade -->
 
-  <mat-form-field class="w-1/4">
+  <mat-form-field>
     <mat-label>Grade</mat-label>
-    <input matInput formControlName="age" />
+    <input matInput formControlName="grade" />
+    <mat-hint>The grade you are currently enrolled in.</mat-hint>
+    <mat-error>{{errorMessage('grade')}}</mat-error>
   </mat-form-field>
 
   <!-- School -->
 
-  <mat-form-field class="w-full">
+  <mat-form-field class="w-full mt-5 mb-4">
     <mat-label>School</mat-label>
     <input matInput formControlName="school" />
+    <mat-hint>The school you are currently enrolled in.</mat-hint>
+    <mat-error>{{errorMessage('school')}}</mat-error>
   </mat-form-field>
 
   <!-- Interests -->
@@ -36,5 +42,6 @@
         text-sm px-5 py-2.5 text-center dark:bg-primary-600 ">
         Submit
     </button>
+    <mat-hint class="mt-2 text-center mat-error" *ngIf="hasErrors">The form has errors, check each field and try again.</mat-hint>
   </div>
 </form>
