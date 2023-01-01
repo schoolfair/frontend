@@ -1,11 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { FirebaseService } from '../../../services/firebase/firebase.service';
 import { User } from '../../../services/firebase/user';
 import { UserdataService } from '../../../services/userdata/userdata.service';
 import { StudentDataModel } from '../../../models/user-data';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-student-data',
@@ -16,8 +17,6 @@ import { StudentDataModel } from '../../../models/user-data';
 export class StudentDataComponent implements OnInit {
 
   studentFormGroup: UntypedFormGroup;
-
-  interests = [];
 
   @Input() userDataFormGroup!: UntypedFormGroup;
 
@@ -37,10 +36,15 @@ export class StudentDataComponent implements OnInit {
 
         grade: new UntypedFormControl('', [Validators.required, Validators.min(1), Validators.max(12)]), // regex
         school: new UntypedFormControl('', [Validators.required]),
+        tags: new FormControl<string[]>([], [Validators.required])
       })
     }
 
   ngOnInit(): void {
+  }
+
+  get tagsControl() {
+    return this.studentFormGroup.get('tags') as FormControl<string[]>;
   }
 
   errorMessage(controlName: string) {
@@ -83,7 +87,6 @@ export class StudentDataComponent implements OnInit {
     this.firebase.user.subscribe((user: User |undefined) => {
       if (!user) { console.error("User is undefined."); }
       else {
-
         let student: StudentDataModel = {
 
           uid: user.uid,
@@ -100,7 +103,7 @@ export class StudentDataComponent implements OnInit {
           school: this.studentFormGroup.get('school')?.value,
           description: this.studentFormGroup.get('description')?.value,
 
-          interests: this.interests
+          interests: this.tagsControl.value
         };
 
         this.userdata.Post(student);

@@ -28,23 +28,27 @@
 
                   <!-- Name -->
 
-                  <mat-form-field class="inline-block mt-2 mr-2">
-                    <mat-label>First Name</mat-label>
-                    <input matInput formControlName="firstName" />
-                    <mat-error>{{errorMessage('firstName')}}</mat-error>
-                  </mat-form-field>
+                  <div>
+                    <mat-form-field class="inline-block w-2/5 mt-2 mr-2">
+                      <mat-label>First Name</mat-label>
+                      <input matInput formControlName="firstName" />
+                      <mat-error>{{errorMessage('firstName')}}</mat-error>
+                    </mat-form-field>
 
-                  <mat-form-field class="inline-block mt-2">
-                    <mat-label>Last Name</mat-label>
-                    <input matInput formControlName="lastName" />
-                    <mat-error>{{errorMessage('lastName')}}</mat-error>
-                  </mat-form-field>
+                    <mat-form-field class="inline-block w-2/5 mt-2">
+                      <mat-label>Last Name</mat-label>
+                      <input matInput formControlName="lastName" />
+                      <mat-error>{{errorMessage('lastName')}}</mat-error>
+                    </mat-form-field>
+                  </div>
 
                   <mat-form-field class="mr-2">
                     <mat-label>Preferred Name</mat-label>
                     <input matInput formControlName="preferredName" />
                     <mat-error>{{errorMessage('preferredName')}}</mat-error>
                   </mat-form-field>
+
+
 
                   <mat-form-field class="mt-4 mr-2 ">
                     <mat-label>Zipcode</mat-label>

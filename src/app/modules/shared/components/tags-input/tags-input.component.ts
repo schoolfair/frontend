@@ -1,17 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Input, Output, ElementRef, ViewChild } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { UntypedFormControl, Validators } from '@angular/forms';
+import { FormControl, UntypedFormControl, Validators } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
 import { Tags } from '../../models/tags';
-import { MatLegacyAutocompleteSelectedEvent as MatAutocompleteSelectedEvent } from '@angular/material/legacy-autocomplete';
-import { MatLegacyChipInputEvent as MatChipInputEvent } from '@angular/material/legacy-chips';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import {  MatChipInputEvent } from '@angular/material/chips';
 
 
 @Component({
   selector: 'app-tags-input',
   templateUrl: './tags-input.component.html',
   styleUrls: ['./tags-input.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TagsInputComponent implements OnInit {
 
@@ -21,7 +20,7 @@ export class TagsInputComponent implements OnInit {
   allTags: string[] = Tags
   tags: string[] = [];
 
-  @Output() Tags = new EventEmitter<string[]>();
+  @Input() Tags = new FormControl<string[]>([], [Validators.required]);
 
   @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
 
@@ -38,6 +37,8 @@ export class TagsInputComponent implements OnInit {
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
+    console.log(value);
+
     // Add our fruit
     if (value) {
       this.tags.push(value);
@@ -46,7 +47,7 @@ export class TagsInputComponent implements OnInit {
     // Clear the input value
     event.chipInput!.clear();
 
-    this.Tags.emit(this.tags);
+    this.Tags.setValue(this.tags);
 
     this.tagControl.setValue(null);
   }
@@ -58,14 +59,18 @@ export class TagsInputComponent implements OnInit {
       this.tags.splice(index, 1);
     }
 
-    this.Tags.emit(this.tags);
+    this.Tags.setValue(this.tags);
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
+
     this.tags.push(event.option.viewValue);
+
     this.tagInput.nativeElement.value = '';
+
+    this.Tags.setValue(this.tags);
+
     this.tagControl.setValue(null);
-    this.Tags.emit(this.tags);
   }
 
   private _filter(value: string): string[] {
