@@ -1,0 +1,25 @@
+<ng-container *ngIf="listings && listings.length != 0 else noListings">
+  <ng-container class="flex overflow-x-auto" *ngFor="let listing of listings | slice:0:5; index as i">
+    <mat-card class="!inline-block border w-1/6 ml-2">
+      <ng-container>
+        <mat-card-header class="text-center">{{listings[i].position}}</mat-card-header>
+        <mat-card-subtitle class="text-center">{{listings[i].institution}}</mat-card-subtitle>
+      </ng-container>
+      <mat-card-footer class="mt-2 text-center">
+        <p>You have: {{applications[i]}} applicant{{applications[i] == 1 ? '' : 's'}}.</p>
+      </mat-card-footer>
+    </mat-card>
+  </ng-container>
+  <div class="text-right">
+    <button (click)="gotoListings()" mat-button>See All Listings</button>
+  </div>
+</ng-container>
+<ng-template #noListings>
+  <div class="ml-5">
+    <p>You currently have no listings.</p>
+  </div>
+  <div class="text-right">
+    <button (click)="gotoListings()" mat-button>Go to Listings</button>
+  </div>
+</ng-template>
+<div class="mb-15"></div>

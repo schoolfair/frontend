@@ -29,6 +29,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { PreviewListingsComponent } from './components/home/dashboard/preview-listings/preview-listings.component';
 
 @NgModule({
     declarations: [
@@ -45,6 +46,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
         ProductsComponent,
         AboutComponent,
         ContactComponent,
+        PreviewListingsComponent,
     ],
     providers: [],
     bootstrap: [AppComponent],
