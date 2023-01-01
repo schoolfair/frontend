@@ -33,9 +33,6 @@ export class AddUserDataComponent implements OnInit {
         firstName: new UntypedFormControl('', Validators.required),
         lastName: new UntypedFormControl('', [Validators.required]),
         preferredName: new UntypedFormControl('', [Validators.required]),
-        email: new UntypedFormControl('', [Validators.required, Validators.email]),
-
-        // date lines
 
         zipcode: new UntypedFormControl('', [Validators.required, Validators.maxLength(5)]),
     });

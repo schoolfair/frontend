@@ -3,6 +3,7 @@ import { Roles } from "../services/firebase/user";
 export interface UserDataModel {
 
   uid?: string;
+  email?: string;
 
   firstName: string;
   lastName: string;

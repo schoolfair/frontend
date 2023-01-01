@@ -43,5 +43,6 @@
         Submit
     </button>
     <mat-hint class="mt-2 text-center mat-error" *ngIf="hasErrors">The form has errors, check each field and try again.</mat-hint>
+    <mat-spinner *ngIf="isLoading" class="mt-2 text-center"></mat-spinner>
   </div>
 </form>

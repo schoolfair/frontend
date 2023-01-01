@@ -22,6 +22,7 @@ export class StudentDataComponent implements OnInit {
   @Input() userDataFormGroup!: UntypedFormGroup;
 
   hasErrors = false;
+  isLoading = false;
 
   constructor(
     private firebase: FirebaseService,
@@ -77,6 +78,7 @@ export class StudentDataComponent implements OnInit {
     }
 
     this.hasErrors = false;
+    this.isLoading = true;
 
     this.firebase.user.subscribe((user: User |undefined) => {
       if (!user) { console.error("User is undefined."); }
@@ -85,6 +87,7 @@ export class StudentDataComponent implements OnInit {
         let student: StudentDataModel = {
 
           uid: user.uid,
+          email: user.email,
           type: { student: true },
 
           firstName: this.userDataFormGroup.get('firstName')?.value,
@@ -101,6 +104,8 @@ export class StudentDataComponent implements OnInit {
         };
 
         this.userdata.Post(student);
+
+        this.isLoading = false;
 
         this.router.navigate(['dashboard']);
       }

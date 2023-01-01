@@ -18,6 +18,7 @@ export class EmployerDataComponent implements OnInit {
   @Input() userDataFormGroup!: UntypedFormGroup;
 
   hasErrors = false;
+  isLoading = false;
 
   constructor(
     private firebase: FirebaseService,
@@ -67,6 +68,7 @@ export class EmployerDataComponent implements OnInit {
       return ;
     }
 
+    this.isLoading = true;
     this.hasErrors = false;
 
     this.firebase.user.subscribe((user: User |undefined) => {
@@ -76,11 +78,13 @@ export class EmployerDataComponent implements OnInit {
         let employer: EmployerDataModel = {
 
           uid: user.uid,
+          email: user.email,
           type: {employer: true},
 
           firstName: this.userDataFormGroup.get('firstName')?.value,
           lastName: this.userDataFormGroup.get('lastName')?.value,
           preferredName: this.userDataFormGroup.get('preferredName')?.value,
+
 
 
           zipcode: this.userDataFormGroup.get('zipcode')?.value,
@@ -90,6 +94,8 @@ export class EmployerDataComponent implements OnInit {
         };
 
         this.userdata.Post(employer);
+
+        this.isLoading = false;
 
         this.router.navigate(['dashboard']);
       }
