@@ -11,13 +11,16 @@ import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { UserDataModel } from '../../models/user-data';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { L } from '@angular/cdk/keycodes';
 @Injectable({
   providedIn: 'root',
 })
-export class FirebaseService {
+export class AuthService {
 
-  private __user: Subject<User| undefined> = new BehaviorSubject<User|undefined>(undefined);
-  private _user: Observable<User | undefined> = this.__user.asObservable();
+  googleProvider = new auth.GoogleAuthProvider();
+
+  private _user: Subject<User| undefined> = new BehaviorSubject<User|undefined>(undefined);
+  public user: Observable<User | undefined> = this._user.asObservable();
 
   public redirectUrl?: string;
 
@@ -25,8 +28,7 @@ export class FirebaseService {
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    private http: HttpClient,
-    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    //public ngZone: NgZone, // NgZone service to remove outside scope warning
   ) {
 
 
@@ -38,7 +40,7 @@ export class FirebaseService {
       if (user) {
         this.afs.doc<User>(`users/${user.uid}`).valueChanges().subscribe((data: User|undefined) => {
 
-          this.__user.next(data);
+          this._user.next(data);
 
           if (this.redirectUrl) {
             this.router.navigate([this.redirectUrl]);
@@ -47,14 +49,10 @@ export class FirebaseService {
         })
       }
       else {
-        this.__user.next(undefined);
+        this._user.next(undefined);
       }
 
     });
-  }
-
-  get user() {
-    return this._user;
   }
 
   // Sign in with email/password
@@ -62,10 +60,10 @@ export class FirebaseService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        //this.SetUserData(result.user);
+        this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
-            this.router.navigate(['dashboard']);
+            this.router.navigate(['']);
           }
         });
       })
@@ -73,6 +71,7 @@ export class FirebaseService {
         window.alert(error.message);
       });
   }
+
   // Sign up with email/password
   SignUp(email: string, password: string) {
     return this.afAuth
@@ -82,20 +81,22 @@ export class FirebaseService {
         up and returns promise */
         this.SendVerificationMail();
         //this.SetUserData(result.user);
-        this.router.navigate(['verify-email']);
+        //this.router.navigate(['auth', 'verify-email']);
       })
       .catch((error) => {
         window.alert(error.message);
       });
   }
+
   // Send email verfificaiton when new user sign up
   SendVerificationMail() {
     return this.afAuth.currentUser
       .then((u: any) => u.sendEmailVerification())
       .then(() => {
-        this.router.navigate(['verify-email-address']);
+        this.router.navigate(['auth', 'verify-email-address']);
       });
   }
+
   // Reset Forggot password
   ForgotPassword(passwordResetEmail: string) {
     return this.afAuth
@@ -110,17 +111,11 @@ export class FirebaseService {
 
 
 
-
-  // Returns true when user is logged in and email is verified
-
-  isLogged(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null && user.emailVerified !== false ? true : false;
-  }
   // Sign in with Google
   GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider())
+    return this.AuthLogin(this.googleProvider)
   }
+
   // Auth logic to run auth providers
   AuthLogin(provider: any) {
     return this.afAuth
@@ -133,6 +128,8 @@ export class FirebaseService {
         window.alert(error);
       });
   }
+
+
   /* Setting up user data when sign in with username/password,
   sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
@@ -158,23 +155,15 @@ export class FirebaseService {
 
 
 
-  SetRole(uid: string, role:Roles) {
-    const userDataRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${uid}`
-    );
-
-    return userDataRef.set({roles: role}, {
-      merge: true
-    });
-  }
-
-
-
   // Sign out
-  SignOut() {
-    return this.afAuth.signOut().then(() => {
-      this.router.navigate(['']);
-      this.__user.next(undefined);
-    });
+  async SignOut() {
+    this.redirectUrl = undefined;
+
+    await this.afAuth.signOut();
+
+
+
+    window.location.reload();
+
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
 
 @Component({
@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
   user!: User;
 
   constructor(
-    private userService: FirebaseService,
+    private userService: AuthService,
     private router: Router
     ) { }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FirebaseService } from '../../services/firebase/firebase.service';
+import { AuthService } from '../../services/firebase/firebase.service';
 import { User } from '../../services/firebase/user';
 
 @Component({
@@ -10,7 +10,7 @@ import { User } from '../../services/firebase/user';
 })
 export class VerifyEmailComponent implements OnInit {
 
-  constructor(private firebase: FirebaseService, private router:Router) { }
+  constructor(private firebase: AuthService, private router:Router) { }
 
   ngOnInit() {
     this.firebase.user.subscribe((user: User|undefined) => {

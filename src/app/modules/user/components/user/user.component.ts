@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StudentDataModel, EmployerDataModel, UserDataModel } from 'src/app/modules/auth/models/user-data';
-import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
 import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata.service';
 
@@ -16,7 +16,7 @@ export class UserComponent implements OnInit {
   userData!: any;
 
   constructor(
-    private userService: FirebaseService,
+    private userService: AuthService,
     private userDataService: UserdataService,
     private router: Router
   ) { }

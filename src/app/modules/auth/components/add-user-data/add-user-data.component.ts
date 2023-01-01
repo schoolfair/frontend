@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { countryList, states } from 'src/app/modules/shared/models/geography';
-import { FirebaseService } from '../../services/firebase/firebase.service';
+import { AuthService } from '../../services/firebase/firebase.service';
 import { User } from '../../services/firebase/user';
 import { StudentDataModel } from '../../models/user-data';
 
@@ -21,7 +21,7 @@ export class AddUserDataComponent implements OnInit {
   statesList = states;
 
   constructor(
-    private firebase: FirebaseService,
+    private firebase: AuthService,
     private router: Router
   ) {
 

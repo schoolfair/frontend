@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first, Observable } from 'rxjs';
 import { UserDataModel } from 'src/app/modules/auth/models/user-data';
-import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { Roles, User } from 'src/app/modules/auth/services/firebase/user';
 import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata.service';
 import { Listing } from '../../models/listing';
@@ -24,7 +24,7 @@ export class ListingComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private listings: ListingService,
-    private user: FirebaseService,
+    private user: AuthService,
     private userData: UserdataService) { }
 
   ngOnInit() {

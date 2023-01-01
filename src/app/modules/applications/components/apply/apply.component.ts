@@ -10,7 +10,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Guid } from 'guid-typescript';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Application } from '../../models/application';
-import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
 import { ApplicationService } from '../../services/application/application.service';
 
@@ -36,7 +36,7 @@ export class ApplyComponent implements OnInit {
     private router: Router,
     private listingService: ListingService,
     private storage: AngularFireStorage,
-    private user: FirebaseService,
+    private user: AuthService,
     private applicationService: ApplicationService
   ) {
     this.applicationFormGroup = new UntypedFormGroup({

@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestro
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
 
 @Component({
@@ -13,14 +13,13 @@ import { User } from 'src/app/modules/auth/services/firebase/user';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  user?: User;
 
   data: any;
 
   isOpen: boolean = false;
 
   constructor(
-    public firebase: FirebaseService,
+    public firebase: AuthService,
     private cdr: ChangeDetectorRef
     ) {
 
@@ -28,9 +27,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.firebase.user.subscribe((data: User|undefined) => {
-      this.user = data;
-    });
+
   }
 
   ngOnDestroy(): void {

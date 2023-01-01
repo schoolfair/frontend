@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { first } from 'rxjs';
-import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
 import { Listing } from 'src/app/modules/listings/models/listing';
 import { ListingService } from 'src/app/modules/listings/services/listing/listing.service';
@@ -17,7 +17,7 @@ export class ApplicationsComponent implements OnInit {
   constructor(
     private applicationService: ApplicationService,
     private listingService: ListingService,
-    private firebase: FirebaseService,
+    private firebase: AuthService,
     private router: Router
   ) { }
 

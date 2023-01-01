@@ -5,7 +5,7 @@ import { Editor, Toolbar } from 'ngx-editor';
 import { first } from 'rxjs';
 
 import { EmployerDataModel } from 'src/app/modules/auth/models/user-data';
-import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
 import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata.service';
 import { Tags } from 'src/app/modules/shared/models/tags';
@@ -26,7 +26,7 @@ export class CreateListingComponent implements OnInit {
   allTags = Tags;
 
   constructor(
-    private firebase: FirebaseService,
+    private firebase: AuthService,
     private userData: UserdataService,
     private listing: ListingService,
     private router: Router

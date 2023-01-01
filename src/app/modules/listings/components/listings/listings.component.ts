@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { Roles, User } from 'src/app/modules/auth/services/firebase/user';
 import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata.service';
 
@@ -14,7 +14,7 @@ export class ListingsComponent implements OnInit {
   userdata: any;
 
   constructor(
-    private firebase: FirebaseService,
+    private firebase: AuthService,
     private userdataService: UserdataService) { }
 
   ngOnInit(): void {

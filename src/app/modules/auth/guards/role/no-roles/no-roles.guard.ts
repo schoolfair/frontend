@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { map, Observable, take, tap } from 'rxjs';
-import { FirebaseService } from '../../../services/firebase/firebase.service';
+import { AuthService } from '../../../services/firebase/firebase.service';
 import { Roles, User } from '../../../services/firebase/user';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { Roles, User } from '../../../services/firebase/user';
 export class NoRolesGuard implements CanActivate {
 
   constructor (
-    private firebase: FirebaseService,
+    private firebase: AuthService,
     private router: Router) { }
 
   private hasRoles(roles: Roles|undefined) {

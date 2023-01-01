@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 
 import { map, Observable, take, tap } from 'rxjs';
-import { FirebaseService } from '../../../services/firebase/firebase.service';
+import { AuthService } from '../../../services/firebase/firebase.service';
 import { User } from '../../../services/firebase/user';
 
 @Injectable({
@@ -11,7 +11,7 @@ import { User } from '../../../services/firebase/user';
 export class StudentGuard implements CanActivate {
 
   constructor(
-    private firebase: FirebaseService,
+    private firebase: AuthService,
     private router: Router
     ) {}
 

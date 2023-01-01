@@ -4,7 +4,7 @@ import { QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/compat/fires
 import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { Observable, ReplaySubject } from 'rxjs';
 import { StudentDataModel, UserDataModel } from 'src/app/modules/auth/models/user-data';
-import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { Listing } from '../../../models/listing';
 import { ListingService } from '../../../services/listing/listing.service';
 

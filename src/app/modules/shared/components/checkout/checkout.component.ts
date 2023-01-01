@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import {AngularFireFunctions} from '@angular/fire/compat/functions';
 import { MatDialog } from '@angular/material/dialog';
 
-import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { environment } from 'src/environments/environment';
 
 declare var StripeCheckout: any;
@@ -24,7 +24,7 @@ interface CheckoutSession {
 export class CheckoutComponent implements OnInit {
 
   constructor(
-    private auth: FirebaseService,
+    private auth: AuthService,
     private db: AngularFirestore
   ) {}
 

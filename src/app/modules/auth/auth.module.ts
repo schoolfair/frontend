@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
-import { FirebaseService } from './services/firebase/firebase.service';
+import { AuthService } from './services/firebase/firebase.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -16,6 +16,11 @@ import { UserdataService } from './services/userdata/userdata.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CreatedUserComponent } from './components/created-user/created-user.component';
 import { SharedModule } from '../shared/shared.module';
+import { AuthGuard } from './guards/auth/auth.guard';
+import { NoRolesGuard } from './guards/role/no-roles/no-roles.guard';
+import { HasRolesGuard } from './guards/role/has-roles/has-roles.guard';
+import { EmployerGuard } from './guards/role/employer/employer.guard';
+import { StudentGuard } from './guards/role/student/student.guard';
 
 
 @NgModule({
@@ -37,8 +42,13 @@ import { SharedModule } from '../shared/shared.module';
     HttpClientModule,
     SharedModule
   ], providers: [
-    FirebaseService,
-    UserdataService
+    AuthService,
+    UserdataService,
+    AuthGuard,
+    NoRolesGuard,
+    HasRolesGuard,
+    EmployerGuard,
+    StudentGuard
   ]
 })
 export class AuthModule { }

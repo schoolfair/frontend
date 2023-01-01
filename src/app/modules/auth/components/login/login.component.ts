@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   loggingIn = false;
 
-  constructor(public firebase: FirebaseService) {
+  constructor(public firebase: AuthService) {
     this.formData = new UntypedFormGroup({
       'email': new UntypedFormControl('', [Validators.required, Validators.email]),
       'password': new UntypedFormControl('', [Validators.required])

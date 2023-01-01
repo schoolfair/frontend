@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FirebaseService } from '../../../services/firebase/firebase.service';
+import { AuthService } from '../../../services/firebase/firebase.service';
 import { User } from '../../../services/firebase/user';
 import { UserdataService } from '../../../services/userdata/userdata.service';
 import { EmployerDataModel } from '../../../models/user-data';
@@ -21,7 +21,7 @@ export class EmployerDataComponent implements OnInit {
   isLoading = false;
 
   constructor(
-    private firebase: FirebaseService,
+    private firebase: AuthService,
     private userdata: UserdataService,
     private router: Router) {
 

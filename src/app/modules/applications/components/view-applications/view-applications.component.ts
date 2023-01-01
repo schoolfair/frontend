@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
 import { StudentDataModel } from 'src/app/modules/auth/models/user-data';
-import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
 import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata.service';
 import { Listing } from 'src/app/modules/listings/models/listing';
@@ -27,7 +27,7 @@ export class ViewApplicationsComponent implements OnInit {
   studentIds: Set<string> = new Set<string>();
 
   constructor(
-    private firebase: FirebaseService,
+    private firebase: AuthService,
     private applicationService: ApplicationService,
     private studentService: UserdataService,
     private router: Router,

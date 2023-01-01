@@ -10,7 +10,7 @@ import { NoRolesGuard } from './guards/role/no-roles/no-roles.guard';
 import { UnloggedGuard } from './guards/role/unlogged/unlogged.guard';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent, canActivate: [UnloggedGuard] },
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent, canActivate: [UnloggedGuard] },
   { path: 'verify-email-address', component: VerifyEmailComponent },
   //{ path: 'creating-user', component: CreatedUserComponent, canActivate: [UnloggedGuard] },

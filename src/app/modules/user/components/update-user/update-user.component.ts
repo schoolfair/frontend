@@ -3,7 +3,7 @@ import { FormArray, FormControl, FormGroup, UntypedFormArray, UntypedFormControl
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { EmployerDataModel, StudentDataModel, UserDataModel } from 'src/app/modules/auth/models/user-data';
-import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
 import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata.service';
 import { skills } from 'src/app/modules/shared/models/skills';
@@ -26,7 +26,7 @@ export class UpdateUserComponent implements OnInit {
 
 
   constructor(
-    private userService: FirebaseService,
+    private userService: AuthService,
     private userDataService: UserdataService,
     private router: Router) { }
 

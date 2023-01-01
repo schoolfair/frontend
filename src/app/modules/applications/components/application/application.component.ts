@@ -6,7 +6,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ListingService } from 'src/app/modules/listings/services/listing/listing.service';
 import { Listing } from 'src/app/modules/listings/models/listing';
 import { Roles, User } from 'src/app/modules/auth/services/firebase/user';
-import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 
 @Component({
   templateUrl: './application.component.html',
@@ -27,7 +27,7 @@ export class ApplicationComponent implements OnInit {
     private storage: AngularFireStorage,
     private listingService: ListingService,
     private router: Router,
-    private firebase: FirebaseService
+    private firebase: AuthService
   ) { }
 
   ngOnInit(): void {

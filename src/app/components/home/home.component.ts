@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
 
 @Component({
@@ -11,12 +11,17 @@ export class HomeComponent implements OnInit {
   user: User | undefined;
 
   constructor(
-    private firebase: FirebaseService
+    private firebase: AuthService
   ) { }
 
   ngOnInit(): void {
     this.firebase.user.subscribe((data: User | undefined) => {
-      this.user = data;
+      // if (!data)
+      //   this.user = undefined;
+      // else
+      //   this.user = data;
+
+        this.user = data;
     });
   }
 
