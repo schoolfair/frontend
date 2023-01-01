@@ -6,7 +6,7 @@
         <mat-card-subtitle class="text-center">{{listings[i].institution}}</mat-card-subtitle>
       </ng-container>
       <mat-card-footer class="mt-2 text-center">
-        <p>You have: {{applications[i]}} applicant{{applications[i] == 1 ? '' : 's'}}.</p>
+        <p>{{applications[i]}} pending applicant{{applications[i] == 1 ? '' : 's'}}.</p>
       </mat-card-footer>
     </mat-card>
   </ng-container>

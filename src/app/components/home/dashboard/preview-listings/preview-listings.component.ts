@@ -33,7 +33,7 @@ export class PreviewListingsComponent implements OnInit {
 
       this.listings.forEach((listing, i) => {
         this.applicationService.Get().subscribe((data?: Application[]) => {
-          this.applications[i] = data?.filter(app => app.listingId == listing.uid).length || 0;
+          this.applications[i] = data?.filter(app => app.listingId == listing.uid && app.status == undefined).length || 0;
         });
       });
     });
