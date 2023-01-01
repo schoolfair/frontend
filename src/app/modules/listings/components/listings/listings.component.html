@@ -1,8 +1,8 @@
 
 <ng-container *ngIf="roles.student">
-  <app-student-listing></app-student-listing>
+  <app-student-listing [userdata]="userdata"></app-student-listing>
 </ng-container>
-<ng-container *ngIf="roles.employer">
-  <app-employer-listing></app-employer-listing>
+<ng-container *ngIf="roles.employer && userdata">
+  <app-employer-listing [userdata]="userdata"></app-employer-listing>
 </ng-container>
 

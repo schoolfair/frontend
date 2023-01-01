@@ -21,8 +21,6 @@ export class CreateListingComponent implements OnInit {
   formGroup: UntypedFormGroup
   numOfEssayPrompts = 1;
 
-  tags = [];
-
 
 
   allTags = Tags;
@@ -40,6 +38,7 @@ export class CreateListingComponent implements OnInit {
       needsResume: new UntypedFormControl(false, [Validators.required]),
       needsInterestStatement: new UntypedFormControl(false, [Validators.required]),
       prompts: new UntypedFormArray([]),
+      tags: new UntypedFormControl([], [Validators.required])
     })
   }
 
@@ -77,6 +76,10 @@ export class CreateListingComponent implements OnInit {
     return this.formGroup.get('description') as UntypedFormControl;
   }
 
+  get tagsControl() {
+    return this.formGroup.get('tags') as UntypedFormControl;
+  }
+
   addListing() {
 
     this.firebase.user.pipe(first()).subscribe((data: User|undefined) => {
@@ -88,7 +91,7 @@ export class CreateListingComponent implements OnInit {
           let listing: Listing = {
             position: this.formGroup.get('position')?.value,
             description: this.formGroup.get('description')?.value,
-            tags: this.tags,
+            tags: this.tagsControl.value,
             creator: data.uid,
             institution: userdata.institution,
             requirements: {

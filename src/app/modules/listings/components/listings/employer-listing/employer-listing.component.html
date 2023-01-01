@@ -1,22 +1,43 @@
-<div class="mt-4 ml-4">
-  <div class="flex">
-    <div class="content-start">
-      <h1>Your Listings</h1>
-    </div>
-    <div class="content-end">
-      <button mat-icon-button routerLink="create">
-        <mat-icon>add</mat-icon>
-      </button>
+<section class="py-8 mb-8" *ngIf="listings">
+  <div class="container px-2 pt-4 pb-12 mx-auto mr-4 text-gray-800">
+    <div class="flex flex-col justify-center my-12 sm:flex-row sm:my-4">
+      <div class="flex flex-col w-5/6 mx-auto mt-4 bg-white rounded-none lg:w-1/4 lg:mx-0 lg:rounded-l-lg">
+        <div class="flex-1 text-gray-900 bg-white rounded-t rounded-b-none shadow">
+          <div class="p-4 text-xl text-center bg-blue-300 border-b-4">
+            Listings
+          </div>
+          <ul class="w-full overflow-y-scroll text-sm text-center screen-height">
+            <li *ngFor="let listing of listings; index as i" class="py-4 border-b" [ngClass]="{'bg-gray-100': selected == i}">
+              <button class="text-lg text-blue-400 underline" (click)="selected = i">{{listing.position}}</button>
+              <p>{{listing.institution}}</p>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+      <div class="flex flex-col flex-grow w-full mx-auto mt-4 bg-white border border-t-2 border-r-2 border-gray-100 rounded-none lg:w-1/4 lg:mx-0 lg:rounded-l-lg">
+        <div class="p-4 text-center border-b-4">
+          <div class="text-3xl ">
+            <h1 >{{listings[selected].position}}</h1>
+          </div>
+          <div class="mt-1 text-sm">
+            <p>{{listings[selected].institution}}</p>
+          </div>
+        </div>
+        <div class="p-4 overflow-y-scroll screen-height" [innerHTML]="listings[selected].description">
+        </div>
+        <mat-divider></mat-divider>
+        <div>
+          <mat-chip-listbox>
+            <mat-chip *ngFor="let tag of listings[selected].tags">{{tag}}</mat-chip>
+          </mat-chip-listbox>
+        </div>
+        <div class="text-right">
+          <button mat-button routerLink="listing/{{listings[selected].uid}}">Apply</button>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="w-full">
-    <mat-card *ngFor="let listing of listings | async; index as i" class="mt-2 mr-2 inline-cards">
-      <mat-card-title>{{listing.position}}</mat-card-title>
-      <mat-card-subtitle>{{listing.institution}}</mat-card-subtitle>
-      <mat-card-content></mat-card-content>
-      <mat-card-actions>
-        <button mat-button [routerLink]="['listing', listing.uid]">See more</button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
-</div>
+</section>
+

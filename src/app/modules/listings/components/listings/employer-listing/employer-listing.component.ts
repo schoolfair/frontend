@@ -8,23 +8,27 @@ import { ListingService } from '../../../services/listing/listing.service';
   selector: 'app-employer-listing',
   templateUrl: './employer-listing.component.html',
   styleUrls: ['./employer-listing.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EmployerListingComponent implements OnInit {
 
   @Input() userdata: any;
   employerData!: EmployerDataModel
 
-  listings!: Observable<Listing[]>
+  listings!: Listing[];
+
+  selected = 0;
 
   constructor(
     private listingService: ListingService
   ) { }
 
   ngOnInit(): void {
+
     this.employerData = this.userdata as EmployerDataModel;
 
-    this.listings = this.listingService.Get()
+    this.listingService.Get().subscribe((data: Listing[]) => {
+      this.listings = data.filter((listing: Listing) => listing.institution === this.employerData.institution);
+    });
   }
 
 }
