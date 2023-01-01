@@ -17,6 +17,8 @@ export class StudentDataComponent implements OnInit {
 
   studentFormGroup: UntypedFormGroup;
 
+  interests = [];
+
   @Input() userDataFormGroup!: UntypedFormGroup;
 
   constructor(
@@ -32,26 +34,12 @@ export class StudentDataComponent implements OnInit {
 
         grade: new UntypedFormControl('', [Validators.required]), // regex
         school: new UntypedFormControl('', [Validators.required]),
-        interests: new UntypedFormArray([])
       })
     }
 
   ngOnInit(): void {
   }
 
-  onEnter(event: Event) {
-    const el = event.target as HTMLInputElement
-    this.interests.push(new UntypedFormControl(el.value));
-    el.value = "";
-  }
-
-  remove(i: number) {
-    this.interests.removeAt(i);
-  }
-
-  get interests() {
-    return (this.studentFormGroup.get('interests') as UntypedFormArray);
-  }
 
   submitStudent() {
 
@@ -86,6 +74,8 @@ export class StudentDataComponent implements OnInit {
           grade: this.studentFormGroup.get('grade')?.value,
           school: this.studentFormGroup.get('school')?.value,
           description: this.studentFormGroup.get('description')?.value,
+
+          interests: this.interests
         };
 
         this.userdata.Post(student);

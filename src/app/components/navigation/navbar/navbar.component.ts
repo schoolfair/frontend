@@ -17,6 +17,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   data: any;
 
+  isOpen: boolean = false;
+
   constructor(
     public firebase: FirebaseService,
     private cdr: ChangeDetectorRef

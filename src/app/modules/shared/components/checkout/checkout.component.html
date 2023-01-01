@@ -1,4 +1,4 @@
-<button (click)="checkout($event)" mat-button>
+<button *ngIf="!isLoading" (click)="checkout($event)" mat-button>
   <ng-content></ng-content>
 </button>
 

@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
+import { forwardRef, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TagsInputComponent } from './components/tags-input/tags-input.component';
 import { MaterialModule } from '../material/material.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './components/text-input/text-input.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { CheckoutComponent } from './components/checkout/checkout.component';
@@ -33,5 +33,12 @@ import { environment } from 'src/environments/environment';
     TextInputComponent,
     CheckoutComponent
   ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TextInputComponent),
+      multi: true,
+    }
+  ]
 })
 export class SharedModule { }

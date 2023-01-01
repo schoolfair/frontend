@@ -17,16 +17,6 @@ import { ApplicationService } from '../../services/application/application.servi
 @Component({
   templateUrl: './apply.component.html',
   styleUrls: ['./apply.component.scss'],
-  animations: [
-    trigger('animation', [
-      transition(':enter', [
-        style({ left: '0%' }),  // initial
-        animate('0.5s',
-          style({ left: '100%' }))  // final
-      ]),
-      transition(':leave', [])
-    ])
-  ]
 })
 export class ApplyComponent implements OnInit {
 
@@ -53,6 +43,10 @@ export class ApplyComponent implements OnInit {
       interestStatement: new UntypedFormControl('', Validators.maxLength(2500)),
       essays: new UntypedFormArray([]),
     });
+  }
+
+  get interestStatementControl() {
+    return this.applicationFormGroup.get('interestStatement') as UntypedFormControl;
   }
 
   get essays() {

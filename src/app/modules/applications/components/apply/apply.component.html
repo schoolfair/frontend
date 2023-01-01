@@ -1,15 +1,15 @@
 <ng-container *ngIf="listing">
-  <div class="w-full m-8 mt-20 text-center sm:mt-4 ">
+  <div class="w-full mt-20 text-center sm:mt-4 ">
     <div class="w-full">
         <h1 class="text-3xl font-medium leading-6 text-gray-900">{{listing.position}}</h1>
         <p class="mt-1 text-sm text-gray-600">{{listing.institution}}</p>
     </div>
   </div>
 
-  <div class="m-8">
+  <div>
     <div class="md:grid md:grid-cols-3 md:gap-6">
-      <div class="md:col-span-1">
-        <div class="px-4 sm:px-0">
+      <div class="hidden md:col-span-1 sm:block">
+        <div class="px-4 m-8 sm:px-0">
           <h3 class="text-lg font-medium leading-6 text-gray-900">Application</h3>
           <p class="mt-1 text-sm text-gray-600">This position asks for:</p>
           <ul>
@@ -19,7 +19,7 @@
           </ul>
         </div>
       </div>
-      <div class="mt-5 md:col-span-2 md:mt-0">
+      <div class="mt-5 mr-8 md:col-span-2 md:mt-0">
         <form [formGroup]="applicationFormGroup">
           <div class="shadow sm:overflow-hidden sm:rounded-md">
             <div class="px-4 py-5 space-y-6 bg-white sm:p-6">
@@ -27,7 +27,7 @@
               <div *ngIf="listing.requirements.interestStatement">
                 <label for="about" class="block text-sm font-medium text-gray-700">Statement of Interest</label>
                 <div class="mt-1">
-                  <app-text-input formControlName="interestStatement"></app-text-input>
+                  <app-text-input ngDefaultControl [formControl]="interestStatementControl"></app-text-input>
                 </div>
                 <p class="mt-2 text-sm text-gray-500">Brief description of why you want this position (2500 characters max)</p>
               </div>
@@ -36,7 +36,7 @@
                 <label for="about" class="block text-sm font-medium text-gray-700">Essays</label>
                 <div *ngFor="let prompt of listing.requirements.essayPrompts; index as i">
                   <div class="mt-1">
-                    <app-text-input [formControl]="essayControl(i)"></app-text-input>
+                    <app-text-input ngDefaultControl [formControl]="essayControl(i)"></app-text-input>
                   </div>
                   <p class="mt-2 text-sm text-gray-500">{{prompt}} (2500 characters max)</p>
                 </div>

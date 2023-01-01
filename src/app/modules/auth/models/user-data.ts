@@ -26,7 +26,7 @@ export interface StudentDataModel extends UserDataModel {
   description: string;
   grade: number;
   school: string;
-  tags?: string[];
+  interests?: string[];
 }
 
 export interface EmployerDataModel extends UserDataModel {

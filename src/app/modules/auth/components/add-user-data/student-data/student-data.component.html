@@ -28,20 +28,7 @@
   </mat-form-field>
 
   <!-- Interests -->
-  <mat-chip-list>
-    <mat-chip *ngFor="let interest of interests.value; index as i" (removed)="remove(i)">
-      {{interest}}
-      <button matChipRemove>
-        <mat-icon>cancel</mat-icon>
-      </button>
-    </mat-chip>
-  </mat-chip-list>
-
-  <mat-form-field class="mt-4">
-    <mat-label>Interests</mat-label>
-    <input matInput formControlName="interests" (keydown.enter)="onEnter($event)" placeholder="Data Science">
-    <mat-hint>Press Enter to add an Interest</mat-hint>
-  </mat-form-field>
+  <app-tags-input (Tags)="interests"></app-tags-input>
 
 
   <div class="mt-4">

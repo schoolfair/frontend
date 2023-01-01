@@ -4,7 +4,7 @@
     <div class="relative flex items-center justify-between h-16">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
         <!-- Mobile menu button-->
-        <button type="button" class="inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+        <button type="button" (click)="isOpen = !isOpen" class="inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
           <span class="sr-only">Open main menu</span>
           <!--
             Icon when menu is closed.
@@ -33,13 +33,10 @@
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a routerLink="/" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="bg-gray-900 activated-route"
             class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white " aria-current="page">Home</a>
-
-
-
           </div>
         </div>
       </div>
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+      <div class="absolute inset-y-0 right-0 items-center hidden pr-2 sm:flex sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
         <div *ngIf="firebase.user | async as user else unlogged">
 
@@ -63,16 +60,27 @@
   </div>
 
   <!-- Mobile menu, show/hide based on menu state. -->
-  <div class="sm:hidden" id="mobile-menu">
+  <div class="sm:hidden" id="mobile-menu" *ngIf="isOpen">
     <div class="px-2 pt-2 pb-3 space-y-1">
       <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-      <a href="#" class="block px-3 py-2 text-base font-medium text-white bg-gray-900 rounded-md" aria-current="page">Dashboard</a>
+      <div *ngIf="firebase.user | async as user else unlogged">
 
-      <a href="#" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Team</a>
+        <a routerLink="/" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="bg-gray-900 activated-route" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Home</a>
+        <a routerLink="/upgrade" routerLinkActive="bg-gray-900 activated-route" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Upgrade</a>
+        <a routerLink="/listings" routerLinkActive="bg-gray-900 activated-route" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Listings</a>
 
-      <a href="#" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Projects</a>
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="block text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">
+          <mat-icon>expand_more</mat-icon>
+        </button>
 
-      <a href="#" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Calendar</a>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [routerLink]="'user'">Profile</button>
+          <button mat-menu-item (click)="firebase.SignOut()">Sign Out</button>
+        </mat-menu>
+      </div>
+      <ng-template #unlogged>
+        <a routerLink="/auth/login" routerLinkActive="bg-gray-900 activated-route" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Login</a>
+      </ng-template>
     </div>
   </div>
 </nav>

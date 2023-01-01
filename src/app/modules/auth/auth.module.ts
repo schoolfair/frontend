@@ -15,6 +15,7 @@ import { EmployerDataComponent } from './components/add-user-data/employer-data/
 import { UserdataService } from './services/userdata/userdata.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CreatedUserComponent } from './components/created-user/created-user.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { CreatedUserComponent } from './components/created-user/created-user.com
     MaterialModule,
     AngularFireAuthModule,
     HttpClientModule,
+    SharedModule
   ], providers: [
     FirebaseService,
     UserdataService
