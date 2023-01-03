@@ -21,6 +21,7 @@ import { NoRolesGuard } from './guards/role/no-roles/no-roles.guard';
 import { HasRolesGuard } from './guards/role/has-roles/has-roles.guard';
 import { EmployerGuard } from './guards/role/employer/employer.guard';
 import { StudentGuard } from './guards/role/student/student.guard';
+import { SubscriptionService } from './services/subscription/subscription.service';
 
 
 @NgModule({
@@ -44,11 +45,12 @@ import { StudentGuard } from './guards/role/student/student.guard';
   ], providers: [
     AuthService,
     UserdataService,
+    SubscriptionService,
     AuthGuard,
     NoRolesGuard,
     HasRolesGuard,
     EmployerGuard,
-    StudentGuard
+    StudentGuard,
   ]
 })
 export class AuthModule { }

@@ -117,8 +117,8 @@ export class AuthService {
   }
 
   // Auth logic to run auth providers
-  AuthLogin(provider: any) {
-    return this.afAuth
+  async AuthLogin(provider: any) {
+    return await this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
         //this.SetUserData(result.user);

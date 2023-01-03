@@ -20,7 +20,7 @@ export const environment = {
   stripeKey: 'pk_test_51MK2cjGnsOgkPr2ErqxMeue0Vxjn5werYj0oj0EA8Uq21Z7eVsICUAxYcoKNrzURYeNPlY4aMfinJVRPCZLblg4S00PRsI5qGH',
   stripePricing: {
     basic: 'price_1MKuiNGnsOgkPr2EbXf1cZYM',
-    pro: 'price_1MKuk0GnsOgkPr2Ejy1KrFAK'
+    pro: 'price_1MKuk0GnsOgkPr2EikJbNhGd'
   },
 
   // AdSense

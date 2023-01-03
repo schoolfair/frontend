@@ -5,6 +5,8 @@ import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/materia
 import { Observable, ReplaySubject } from 'rxjs';
 import { StudentDataModel, UserDataModel } from 'src/app/modules/auth/models/user-data';
 import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { StripeRoles } from 'src/app/modules/auth/services/subscription/stripe-roles';
+import { SubscriptionService } from 'src/app/modules/auth/services/subscription/subscription.service';
 import { Listing } from '../../../models/listing';
 import { ListingService } from '../../../services/listing/listing.service';
 
@@ -21,12 +23,15 @@ export class StudentListingComponent implements OnInit {
 
   listings!: Listing[];
 
+  claims?: StripeRoles;
+
   selected: number = 0;
 
   displayedColumns = ['position', 'institution']
 
   constructor(
-    private listingService: ListingService
+    private listingService: ListingService,
+    private subscriptions: SubscriptionService
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +39,11 @@ export class StudentListingComponent implements OnInit {
 
     this.listingService.Get().subscribe((data: Listing[]) => {
       this.listings = data;
+    });
+
+    this.subscriptions.getClaimRole().then((data: any) => {
+      console.log(data);
+      this.claims = data;
     });
   }
 

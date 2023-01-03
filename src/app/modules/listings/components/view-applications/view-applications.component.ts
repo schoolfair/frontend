@@ -34,6 +34,8 @@ export class ViewApplicationsComponent implements OnInit {
 
       data = data.filter((d: Application) => d.listingId == _id);
 
+
+
       console.log(data);
 
       this.applications = data;

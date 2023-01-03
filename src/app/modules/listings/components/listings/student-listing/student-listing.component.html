@@ -10,7 +10,7 @@
             <li *ngFor="let listing of listings; index as i" class="py-4 border-b" [ngClass]="{'bg-gray-100': selected == i}">
               <button class="text-lg text-blue-400 underline" (click)="selected = i">{{listing.position}}</button>
               <p>{{listing.institution}}</p>
-              <div class="border-t" *ngIf="i % 5 == 0 && i > 0">
+              <div class="border-t" *ngIf="!claims && i % 5 == 0 && i > 0">
                 <ng-adsense></ng-adsense>
               </div>
             </li>
