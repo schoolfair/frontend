@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { first } from 'rxjs';
+import { first, take } from 'rxjs';
 import { Application } from 'src/app/modules/applications/models/application';
 import { ApplicationService } from 'src/app/modules/applications/services/application/application.service';
 import { Listing } from 'src/app/modules/listings/models/listing';
@@ -31,7 +31,7 @@ export class PreviewApplicationsComponent implements OnInit {
       }
 
       this.applications.forEach((app, i) => {
-        this.listingService.GetById(app.listingId).subscribe((data?: Listing) => {
+        this.listingService.GetById(app.listingId).pipe(take(1)).subscribe((data?: Listing) => {
           if (data) {
             this.listings[i] = data;
           }

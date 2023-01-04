@@ -30,13 +30,10 @@ export class ViewApplicationsComponent implements OnInit {
   ngOnInit() {
     const _id = this.route.snapshot.paramMap.get('id');
 
-    this.applicationsService.Get().subscribe((data: Application[]) => {
+    this.applicationsService.Get().pipe(first()).subscribe((data: Application[]) => {
 
       data = data.filter((d: Application) => d.listingId == _id);
 
-
-
-      console.log(data);
 
       this.applications = data;
 

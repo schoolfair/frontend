@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, ApplicationRef, OnChanges, SimpleChanges, NgZone, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 
 import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
@@ -14,12 +14,13 @@ import { SubscriptionService } from 'src/app/modules/auth/services/subscription/
 })
 export class NavbarComponent implements OnInit {
 
-
   data: any;
 
   isOpen: boolean = false;
 
   claims?: StripeRoles;
+
+  subscription: any;
 
   constructor(
     public firebase: AuthService,
@@ -31,7 +32,10 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.firebase.user.subscribe(async (data?: User) => {
+    this.subscription = this.firebase.user.pipe(take(1)).subscribe(async (data?: User) => {
+      if (!data) {
+        return;
+      }
       let claims = await this.subscriptionService.getClaimRole()
       if(claims) {
         this.claims = claims;
@@ -40,6 +44,5 @@ export class NavbarComponent implements OnInit {
       }
     });
   }
-
 
 }

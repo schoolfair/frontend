@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, UntypedFormArray, UntypedFormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { first, Observable, take } from 'rxjs';
 import { EmployerDataModel, StudentDataModel, UserDataModel } from 'src/app/modules/auth/models/user-data';
 import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
@@ -31,11 +31,11 @@ export class UpdateUserComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.userService.user.subscribe((user: User|undefined) => {
+    this.userService.user.pipe(take(1)).subscribe((user: User|undefined) => {
       if (user) {
         this.user = user;
 
-        this.userDataService.GetById(user.uid).subscribe((data: any) => {
+        this.userDataService.GetById(user.uid).pipe(first()).subscribe((data: any) => {
           if (data) {
             if (user.roles?.student) {
               this.userData = data as StudentDataModel;

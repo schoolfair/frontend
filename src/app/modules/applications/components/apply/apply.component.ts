@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { finalize, Observable } from 'rxjs';
+import { finalize, Observable, take } from 'rxjs';
 import { Listing } from 'src/app/modules/listings/models/listing';
 import { ListingService } from 'src/app/modules/listings/services/listing/listing.service';
 
@@ -122,7 +122,7 @@ export class ApplyComponent implements OnInit {
       }
     }
 
-    this.user.user.subscribe((data: User|undefined) => {
+    this.user.user.pipe(take(1)).subscribe((data: User|undefined) => {
       if (data && this.listing.uid) {
         let application: Application = {
           userId: data.uid,

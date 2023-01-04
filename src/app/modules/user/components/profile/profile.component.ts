@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs';
 import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class ProfileComponent implements OnInit {
       console.error("No uid provided");
     }
 
-    this.userDataService.GetById(this.uid).subscribe((data: any) => {
+    this.userDataService.GetById(this.uid).pipe(first()).subscribe((data: any) => {
       if (data) {
         this.userData = data;
       }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { take } from 'rxjs';
 import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { Roles, User } from 'src/app/modules/auth/services/firebase/user';
 import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata.service';
@@ -18,7 +19,7 @@ export class ListingsComponent implements OnInit {
     private userdataService: UserdataService) { }
 
   ngOnInit(): void {
-    this.firebase.user.subscribe((data: User|undefined) => {
+    this.firebase.user.pipe(take(1)).subscribe((data: User|undefined) => {
       if (data) {
 
         if (data.roles) {

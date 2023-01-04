@@ -16,11 +16,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.firebase.user.subscribe((data: User | undefined) => {
-      // if (!data)
-      //   this.user = undefined;
-      // else
-      //   this.user = data;
-
         this.user = data;
     });
   }

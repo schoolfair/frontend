@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { first } from 'rxjs';
+import { first, take } from 'rxjs';
 import { Application } from 'src/app/modules/applications/models/application';
 import { ApplicationService } from 'src/app/modules/applications/services/application/application.service';
 import { Listing } from 'src/app/modules/listings/models/listing';
@@ -32,7 +32,7 @@ export class PreviewListingsComponent implements OnInit {
       }
 
       this.listings.forEach((listing, i) => {
-        this.applicationService.Get().subscribe((data?: Application[]) => {
+        this.applicationService.Get().pipe(take(1)).subscribe((data?: Application[]) => {
           this.applications[i] = data?.filter(app => app.listingId == listing.uid && app.status == undefined).length || 0;
         });
       });

@@ -7,6 +7,7 @@ import { ListingService } from 'src/app/modules/listings/services/listing/listin
 import { Listing } from 'src/app/modules/listings/models/listing';
 import { Roles, User } from 'src/app/modules/auth/services/firebase/user';
 import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
+import { take } from 'rxjs';
 
 @Component({
   templateUrl: './application.component.html',
@@ -52,7 +53,7 @@ export class ApplicationComponent implements OnInit {
         }
       });
 
-      this.firebase.user.subscribe((user?: User) => {
+      this.firebase.user.pipe(take(1)).subscribe((user?: User) => {
         if (user && user.roles) {
           this.roles = user.roles;
         }

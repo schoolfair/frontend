@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Editor, Toolbar } from 'ngx-editor';
-import { first } from 'rxjs';
+import { first, take } from 'rxjs';
 
 import { EmployerDataModel } from 'src/app/modules/auth/models/user-data';
 import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
@@ -82,10 +82,10 @@ export class CreateListingComponent implements OnInit {
 
   addListing() {
 
-    this.firebase.user.pipe(first()).subscribe((data: User|undefined) => {
+    this.firebase.user.pipe(take(1)).subscribe((data: User|undefined) => {
 
       if (data) {
-        this.userData.GetById(data.uid).subscribe((userRawdata: any|undefined) => {
+        this.userData.GetById(data.uid).pipe(first()).subscribe((userRawdata: any|undefined) => {
           let userdata = userRawdata as EmployerDataModel;
 
           let listing: Listing = {

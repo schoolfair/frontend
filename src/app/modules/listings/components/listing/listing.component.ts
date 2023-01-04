@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first, Observable } from 'rxjs';
+import { first, Observable, take } from 'rxjs';
 import { UserDataModel } from 'src/app/modules/auth/models/user-data';
 import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { Roles, User } from 'src/app/modules/auth/services/firebase/user';
@@ -32,7 +32,7 @@ export class ListingComponent implements OnInit {
     if (_id) {
       this.id = _id;
 
-      this.listings.GetById(_id).subscribe((data: Listing|undefined) => {
+      this.listings.GetById(_id).pipe(first()).subscribe((data: Listing|undefined) => {
         if (data) {
           this.listing = data;
         }
@@ -41,7 +41,7 @@ export class ListingComponent implements OnInit {
       this.router.navigate(['listings'])
     }
 
-    this.user.user.pipe(first()).subscribe((data?: User) => {
+    this.user.user.pipe(take(1)).subscribe((data?: User) => {
       if (data && data.roles) {
         this.roles = data?.roles;
       }

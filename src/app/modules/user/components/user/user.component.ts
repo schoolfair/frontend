@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { first, take } from 'rxjs';
 import { StudentDataModel, EmployerDataModel, UserDataModel } from 'src/app/modules/auth/models/user-data';
 import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
@@ -22,11 +23,11 @@ export class UserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.user.subscribe((user: User|undefined) => {
+    this.userService.user.pipe(take(1)).subscribe((user: User|undefined) => {
       if (user) {
         this.user = user;
 
-        this.userDataService.GetById(user.uid).subscribe((data: any) => {
+        this.userDataService.GetById(user.uid).pipe(first()).subscribe((data: any) => {
           if (data) {
             if (user.roles?.student)
               this.userData = data as StudentDataModel;
