@@ -1,0 +1,12 @@
+User-agent: *
+
+Allow: /
+Allow: /listings/*
+Allow: /privacy
+Allow: /terms
+Allow: /about-us
+Allow: /contact-us
+
+Disallow: /user/*
+Disallow: /applications/*
+Disallow: /products

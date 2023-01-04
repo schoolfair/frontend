@@ -4,6 +4,13 @@ module.exports = {
     "./src/**/*.{html,js,ts}",
     './node_modules/tw-elements/dist/js/**/*.js'
   ],
+  purge: {
+    enabled: true,
+    content: [
+      "./src/**/*.{html,js,ts}",
+      './node_modules/tw-elements/dist/js/**/*.js'
+    ]
+  },
   theme: {
     extend: {},
   },
