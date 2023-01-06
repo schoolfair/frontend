@@ -18,7 +18,7 @@ import { ListingService } from '../../services/listing/listing.service';
 })
 export class CreateListingComponent implements OnInit {
 
-  formGroup: UntypedFormGroup
+  listingFormGroup: UntypedFormGroup
   numOfEssayPrompts = 1;
 
 
@@ -31,9 +31,12 @@ export class CreateListingComponent implements OnInit {
     private listing: ListingService,
     private router: Router
   ) {
-    this.formGroup = new UntypedFormGroup({
+
+
+    this.listingFormGroup = new UntypedFormGroup({
       position: new UntypedFormControl('', [Validators.required]),
       description: new UntypedFormControl('', [Validators.required]),
+      location: new UntypedFormControl('', [Validators.required]),
       needsEssay: new UntypedFormControl(false, [Validators.required]),
       needsResume: new UntypedFormControl(false, [Validators.required]),
       needsInterestStatement: new UntypedFormControl(false, [Validators.required]),
@@ -45,12 +48,12 @@ export class CreateListingComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get needsEssays() {
-    return this.formGroup.get('needsEssay')?.value;
+  needsEssays() {
+    return this.listingFormGroup.value['needsEssay'] as boolean;
   }
 
-  get essayPrompts() {
-    return this.formGroup.get('prompts') as UntypedFormArray;
+  essayPrompts() {
+    return this.listingFormGroup.get('prompts') as UntypedFormArray;
   }
 
   private essayPrompt() {
@@ -60,24 +63,24 @@ export class CreateListingComponent implements OnInit {
 
 
   addEssayPrompt() {
-    this.essayPrompts.push(this.essayPrompt())
+    this.essayPrompts().push(this.essayPrompt())
   }
 
   removeEssayPrompt(index: number) {
-    this.essayPrompts.removeAt(index);
+    this.essayPrompts().removeAt(index);
 
   }
 
   getControl(index: number) {
-    return this.essayPrompts.get(index.toString()) as UntypedFormControl;
+    return this.essayPrompts().get(index.toString()) as UntypedFormControl;
   }
 
   get description() {
-    return this.formGroup.get('description') as UntypedFormControl;
+    return this.listingFormGroup.get('description') as UntypedFormControl;
   }
 
   get tagsControl() {
-    return this.formGroup.get('tags') as UntypedFormControl;
+    return this.listingFormGroup.get('tags') as UntypedFormControl;
   }
 
   addListing() {
@@ -88,17 +91,21 @@ export class CreateListingComponent implements OnInit {
         this.userData.GetById(data.uid).pipe(first()).subscribe((userRawdata: any|undefined) => {
           let userdata = userRawdata as EmployerDataModel;
 
+          const {position, description, location, needsEssay, needsResume, needsInterestStatement, prompts, tags} = this.listingFormGroup.value;
+
+
           let listing: Listing = {
-            position: this.formGroup.get('position')?.value,
-            description: this.formGroup.get('description')?.value,
-            tags: this.tagsControl.value,
+            position: position,
+            description: description,
+            location: location,
+            tags: tags,
             creator: data.uid,
             institution: userdata.institution,
             requirements: {
-              interestStatement: this.formGroup.get('needsInterestStatement')?.value,
-              resume:  this.formGroup.get('needsResume')?.value,
-              essays:  this.formGroup.get('needsEssay')?.value,
-              essayPrompts: this.formGroup.get('prompts')?.value
+              interestStatement: needsInterestStatement,
+              resume:  needsResume,
+              essays:  needsEssay,
+              essayPrompts: prompts
             }
           }
 

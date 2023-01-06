@@ -1,5 +1,5 @@
 <ng-container *ngIf="listings && listings.length != 0 else noListings">
-  <ng-container class="flex overflow-x-auto" *ngFor="let listing of listings | slice:0:5; index as i">
+  <ng-container class="flex overflow-x-auto" *ngFor="let listing of listings | slice:0:5; index as i; trackby:tracker">
     <mat-card class="!inline-block border w-1/6 ml-2">
       <ng-container>
         <mat-card-header class="text-center">{{listings[i].position}}</mat-card-header>

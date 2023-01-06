@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, UntypedFormArray, UntypedFormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { first, Observable, take } from 'rxjs';
+import { first, Observable, Subscription, take } from 'rxjs';
 import { EmployerDataModel, StudentDataModel, UserDataModel } from 'src/app/modules/auth/models/user-data';
 import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
@@ -14,7 +14,7 @@ import { Tags } from 'src/app/modules/shared/models/tags';
   templateUrl: './update-user.component.html',
   styleUrls: ['./update-user.component.scss']
 })
-export class UpdateUserComponent implements OnInit {
+export class UpdateUserComponent implements OnInit, OnDestroy {
 
   user!: User;
   userData!: any;
@@ -24,6 +24,8 @@ export class UpdateUserComponent implements OnInit {
   tags = Tags
   skills = skills
 
+  sub!: Subscription
+
 
   constructor(
     private userService: AuthService,
@@ -31,7 +33,7 @@ export class UpdateUserComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.userService.user.pipe(take(1)).subscribe((user: User|undefined) => {
+    this.sub = this.userService.user.subscribe((user: User|undefined) => {
       if (user) {
         this.user = user;
 
@@ -54,12 +56,25 @@ export class UpdateUserComponent implements OnInit {
             }
             else if (user.roles?.employer) {
               this.userData = data as EmployerDataModel
+
+              this.group = new FormGroup({
+                firstName: new FormControl(this.userData.firstName),
+                lastName: new FormControl(this.userData.lastName),
+                preferredName: new FormControl(this.userData.preferredName),
+
+                zipcode: new FormControl(this.userData.zipcode),
+
+              })
             }
           }
         });
       }
     })
 
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   get interestsControl() {

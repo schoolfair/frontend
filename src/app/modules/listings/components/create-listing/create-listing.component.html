@@ -7,16 +7,22 @@
       </div>
     </div>
     <div class="mt-5 md:col-span-2 md:mt-0">
-      <form [formGroup]="formGroup">
+      <form [formGroup]="listingFormGroup">
         <div class="overflow-hidden shadow sm:rounded-md">
           <div class="px-4 py-5 bg-white sm:p-6">
             <div class="grid grid-cols-6 gap-6">
               <mat-form-field class="col-span-6 ">
                 <mat-label for="first-name">Position</mat-label>
-                <input matInput type="text" formControlName="position" name="first-name" id="first-name" autocomplete="given-name" class="w-full">
+                <input matInput type="text" formControlName="position" name="position" class="w-full">
               </mat-form-field>
 
               <app-text-input class="col-span-6" [formControl]="description"></app-text-input>
+
+              <mat-form-field class="col-span-6 ">
+                <mat-label for="first-name">Location</mat-label>
+                <input matInput type="text" formControlName="location" name="location" class="w-full">
+                <mat-hint>Hint: City, State</mat-hint>
+              </mat-form-field>
 
               <div class="col-span-6 ">
                 <label for="last-name" class="block mb-2 text-sm font-medium text-gray-700">Requirements</label>
@@ -25,16 +31,14 @@
                 <mat-checkbox formControlName="needsResume">Resume</mat-checkbox>
               </div>
 
-              <div class="col-span-6" *ngIf="needsEssays">
-                <div>
-                  <label for="street-address" class="inline-block text-sm font-medium text-gray-700">Essays</label>
+              <section class="col-span-6" *ngIf="needsEssays()">
+                  <h3 for="street-address" class="inline-block text-sm font-medium text-gray-700">Essays</h3>
                   <button mat-icon-button class="inline-block w-3" (click)="addEssayPrompt()">
                     <mat-icon>add</mat-icon>
                   </button>
-                </div>
-              </div>
+              </section>
 
-              <mat-form-field class="col-span-6" formArrayName="prompts" *ngFor="let prompt of essayPrompts.controls; let i=index">
+              <mat-form-field class="col-span-6" formArrayName="prompts" *ngFor="let prompt of essayPrompts().controls; let i=index" >
                 <mat-label>Prompt #{{i + 1}}</mat-label>
                 <input matInput type="text" [formControl]="getControl(i)" />
                 <button mat-icon-button (click)="removeEssayPrompt(i)" matSuffix>

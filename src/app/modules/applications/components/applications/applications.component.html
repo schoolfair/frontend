@@ -1,4 +1,4 @@
-<ng-container *ngIf="applications && listings.length > 0">
+<ng-container *ngIf="applications && listings.length !== applications.length">
   <div class="w-full">
     <table mat-table [dataSource]="applications" class="w-full mat-elevation-z8">
 
@@ -9,13 +9,13 @@
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Position </th>
-        <td mat-cell *matCellDef="let application; index as i"> {{listings[i].position}} </td>
+        <td mat-cell *matCellDef="let application; index as i"> {{getListing(application.listingId)?.position}} </td>
       </ng-container>
 
       <!-- Weight Column -->
       <ng-container matColumnDef="institution">
         <th mat-header-cell *matHeaderCellDef> Institution </th>
-        <td mat-cell *matCellDef="let application; index as i"> {{listings[i].institution}} </td>
+        <td mat-cell *matCellDef="let application; index as i"> {{getListing(application.listingId)?.institution}} </td>
       </ng-container>
 
       <!-- Symbol Column -->

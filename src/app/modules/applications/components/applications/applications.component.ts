@@ -31,7 +31,7 @@ export class ApplicationsComponent implements OnInit {
   ngOnInit(): void {
     this.firebase.user.subscribe((user?: User) => {
       if (user) {
-        this.applicationService.Get().pipe(first()).subscribe((data?: Application[]) => {
+        this.applicationService.Get().subscribe((data?: Application[]) => {
           if (data) {
             this.applications = data.filter(app => app.userId == user.uid);
 
@@ -44,7 +44,6 @@ export class ApplicationsComponent implements OnInit {
 
                 if (listingData) {
                   this.listings.push(listingData);
-                  console.log(this.listings);
                 }
               });
             });
@@ -53,6 +52,10 @@ export class ApplicationsComponent implements OnInit {
       }
     })
 
+  }
+
+  getListing(listingId: string): Listing | undefined {
+    return this.listings.find(listing => listing.uid == listingId);
   }
 
   gotoApplication(application: Application) {

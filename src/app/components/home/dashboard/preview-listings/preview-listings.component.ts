@@ -44,4 +44,8 @@ export class PreviewListingsComponent implements OnInit {
     this.router.navigate(['listings']);
   }
 
+  tracker = (index: number, name: Listing): string => {
+    return name.uid? name.uid : index.toString();
+  }
+
 }

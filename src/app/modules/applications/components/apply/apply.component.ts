@@ -6,7 +6,7 @@ import { finalize, Observable, take } from 'rxjs';
 import { Listing } from 'src/app/modules/listings/models/listing';
 import { ListingService } from 'src/app/modules/listings/services/listing/listing.service';
 
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { Guid } from 'guid-typescript';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Application } from '../../models/application';
@@ -91,7 +91,7 @@ export class ApplyComponent implements OnInit {
       this.file = element.files[0];
   }
 
-  pushFileToStorage(fileUpload: File): Observable<number | undefined> {
+  pushFileToStorage(fileUpload: File): AngularFireUploadTask {
 
     this.fileId = Guid.create();
 
@@ -99,7 +99,7 @@ export class ApplyComponent implements OnInit {
     //const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload)
 
-    return uploadTask.percentageChanges();
+    return uploadTask;
   }
 
   uploadFile(event: any) {
@@ -115,7 +115,10 @@ export class ApplyComponent implements OnInit {
 
     if (this.listing.requirements.resume) {
       if (this.file) {
-        this.pushFileToStorage(this.file);
+        this.pushFileToStorage(this.file).catch((error) => {
+          console.log(error);
+          return;
+        })
       }
       else {
         return;

@@ -5,9 +5,12 @@
         <div class="flex-1 text-gray-900 bg-white rounded-t rounded-b-none shadow">
           <div class="p-4 text-xl text-center bg-blue-300 border-b-4">
             Listings
+            <button mat-icon-button routerLink="/listings/create">
+              <mat-icon class="!text-gray-900 text-sm">add</mat-icon>
+            </button>
           </div>
           <ul class="w-full overflow-y-scroll text-sm text-center screen-height">
-            <li *ngFor="let listing of listings; index as i" class="py-4 border-b" [ngClass]="{'bg-gray-100': selected == i}">
+            <li *ngFor="let listing of listings; index as i; trackBy:tracker" class="py-4 border-b" [ngClass]="{'bg-gray-100': selected == i}">
               <button class="text-lg text-blue-400 underline" (click)="selected = i">{{listing.position}}</button>
               <p>{{listing.institution}}</p>
             </li>

@@ -39,13 +39,15 @@ export class StudentListingComponent implements OnInit {
 
     this.listingService.Get().pipe(first()).subscribe((data: Listing[]) => {
       this.listings = data;
+
     });
 
     this.subscriptions.getClaimRole().then((data: any) => {
-      console.log(data);
       this.claims = data;
     });
   }
+
+  tracker = (index: number, item: Listing) => item.uid? item.uid : index.toString();
 
 }
 

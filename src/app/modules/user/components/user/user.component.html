@@ -40,19 +40,27 @@
                   <input matInput disabled [value]="userData.preferredName" />
                 </mat-form-field>
 
-                <div class="col-span-3">
-                  <h4 class="text-lg font-bold">Interests</h4>
-                  <mat-chip-listbox>
-                    <mat-chip *ngFor="let tag of userData.interests">{{tag}}</mat-chip>
-                  </mat-chip-listbox>
-                </div>
+                <ng-container *ngIf="user.roles?.student">
+                  <div class="col-span-3">
+                    <h4 class="text-lg font-bold">Interests</h4>
+                    <mat-chip-listbox>
+                      <mat-chip *ngFor="let tag of userData.interests">{{tag}}</mat-chip>
+                    </mat-chip-listbox>
+                  </div>
 
-                <div class="col-span-3">
-                  <h4 class="text-lg font-bold">Skills</h4>
-                  <mat-chip-listbox>
-                    <mat-chip *ngFor="let skill of userData.skills">{{skill}}</mat-chip>
-                  </mat-chip-listbox>
-                </div>
+                  <div class="col-span-3">
+                    <h4 class="text-lg font-bold">Skills</h4>
+                    <mat-chip-listbox>
+                      <mat-chip *ngFor="let skill of userData.skills">{{skill}}</mat-chip>
+                    </mat-chip-listbox>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="user.roles?.employer">
+                  <mat-form-field class="w-2/5 col-span-6">
+                    <mat-label>Institution</mat-label>
+                    <input matInput disabled [value]="userData.institution" />
+                  </mat-form-field>
+                </ng-container>
 
               </div>
             </div>

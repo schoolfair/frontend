@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { first, take } from 'rxjs';
+import { first, Subscription, take } from 'rxjs';
 import { StudentDataModel, EmployerDataModel, UserDataModel } from 'src/app/modules/auth/models/user-data';
 import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
@@ -11,10 +11,12 @@ import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
 
   user!: User;
   userData!: any;
+
+  subscription!: Subscription;
 
   constructor(
     private userService: AuthService,
@@ -23,7 +25,8 @@ export class UserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.user.pipe(take(1)).subscribe((user: User|undefined) => {
+    this.subscription = this.userService.user.subscribe((user: User|undefined) => {
+
       if (user) {
         this.user = user;
 
@@ -38,6 +41,10 @@ export class UserComponent implements OnInit {
         });
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   navigateToUpdateProfile() {

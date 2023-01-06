@@ -1,5 +1,5 @@
 <ng-container *ngIf="applications && applications.length != 0 else noApplications">
-  <ng-container class="flex overflow-x-auto" *ngFor="let app of applications | slice:0:5; index as i">
+  <ng-container class="flex overflow-x-auto" *ngFor="let app of applications | slice:0:5; index as i; trackBy:tracker" >
     <mat-card class="!inline-block border w-1/6 ml-2" [ngClass]="{'!border-green-400': app.status, '!border-red-400': app.status === false}">
       <ng-container *ngIf="listings[i]">
         <mat-card-header>{{listings[i].position}}</mat-card-header>

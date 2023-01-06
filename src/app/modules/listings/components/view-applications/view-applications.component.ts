@@ -59,4 +59,8 @@ export class ViewApplicationsComponent implements OnInit {
     }
   }
 
+  tracker = (index: number, name: Application): string => {
+    return name.uid? name.uid : index.toString();
+  }
+
 }

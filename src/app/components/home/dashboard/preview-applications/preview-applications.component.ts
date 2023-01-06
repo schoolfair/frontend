@@ -31,7 +31,7 @@ export class PreviewApplicationsComponent implements OnInit {
       }
 
       this.applications.forEach((app, i) => {
-        this.listingService.GetById(app.listingId).pipe(take(1)).subscribe((data?: Listing) => {
+        this.listingService.GetById(app.listingId).pipe(first()).subscribe((data?: Listing) => {
           if (data) {
             this.listings[i] = data;
           }
@@ -40,16 +40,16 @@ export class PreviewApplicationsComponent implements OnInit {
     });
   }
 
-  viewStatus(id?: string) {
-
-  }
-
   gotoApplications() {
     this.router.navigate(['applications', 'applications'])
   }
 
   gotoListings() {
     this.router.navigate(['listings']);
+  }
+
+  tracker = (index: number, name: Application): string => {
+    return name.uid? name.uid : index.toString();
   }
 
 }

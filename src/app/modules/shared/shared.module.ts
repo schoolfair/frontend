@@ -36,6 +36,11 @@ import { environment } from 'src/environments/environment';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => TextInputComponent),
       multi: true,
+    },
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TagsInputComponent),
+      multi: true,
     }
   ]
 })

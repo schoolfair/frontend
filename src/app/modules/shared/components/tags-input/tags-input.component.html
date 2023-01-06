@@ -14,6 +14,7 @@
     [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
     (matChipInputTokenEnd)="add($event)"/>
+  <mat-hint>Hint: Enter custom tags with ENTER or a comma.</mat-hint>
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
     <mat-option *ngFor="let tag of filteredTags | async" [value]="tag" >
       {{tag}}

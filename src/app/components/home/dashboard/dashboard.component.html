@@ -1,21 +1,31 @@
-<header class="bg-white shadow">
-  <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
-  </div>
-</header>
-<div *ngIf="user.roles?.student">
-  <div class="w-full">
+
+<section *ngIf="user.emailVerified else verifyEmailMessage">
+  <header class="bg-white shadow">
     <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <h1 class="text-xl font-bold tracking-tight text-gray-900">Your Applications</h1>
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
     </div>
-    <app-preview-applications [userId]="user.uid"></app-preview-applications>
-  </div>
-</div>
-<div *ngIf="user.roles?.employer">
-  <div class="w-full">
-    <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <h1 class="text-xl font-bold tracking-tight text-gray-900">Applicants</h1>
+  </header>
+  <div *ngIf="user.roles?.student">
+    <div class="w-full">
+      <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <h1 class="text-xl font-bold tracking-tight text-gray-900">Your Applications</h1>
+      </div>
+      <app-preview-applications [userId]="user.uid"></app-preview-applications>
     </div>
-    <app-preview-listings [userId]="user.uid"></app-preview-listings>
   </div>
-</div>
+  <div *ngIf="user.roles?.employer">
+    <div class="w-full">
+      <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <h1 class="text-xl font-bold tracking-tight text-gray-900">Applicants</h1>
+      </div>
+      <app-preview-listings [userId]="user.uid"></app-preview-listings>
+    </div>
+  </div>
+</section>
+<ng-template #verifyEmailMessage>
+  <div class="w-full mt-4 text-center">
+    <h1>Verify Your Email</h1>
+    <p>Check your email for a message from us to verify your email.</p>
+  </div>
+
+</ng-template>

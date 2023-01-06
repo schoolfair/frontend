@@ -16,6 +16,7 @@ export abstract class FirestoreService<T>  {
     // }
 
     this.collectionRef = this.afs.collection<T>(this.dbPath);
+
   }
 
   Get() {

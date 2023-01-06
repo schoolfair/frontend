@@ -23,7 +23,7 @@
                 </div>
               </div>
               <div>
-                <mat-form-field>
+                <mat-form-field *ngIf="user.roles?.student">
                   <mat-label>Website</mat-label>
                   <input matInput [value]="userData.website" formControlName="website" />
                 </mat-form-field>
@@ -76,9 +76,10 @@
                   <input matInput [value]="userData.zipcode" formControlName="zipcode" />
                 </mat-form-field>
 
-                <app-tags-input class="col-span-3" [control]="interestsControl" [data]="tags" label="Interests" placeholder="New Interest..."></app-tags-input>
-                <app-tags-input class="col-span-3" [control]="skillsControl" [data]="skills" label="Skills" placeholder="New Skill..."></app-tags-input>
-
+                <ng-container *ngIf="user.roles?.student">
+                  <app-tags-input class="col-span-3" [control]="interestsControl" [data]="tags" label="Interests" placeholder="New Interest..."></app-tags-input>
+                  <app-tags-input class="col-span-3" [control]="skillsControl" [data]="skills" label="Skills" placeholder="New Skill..."></app-tags-input>
+                </ng-container>
               </div>
             </div>
             <div class="px-4 py-3 text-right bg-gray-50 sm:px-6">
