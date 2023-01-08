@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 import { FirestoreService } from 'src/app/modules/shared/services/firestorage-service';
 import { environment } from 'src/environments/environment';
 import { UserDataModel } from '../../models/user-data';
@@ -11,13 +12,17 @@ import { UserDataModel } from '../../models/user-data';
 export class UserdataService extends FirestoreService<any> {
 
   constructor(_afs: AngularFirestore,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {
     super('user-data', _afs);
    }
 
   Post(newItem: any) {
-    return this.http.post(`${environment.apiUrl}/user-data`, newItem).subscribe((data) => console.log(data));
+    return this.http.post(`${environment.apiUrl}/user-data`, newItem).subscribe((data) => {
+      this.router.navigate(['']);
+      window.location.reload();
+    });
    }
 
   /**

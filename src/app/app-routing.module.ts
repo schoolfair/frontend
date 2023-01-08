@@ -25,7 +25,7 @@ const routes: Routes = [
 
   // Student routes
 
-  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, HasRolesGuard]},
+  {path: 'dashboard', redirectTo: '/'},
 
   // basic user routes (e.g. profile, change profile)
 

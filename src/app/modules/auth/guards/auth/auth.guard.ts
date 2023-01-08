@@ -20,11 +20,14 @@ export class AuthGuard implements CanActivate {
 
       return this.firebase.user.pipe(
         take(1),
+
         map((user: User|undefined) => !!user),
         tap((loggedIn: boolean) => {
           if (!loggedIn) {
             this.router.navigate(['/auth/login']);
           }
+
+
         }),
       )
   }
