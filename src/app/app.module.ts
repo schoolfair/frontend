@@ -30,6 +30,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { PreviewListingsComponent } from './components/home/dashboard/preview-listings/preview-listings.component';
+import { VerifyEmailComponent } from './components/home/dashboard/verify-email/verify-email.component';
 
 @NgModule({
     declarations: [
@@ -47,6 +48,7 @@ import { PreviewListingsComponent } from './components/home/dashboard/preview-li
         AboutComponent,
         ContactComponent,
         PreviewListingsComponent,
+        VerifyEmailComponent,
     ],
     providers: [],
     bootstrap: [AppComponent],

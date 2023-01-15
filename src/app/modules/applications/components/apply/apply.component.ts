@@ -13,6 +13,7 @@ import { Application } from '../../models/application';
 import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
 import { ApplicationService } from '../../services/application/application.service';
+import { timeStamp } from 'console';
 
 @Component({
   templateUrl: './apply.component.html',
@@ -53,6 +54,11 @@ export class ApplyComponent implements OnInit {
     return this.applicationFormGroup.get('essays') as UntypedFormArray;
   }
 
+  get isPDF() {
+    let name = this.file?.name.toLowerCase().split('.');
+    return this.file && name && name[name?.length - 1] === 'pdf';
+  }
+
   essayControl(i: number) {
     return this.essays.get(i.toString()) as UntypedFormControl;
   }
@@ -87,8 +93,11 @@ export class ApplyComponent implements OnInit {
 
   selectFile( event: Event ) {
     const element = (event.target as HTMLInputElement);
-    if (element && element.files)
+    if (element && element.files) {
       this.file = element.files[0];
+    }
+
+
   }
 
   pushFileToStorage(fileUpload: File): AngularFireUploadTask {

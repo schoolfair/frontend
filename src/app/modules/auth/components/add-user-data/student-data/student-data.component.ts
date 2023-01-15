@@ -113,14 +113,13 @@ export class StudentDataComponent implements OnInit {
           school: this.studentFormGroup.get('school')?.value,
           description: this.studentFormGroup.get('description')?.value,
 
-          interests: this.tagsControl.value
+          interests: this.tagsControl.value,
+          skills: this.skillsControl.value
         };
 
         this.userdata.Post(student);
 
         this.isLoading = false;
-
-        this.router.navigate(['dashboard']);
       }
     });
   }

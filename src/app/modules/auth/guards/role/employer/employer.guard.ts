@@ -30,7 +30,7 @@ export class EmployerGuard implements CanActivate {
           }
 
           if (user?.roles?.employer != true) {
-            this.router.navigate(['dashboard']);
+            this.router.navigate(['']);
             return false;
           }
 

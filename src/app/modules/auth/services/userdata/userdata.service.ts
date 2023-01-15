@@ -21,7 +21,6 @@ export class UserdataService extends FirestoreService<any> {
   Post(newItem: any) {
     return this.http.post(`${environment.apiUrl}/user-data`, newItem).subscribe((data) => {
       this.router.navigate(['']);
-      window.location.reload();
     });
    }
 

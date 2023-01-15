@@ -1,0 +1,7 @@
+<div class="w-full mt-4 text-center">
+  <h1>Verify Your Email</h1>
+  <p>Check your email for a message from us to verify your email.</p>
+  <p *ngIf="!loading && !emailSent">Click <button mat-button (click)="sendVerificationEmail()" class="text-blue-400 ">here</button> to resend your verification email.</p>
+  <mat-spinner class="text-center" *ngIf="loading"></mat-spinner>
+  <p *ngIf="!loading && emailSent">Email sent!</p>
+</div>

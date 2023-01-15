@@ -54,10 +54,11 @@
                       <label for="file-upload" class="relative font-medium text-blue-400 bg-white rounded-md cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
                         <span>Upload a file</span>
                         <input id="file-upload" name="file-upload" type="file" (change)="selectFile($event)" class="sr-only">
-                      </label>
+                        </label>
                       <p class="pl-1">or drag and drop</p>
                     </div>
                     <p class="text-xs text-gray-500">PDF, up to 10MB</p>
+                    <p class="text-xs text-red-500" *ngIf="file && !isPDF">This file is not a pdf.</p>
                   </div>
                 </div>
               </div>

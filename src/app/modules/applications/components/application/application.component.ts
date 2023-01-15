@@ -80,4 +80,8 @@ export class ApplicationComponent implements OnInit {
     }
   }
 
+  viewUser() {
+    this.router.navigate(['user', 'profile', this.application.userId]);
+  }
+
 }

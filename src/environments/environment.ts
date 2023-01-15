@@ -10,8 +10,8 @@ export const environment = {
     pro: 'price_1MKuk0GnsOgkPr2EikJbNhGd'
   },
 
-  //apiUrl: 'http://127.0.0.1:5001/schoolfair-9b858/us-central1/api',
-  apiUrl: 'https://us-central1-schoolfair-9b858.cloudfunctions.net/api',
+  apiUrl: 'http://127.0.0.1:5001/schoolfair-9b858/us-central1/api',
+  // apiUrl: 'https://us-central1-schoolfair-9b858.cloudfunctions.net/api',
 
   adClientId: 'ca-pub-2984949598588246',
 
@@ -27,7 +27,7 @@ export const environment = {
   firestoreEmulatorURL: 'http://127.0.0.1:8080',
   authEmulatorURL: 'http://localhost:9099',
 
-  isEmulating: false,
+  isEmulating: true,
 
   production: false,
 

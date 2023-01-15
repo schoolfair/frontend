@@ -18,7 +18,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.firebase.user.subscribe((data: User | undefined) => {
-        if (data && !data.roles) {
+
+        if (data && !data.emailVerified) {
+          this.router.navigate(['auth', 'verify-email'])
+        }
+
+        else if (data && !data.roles) {
           this.router.navigate(['auth', 'add-user-data'])
         }
         this.user = data;

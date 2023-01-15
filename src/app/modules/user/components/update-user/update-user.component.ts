@@ -96,4 +96,8 @@ export class UpdateUserComponent implements OnInit, OnDestroy {
     this.router.navigate(['/user']);
   }
 
+  deleteAccount() {
+    this.userService.DeleteAccount()
+  }
+
 }

@@ -166,4 +166,10 @@ export class AuthService {
     window.location.reload();
 
   }
+
+  async DeleteAccount() {
+    let user = await this.afAuth.currentUser
+    return user?.delete();
+  }
+
 }
