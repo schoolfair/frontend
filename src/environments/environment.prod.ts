@@ -9,7 +9,7 @@ export const environment = {
     storageBucket: 'schoolfair-9b858.appspot.com',
     locationId: 'us-central',
     apiKey: 'AIzaSyABpcpuZnZsPzdZdda6gVfpFVYIM-nf72o',
-    authDomain: 'schoolfair-9b858.firebaseapp.com',
+    authDomain: 'schoolfair.us',
     messagingSenderId: '566329469840',
   },
   production: true,
