@@ -5,10 +5,13 @@ import { StudentDataModel } from 'src/app/modules/auth/models/user-data';
 import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { User } from 'src/app/modules/auth/services/firebase/user';
 import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata.service';
-import { Listing } from 'src/app/modules/listings/models/listing';
-import { ListingService } from 'src/app/modules/listings/services/listing/listing.service';
 import { Application } from '../../models/application';
 import { ApplicationService } from '../../services/application/application.service';
+
+interface Student {
+  studentId: string;
+  data: StudentDataModel;
+}
 
 @Component({
   templateUrl: './view-applications.component.html',
@@ -16,13 +19,13 @@ import { ApplicationService } from '../../services/application/application.servi
 })
 export class ViewApplicationsComponent implements OnInit {
 
-  displayedColumns = ['name', 'description', 'skills', 'info'];
+  displayedColumns = ['name', 'description', 'skills', 'status', 'info', 'contact'];
 
   listingId!: string;
 
 
   applications!: Application[];
-  students: StudentDataModel[] = []
+  students: Student[] = []
 
   studentIds: Set<string> = new Set<string>();
 
@@ -48,11 +51,10 @@ export class ViewApplicationsComponent implements OnInit {
               this.studentIds.add(app.userId);
             })
 
-            this.studentIds.forEach((listingId) => {
-              this.studentService.GetById(listingId).subscribe((studentData?: StudentDataModel) => {
-
+            this.studentIds.forEach((studentId) => {
+              this.studentService.GetById(studentId).pipe(first()).subscribe((studentData?: StudentDataModel) => {
                 if (studentData) {
-                  this.students.push(studentData);
+                  this.students.push({studentId: studentId, data: studentData});
                 }
               });
             });
@@ -64,6 +66,14 @@ export class ViewApplicationsComponent implements OnInit {
 
   gotoApplication(application: Application) {
     this.router.navigate(['applications', 'app', application.uid]);
+  }
+
+  gotoContactPage(application: Application) {
+    this.router.navigate(['applications', 'contact', application.userId]);
+  }
+
+  getStudent(app: Application) {
+    return this.students.find(student => student.studentId === app.userId);
   }
 
 }

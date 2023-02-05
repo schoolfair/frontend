@@ -12,6 +12,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { ApplicationComponent } from './components/application/application.component';
 import { ApplicationsComponent } from './components/applications/applications.component';
 import { SharedModule } from '../shared/shared.module';
+import { ContactComponent } from './components/contact/contact.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { SharedModule } from '../shared/shared.module';
     ApplyComponent,
     ViewApplicationsComponent,
     ApplicationComponent,
-    ApplicationsComponent
+    ApplicationsComponent,
+    ContactComponent
   ],
   imports: [
     CommonModule,
