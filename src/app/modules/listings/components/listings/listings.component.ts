@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { take } from 'rxjs';
 import { AuthService } from 'src/app/modules/auth/services/firebase/firebase.service';
 import { Roles, User } from 'src/app/modules/auth/services/firebase/user';
@@ -7,7 +8,8 @@ import { UserdataService } from 'src/app/modules/auth/services/userdata/userdata
 @Component({
   selector: 'app-listings',
   templateUrl: './listings.component.html',
-  styleUrls: ['./listings.component.scss']
+  styleUrls: ['./listings.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ListingsComponent implements OnInit {
 

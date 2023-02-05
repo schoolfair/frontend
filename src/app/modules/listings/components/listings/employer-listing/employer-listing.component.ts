@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ViewEncapsulation } from '@angular/core';
 import { first, Observable } from 'rxjs';
 import { EmployerDataModel } from 'src/app/modules/auth/models/user-data';
 import { Listing } from '../../../models/listing';

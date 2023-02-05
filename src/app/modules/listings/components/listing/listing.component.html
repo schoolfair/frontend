@@ -6,7 +6,7 @@
               {{listing.position}}
             </h1>
             <h2 class="text-sm font-bold leading-tight tracking-tight text-gray-900 md:text-sm">Description</h2>
-            <div [innerHTML]="listing.description"></div>
+            <div class="description" [innerHTML]="listing.description"></div>
           </div>
           <div class="px-4 py-3 text-right bg-gray-50 sm:px-6">
             <button *ngIf="roles.employer" (click)="gotoApplicationsPage()"  mat-button>View Applications</button>
