@@ -1,0 +1,11 @@
+<section>
+  <div class="p-4">
+    <h1 mat-dialog-title>Delete This Listing</h1>
+    <p mat-dialog-content>Are you sure you want to delete this listing?</p>
+
+    <div class="flex flex-row items-center" mat-dialog-actions>
+      <button mat-button mat-dialog-close>Go Back</button>
+      <button mat-button mat-dialog-close (click)="deleteListing()" color="warn">Delete</button>
+    </div>
+  </div>
+</section>

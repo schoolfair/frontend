@@ -37,6 +37,7 @@
           </mat-chip-listbox>
         </div>
         <div class="text-right">
+          <button mat-button color="warn" (click)="openErrorDialog('250ms', '100ms')">Delete Listing</button>
           <button mat-button routerLink="/applications/view-applications/{{listings[selected].uid}}">View Applications</button>
         </div>
       </div>

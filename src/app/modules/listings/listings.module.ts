@@ -15,6 +15,7 @@ import { ViewApplicationsComponent } from './components/view-applications/view-a
 import { SharedModule } from '../shared/shared.module';
 import { NgxEditorModule } from 'ngx-editor';
 import { AdsenseModule } from 'ng2-adsense';
+import { DeleteDialogComponent } from './components/listings/employer-listing/delete-dialog/delete-dialog.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { AdsenseModule } from 'ng2-adsense';
     EmployerListingComponent,
     StudentListingComponent,
     ViewApplicationsComponent,
+    DeleteDialogComponent,
 
   ],
   imports: [
